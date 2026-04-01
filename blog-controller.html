@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Controller Role Is Being Redefined — Pratik Parashar</title>
+
+  <!-- OG / Social -->
+  <meta property="og:title" content="The Controller Role Is Being Redefined. Most Controllers Don't Know It Yet." />
+  <meta property="og:description" content="Controller upper-range salaries dropped 21% in a single year. The market is saying something loud. Most people in the role haven't heard it yet." />
+  <meta property="og:image" content="https://alloutoftokens.com/og-controller.png" />
+  <meta property="og:url" content="https://alloutoftokens.com/blog-controller.html" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Controller Role Is Being Redefined. Most Controllers Don't Know It Yet." />
+  <meta name="twitter:description" content="Controller upper-range salaries dropped 21% in a single year. The market is saying something loud." />
+  <meta name="twitter:image" content="https://alloutoftokens.com/og-controller.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Reset & tokens ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0d0d0d;
+      --cream:   #f5f0e8;
+      --red:     #ff3c1f;
+      --mid:     #6b6560;
+      --border:  rgba(13,13,13,0.12);
+      --ff-serif: 'Playfair Display', Georgia, serif;
+      --ff-mono:  'Space Mono', 'Courier New', monospace;
+      --ff-sans:  'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 18px;
+      line-height: 1.7;
+      cursor: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Custom cursor ──────────────────────────────────────────── */
+    .cursor {
+      position: fixed;
+      width: 10px; height: 10px;
+      background: var(--red);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.08s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease;
+      mix-blend-mode: multiply;
+    }
+    .cursor.hover {
+      width: 28px; height: 28px;
+      background: var(--black);
+    }
+
+    /* ── Nav ────────────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      padding: 0 clamp(24px, 5vw, 80px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      color: var(--black);
+      text-transform: uppercase;
+    }
+    .nav-logo span { color: var(--red); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--red); }
+
+    /* ── Article layout ─────────────────────────────────────────── */
+    .article-wrap {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 clamp(24px, 5vw, 48px);
+    }
+
+    /* ── Hero ───────────────────────────────────────────────────── */
+    .hero {
+      padding: 72px 0 0;
+      border-bottom: 2px solid var(--black);
+      margin-bottom: 64px;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cream);
+      background: var(--red);
+      padding: 4px 10px;
+    }
+
+    .hero-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--mid);
+      letter-spacing: 0.06em;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    .hero-deck {
+      font-size: 19px;
+      font-weight: 300;
+      color: #3a3530;
+      line-height: 1.6;
+      margin-bottom: 40px;
+      max-width: 600px;
+    }
+
+    /* ── Stat block ─────────────────────────────────────────────── */
+    .stat-hero {
+      background: var(--black);
+      color: var(--cream);
+      padding: 40px 48px;
+      margin-bottom: 0;
+      display: flex;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .stat-hero .stat-number {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 80px;
+      font-weight: 900;
+      color: var(--red);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .stat-hero .stat-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+      color: rgba(245,240,232,0.75);
+    }
+
+    .stat-hero .stat-label strong {
+      display: block;
+      font-size: 18px;
+      color: var(--cream);
+      margin-bottom: 4px;
+    }
+
+    @media (max-width: 560px) {
+      .stat-hero { flex-direction: column; gap: 16px; padding: 32px 24px; }
+      .stat-hero .stat-number { font-size: 60px; }
+    }
+
+    /* ── Body content ───────────────────────────────────────────── */
+    .post-body {
+      padding-bottom: 80px;
+    }
+
+    .post-body p {
+      margin-bottom: 28px;
+      font-size: 18px;
+      line-height: 1.75;
+      color: #1a1714;
+    }
+
+    .post-body h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(22px, 3vw, 28px);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin: 64px 0 24px;
+      padding-top: 64px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Post illustration ──────────────────────────────────────── */
+    .post-illustration {
+      margin: 48px -24px;
+      border-top: 2px solid var(--black);
+      border-bottom: 2px solid var(--black);
+    }
+
+    .post-illustration img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .post-illustration figcaption {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--mid);
+      padding: 12px 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (min-width: 740px) {
+      .post-illustration { margin: 56px -48px; }
+    }
+
+    /* ── Pull quote ─────────────────────────────────────────────── */
+    .pull-quote {
+      border-left: 4px solid var(--red);
+      margin: 48px 0;
+      padding: 4px 0 4px 28px;
+    }
+
+    .pull-quote p {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(20px, 2.8vw, 26px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.4;
+      color: var(--black);
+      margin: 0;
+    }
+
+    /* ── Inline stat chips ──────────────────────────────────────── */
+    .stat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin: 48px 0;
+    }
+
+    .stat-chip {
+      background: var(--black);
+      color: var(--cream);
+      padding: 28px 24px;
+    }
+
+    .stat-chip .n {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 44px;
+      font-weight: 900;
+      color: var(--red);
+      line-height: 1;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .stat-chip .l {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      line-height: 1.4;
+      color: rgba(245,240,232,0.7);
+    }
+
+    .stat-chip .l strong {
+      color: var(--cream);
+      display: block;
+    }
+
+    @media (max-width: 480px) {
+      .stat-row { grid-template-columns: 1fr; }
+    }
+
+    /* ── Sources ────────────────────────────────────────────────── */
+    .sources {
+      border-top: 1px solid var(--border);
+      margin-top: 64px;
+      padding-top: 32px;
+    }
+
+    .sources h3 {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 16px;
+    }
+
+    .sources p {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      line-height: 1.8;
+      color: var(--mid);
+      margin: 0;
+    }
+
+    /* ── Author card ────────────────────────────────────────────── */
+    .author-card {
+      background: var(--black);
+      color: var(--cream);
+      padding: 40px;
+      margin-top: 64px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .author-card img {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid var(--red);
+    }
+
+    .author-card .author-info .name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .author-card .author-info .bio {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(245,240,232,0.7);
+      margin: 0;
+    }
+
+    .author-card .author-info .bio a {
+      color: var(--red);
+      text-decoration: none;
+    }
+
+    @media (max-width: 500px) {
+      .author-card { flex-direction: column; gap: 16px; }
+    }
+
+    /* ── Back link ──────────────────────────────────────────────── */
+    .back-link-wrap {
+      padding: 40px 0 0;
+    }
+
+    .back-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--red); }
+    .back-link::before { content: '←'; }
+
+    /* ── Scroll reveal ──────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── Footer ─────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px clamp(24px, 5vw, 80px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    footer p {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--mid);
+      margin: 0;
+    }
+
+    footer a {
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: var(--red); }
+
+    /* ── Mobile nav ─────────────────────────────────────────────── */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--black);
+      transition: all 0.25s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 60px 0 0;
+      background: var(--cream);
+      z-index: 99;
+      padding: 40px clamp(24px, 5vw, 48px);
+      flex-direction: column;
+      gap: 24px;
+      border-top: 2px solid var(--black);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Nav -->
+  <nav>
+    <a href="index.html" class="nav-logo">All Out <span>of</span> Tokens</a>
+    <ul class="nav-links">
+      <li><a href="index.html#what-i-do">What I Do</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="index.html#blog">Writing</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html#what-i-do">What I Do</a>
+    <a href="index.html#experience">Experience</a>
+    <a href="index.html#blog">Writing</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+
+  <!-- Article -->
+  <main class="article-wrap">
+
+    <div class="back-link-wrap">
+      <a href="index.html#blog" class="back-link">All posts</a>
+    </div>
+
+    <!-- Hero -->
+    <header class="hero">
+      <div class="hero-meta">
+        <span class="tag">Finance Transformation</span>
+        <span class="hero-date">March 2026</span>
+      </div>
+      <h1>The Controller Role Is Being Redefined.<br>Most Controllers Don't Know It Yet.</h1>
+      <p class="hero-deck">The market is already pricing in what a controller is worth in an AI-accelerated close. The question is which version of the role you're heading towards.</p>
+
+      <!-- Big stat -->
+      <div class="stat-hero">
+        <div class="stat-number">−21%</div>
+        <div class="stat-label">
+          <strong>Controller upper-range salaries. One year.</strong>
+          $170,000 down to $134,000 — while CFO lower-range salaries went up 9% in the same period. The market is telling you something. It's saying it loudly.
+        </div>
+      </div>
+    </header>
+
+    <!-- Body -->
+    <article class="post-body">
+
+      <p class="reveal">Controller upper-range salaries dropped 21% in a single year.</p>
+
+      <p class="reveal">Not slowly, over a decade. One year — $170,000 down to $134,000, according to Datarails' March 2026 analysis of over 5,000 US finance job postings. In that same period, CFO salaries at the lower range went up 9%.</p>
+
+      <p class="reveal">That's not a coincidence. The market is telling you something about what it thinks a controller is worth, and it's saying it louder than most people in the role seem to have heard.</p>
+
+      <p class="reveal">This isn't another piece about whether AI is coming for finance jobs. That argument is already over. What's actually worth asking now is: which version of the controller role are you heading towards?</p>
+
+      <!-- Hero illustration -->
+      <figure class="post-illustration reveal">
+        <img src="og-controller.png" alt="Two versions of a controller: buried in paperwork vs. standing confidently on a laptop with AI data around them" />
+        <figcaption>Two versions of the same role. The question is which one you're building towards.</figcaption>
+      </figure>
+
+      <!-- Section 1 -->
+      <h2 class="reveal">What's happening to the close right now</h2>
+
+      <p class="reveal">A lot of what gets written about AI in finance is abstract. So here's what's concrete.</p>
+
+      <p class="reveal">An MIT and Stanford study from August 2025 found that accountants using generative AI cut 7.5 days off the monthly close. Not from a particularly slow baseline — just off. The same study found they could support 55% more clients per week. These aren't vendor claims. They're peer-reviewed findings.</p>
+
+      <p class="reveal">Real companies are posting harder numbers. Avis Budget's close-and-forecast cycle got 60% shorter after an Oracle deployment. HPE's CFO Marie Myers built an AI tool that eliminated 90% of the manual work her team spent preparing for weekly reviews — work that used to eat entire weekends. BlackLine customers now reconcile up to 85% of accounts automatically.</p>
+
+      <div class="stat-row reveal">
+        <div class="stat-chip">
+          <span class="n">7.5</span>
+          <span class="l"><strong>Days cut from monthly close</strong>MIT / Stanford study, August 2025</span>
+        </div>
+        <div class="stat-chip">
+          <span class="n">85%</span>
+          <span class="l"><strong>Accounts reconciled automatically</strong>BlackLine customer benchmark</span>
+        </div>
+      </div>
+
+      <p class="reveal">The tasks getting automated fastest are the ones that have always defined a controller's week. Reconciliations. Journal entries. Invoice matching. Variance analysis. At large enterprises, with production systems, right now.</p>
+
+      <p class="reveal">Two things are worth keeping in mind. This is moving faster at big companies than at smaller ones — the controller at a Fortune 500 is on a very different timeline to the controller at a €50 million business. And AI hallucinates in up to 41% of finance-related queries, according to research from FailSafeQA. So the automation is real, and so is the continued need for someone who can catch it when it's wrong.</p>
+
+      <!-- Section 2 -->
+      <h2 class="reveal">The role isn't changing. It's splitting.</h2>
+
+      <p class="reveal">86% of controllers expect their role to change significantly within five years. That's from EY's DNA of the Financial Controller survey. What's interesting isn't the 86%. It's what the split actually looks like up close.</p>
+
+      <div class="pull-quote reveal">
+        <p>30% of controllers use spreadsheets as their primary modelling tool. 3% use AI. That gap is the story.</p>
+      </div>
+
+      <p class="reveal">One version of the controller is getting squeezed. The work that's always filled the calendar — closing the books, chasing reconciliations, building variance reports — is being taken over. Deloitte and IMA surveyed 900+ finance professionals and found that while AI adoption in controllership is expected to double over the next few years, spreadsheets are still the most common modelling tool by a wide margin. 30% use them. 3% use AI. The gap between where things are heading and where most controllers are standing is genuinely large.</p>
+
+      <p class="reveal">The other version is getting more valuable. Controllers who can govern AI tools, interpret their outputs, and translate numbers into actual business thinking — those people are harder to replace than they've ever been. Gartner's March 2026 survey found that acquiring AI talent is now CFOs' number-one near-term challenge. What finance leaders want and can't find enough of is someone who understands both the numbers and the technology well enough to connect them.</p>
+
+      <p class="reveal">This pattern isn't new. Spreadsheets didn't kill bookkeepers — they turned them into analysts. ERPs didn't eliminate controllers — they pushed the role upward. Every automation wave has compressed the transactional layer and expanded the interpretive one. What's different now is how fast it's moving.</p>
+
+      <!-- Section 3 -->
+      <h2 class="reveal">The gap between believing it and doing something about it</h2>
+
+      <p class="reveal">AICPA and CIMA surveyed 1,446 senior finance leaders in December 2025. 88% said AI will be the most transformative technology trend in accounting over the next one to two years. Only 8% said their organisation feels very well prepared for it.</p>
+
+      <div class="pull-quote reveal">
+        <p>88% say it's coming. 8% feel ready. The rest are somewhere in between — which is exactly where most controllers are right now.</p>
+      </div>
+
+      <p class="reveal">That gap is where most controllers are sitting. They can see it coming. They don't have a clear answer for what to do next.</p>
+
+      <p class="reveal">Robert Half's 2026 report found that only 6% of finance and accounting leaders say they currently have the capabilities to deliver on their priority projects. And AI mentions in accountant job postings rose 67% in the year to March 2026 — the market isn't waiting for the profession to catch up. The job descriptions are already being rewritten. The question is whether the people in those roles are changing alongside them.</p>
+
+      <p class="reveal">The skills that keep showing up as gaps aren't obscure. Generative AI literacy. Data analytics. Business partnering. These are the exact things that separate the version of this role that's growing from the version that isn't.</p>
+
+      <!-- Section 4 -->
+      <h2 class="reveal">What this actually means</h2>
+
+      <p class="reveal">Gartner predicts that by 2028, cloud ERP with embedded AI will produce a 30% faster financial close. By 2030, 80% or more of finance functions will have AI driving core processes autonomously.</p>
+
+      <p class="reveal">The controller who fits into that world isn't the one who knows the most Excel shortcuts. It's the one who can look at an AI-generated reconciliation and know whether to trust it. The one who, when the close gets compressed from two weeks to two days, has something to say about what the numbers mean — not just what they are.</p>
+
+      <div class="stat-row reveal">
+        <div class="stat-chip">
+          <span class="n">30%</span>
+          <span class="l"><strong>Faster financial close by 2028</strong>Gartner prediction, cloud ERP + AI</span>
+        </div>
+        <div class="stat-chip">
+          <span class="n">80%+</span>
+          <span class="l"><strong>Finance functions with autonomous AI by 2030</strong>Gartner</span>
+        </div>
+      </div>
+
+      <p class="reveal">ACCA is redesigning its entire qualification for 2027 with AI and technology at the centre. The IMA expanded its competency framework to include emerging technologies and digital transformation. The CPA exam already covers data analytics.</p>
+
+      <p class="reveal">The tools are changing. The qualifications are changing. The job market is changing.</p>
+
+      <p class="reveal">What's less clear is whether the people doing the job are.</p>
+
+      <!-- Sources -->
+      <div class="sources reveal">
+        <h3>Sources</h3>
+        <p>
+          Datarails CFO's Office 2.0 (March 2026) &middot;
+          MIT/Stanford GenAI in Accounting Study (August 2025) &middot;
+          EY DNA of the Financial Controller Survey &middot;
+          Gartner Finance AI Predictions (2024–2026) &middot;
+          AICPA/CIMA Future-Ready Finance Survey (December 2025) &middot;
+          Robert Half Finance &amp; Accounting Trends (2026) &middot;
+          CPA Practice Advisor (March 2026) &middot;
+          Fortune — HPE CFO Marie Myers (February 2026) &middot;
+          FailSafeQA Financial LLM Benchmark &middot;
+          Deloitte/IMA Controllership Survey (December 2024)
+        </p>
+      </div>
+
+      <!-- Author card -->
+      <div class="author-card reveal">
+        <img src="pratik.jpg" alt="Pratik Parashar" />
+        <div class="author-info">
+          <div class="name">Pratik Parashar</div>
+          <p class="bio">
+            Senior auditor with 7+ years of Big 4 experience. Writing about finance transformation, AI in finance, and what the numbers actually mean. Based in the Netherlands. <a href="index.html#contact">Open to new roles.</a>
+          </p>
+        </div>
+      </div>
+
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Pratik Parashar</p>
+    <p><a href="index.html">alloutoftokens.com</a></p>
+  </footer>
+
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top  = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Hamburger
+    const ham  = document.getElementById('hamburger');
+    const menu = document.getElementById('mobile-menu');
+    ham.addEventListener('click', () => {
+      ham.classList.toggle('open');
+      menu.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

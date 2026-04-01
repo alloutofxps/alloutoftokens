@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pratik Parashar — Finance × AI Transformation</title>
+  <meta name="description" content="Finance professional helping companies move from manual to automated. Senior Auditor at KPMG NL, open to Finance Transformation, FP&A, and Controller roles.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --off-white: #f0ede6;
+      --cream: #e8e3d8;
+      --accent: #ff3c1f;
+      --gray: #5a5a5a;
+      --light-gray: #c8c3b8;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--off-white); color: var(--black);
+      font-family: 'DM Sans', sans-serif; font-weight: 300;
+      overflow-x: hidden; cursor: none;
+    }
+
+    /* Cursor */
+    .cursor {
+      width: 12px; height: 12px; background: var(--accent);
+      border-radius: 50%; position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9999; mix-blend-mode: multiply;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px; border: 1px solid var(--black);
+      border-radius: 50%; position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9998; transition: all 0.15s ease;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 1000; opacity: 0.4;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      padding: 20px 48px; display: flex;
+      justify-content: space-between; align-items: center;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    nav.light { background: rgba(240,237,230,0.96); backdrop-filter: blur(10px); box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
+    nav.dark { background: rgba(10,10,10,0.88); backdrop-filter: blur(10px); }
+    .nav-logo {
+      font-family: 'Space Mono', monospace; font-size: 11px;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--black); text-decoration: none; opacity: 0.55;
+      transition: color 0.3s, opacity 0.2s;
+    }
+    .nav-logo:hover { opacity: 1; }
+    nav.dark .nav-logo { color: var(--off-white); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-family: 'Space Mono', monospace; font-size: 10px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--black); text-decoration: none; opacity: 0.6;
+      transition: opacity 0.2s, color 0.3s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 1px; background: var(--accent); transition: width 0.3s;
+    }
+    .nav-links a:hover { opacity: 1; }
+    .nav-links a:hover::after { width: 100%; }
+    nav.dark .nav-links a { color: var(--off-white); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .nav-hamburger span { display: block; width: 24px; height: 1.5px; background: var(--black); transition: background 0.3s; }
+    nav.dark .nav-hamburger span { background: var(--off-white); }
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; background: var(--black);
+      z-index: 990; flex-direction: column; justify-content: center; align-items: center; gap: 40px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 700; color: var(--off-white); text-decoration: none; transition: color 0.2s; }
+    .mobile-menu a:hover { color: var(--accent); }
+    .mobile-menu-close { position: absolute; top: 24px; right: 24px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); cursor: pointer; background: none; border: none; text-transform: uppercase; }
+
+    /* HERO */
+    /* HERO — pure typographic, no photo */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    /* Subtle background texture using noise + accent smear */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 30%, rgba(255,60,31,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(255,255,255,0.02) 0%, transparent 60%);
+    }
+
+    /* Content sits over the texture */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 72px 80px;
+      max-width: 900px;
+    }
+
+    .available-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14);
+      padding: 7px 14px; width: fit-content; margin-bottom: 36px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards;
+    }
+    .available-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: #22c55e;
+      animation: pulse-green 2s infinite;
+    }
+    @keyframes pulse-green {
+      0%   { box-shadow: 0 0 0 0   rgba(34,197,94,0.5); }
+      70%  { box-shadow: 0 0 0 8px rgba(34,197,94,0);   }
+      100% { box-shadow: 0 0 0 0   rgba(34,197,94,0);   }
+    }
+    .available-text { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(64px, 7vw, 108px); font-weight: 900;
+      line-height: 0.93; letter-spacing: -0.025em;
+      color: var(--off-white);
+      margin-bottom: 28px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.25s forwards;
+    }
+    .hero-name em { font-style: italic; color: var(--accent); display: block; }
+
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(17px, 1.6vw, 22px); font-weight: 400; font-style: italic;
+      color: rgba(255,255,255,0.6); line-height: 1.55; max-width: 480px;
+      margin-bottom: 20px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+    .hero-tagline strong { color: var(--off-white); font-style: normal; font-weight: 600; }
+
+    .hero-desc {
+      font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.42);
+      max-width: 440px; margin-bottom: 44px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.52s forwards;
+    }
+    .hero-desc strong { color: rgba(255,255,255,0.75); font-weight: 500; }
+
+    .hero-cta {
+      display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+      margin-bottom: 64px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.62s forwards;
+    }
+    .btn-primary {
+      background: var(--accent); color: #fff; padding: 14px 32px;
+      font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.12em;
+      text-transform: uppercase; text-decoration: none; border: 2px solid var(--accent);
+      transition: all 0.25s ease; display: inline-block;
+    }
+    .btn-primary:hover { background: transparent; color: var(--accent); transform: translate(-3px,-3px); box-shadow: 6px 6px 0 var(--accent); }
+    .btn-secondary { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+    .btn-secondary:hover { color: var(--off-white); border-color: var(--off-white); }
+
+    /* Stat strip along the bottom */
+    .hero-stat-grid {
+      display: grid; grid-template-columns: repeat(4, auto); gap: 0;
+      width: fit-content;
+      opacity: 0; animation: fadeUp 0.8s ease 0.75s forwards;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 28px;
+    }
+    .hero-stat {
+      padding: 0 40px 0 0;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      margin-right: 40px;
+      transition: opacity 0.2s;
+    }
+    .hero-stat:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+    .hero-stat:hover { opacity: 0.75; }
+    .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: var(--off-white); line-height: 1; margin-bottom: 5px; }
+    .hero-stat-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+
+    .scroll-hint { position: absolute; bottom: 40px; right: 48px; display: flex; align-items: center; gap: 12px; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.25); z-index: 3; opacity: 0; animation: fadeUp 0.8s ease 1s forwards; }
+    .scroll-line { width: 40px; height: 1px; background: rgba(255,255,255,0.2); position: relative; overflow: hidden; }
+    .scroll-line::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: var(--accent); animation: scanline 2s ease infinite; }
+    @keyframes scanline { 0% { left: -100%; } 100% { left: 100%; } }
+
+    /* TICKER */
+    .ticker { background: var(--black); color: var(--off-white); padding: 13px 0; overflow: hidden; white-space: nowrap; border-top: 2px solid var(--accent); }
+    .ticker-inner { display: inline-flex; animation: ticker 30s linear infinite; }
+    .ticker-item { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 48px; opacity: 0.6; }
+    .ticker-item span { color: var(--accent); margin-right: 14px; }
+    @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* SHARED */
+    .section-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+    .section-label::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+
+    /* WHAT I DO */
+    .what-i-do { padding: 120px 48px; }
+    .what-i-do-header { display: grid; grid-template-columns: 1fr 1.8fr; gap: 80px; align-items: start; margin-bottom: 72px; }
+    .what-i-do-title { font-family: 'Playfair Display', serif; font-size: clamp(36px, 3.5vw, 52px); font-weight: 900; line-height: 1.05; letter-spacing: -0.02em; position: sticky; top: 100px; margin-top: 12px; }
+    .what-i-do-title em { font-style: italic; color: var(--accent); }
+    .what-i-do-intro { font-size: 17px; line-height: 1.85; color: var(--gray); }
+    .what-i-do-intro strong { color: var(--black); font-weight: 500; }
+    .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .pillar { background: var(--cream); padding: 40px 36px; border-top: 3px solid transparent; transition: border-color 0.25s, background 0.25s; }
+    .pillar:hover { border-top-color: var(--accent); background: #fff; }
+    .pillar-num { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 900; color: var(--accent); opacity: 0.2; line-height: 1; margin-bottom: 20px; }
+    .pillar-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin-bottom: 16px; line-height: 1.2; }
+    .pillar-desc { font-size: 14px; line-height: 1.75; color: var(--gray); }
+    .pillar-tags { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .pillar-tag { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 10px; border: 1px solid var(--light-gray); color: var(--gray); }
+
+    /* EXPERIENCE */
+    .experience { padding: 100px 48px; background: var(--black); color: var(--off-white); }
+    .exp-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 72px; }
+    .exp-title { font-family: 'Playfair Display', serif; font-size: clamp(36px, 3.5vw, 52px); font-weight: 900; line-height: 1.05; }
+    .exp-title em { font-style: italic; color: var(--accent); }
+    .exp-list { display: flex; flex-direction: column; }
+    .exp-item { display: grid; grid-template-columns: 160px 1fr auto; gap: 40px; align-items: start; padding: 36px 0; border-top: 1px solid rgba(255,255,255,0.07); position: relative; }
+    .exp-item::before { content: ''; position: absolute; left: -48px; right: -48px; top: 0; bottom: 0; background: rgba(255,60,31,0.04); opacity: 0; transition: opacity 0.3s; }
+    .exp-item:hover::before { opacity: 1; }
+    .exp-period { font-family: 'Space Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.28); letter-spacing: 0.08em; padding-top: 4px; line-height: 1.8; }
+    .exp-highlight { display: inline-block; background: var(--accent); color: #fff; font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; margin-bottom: 10px; }
+    .exp-company { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--off-white); margin-bottom: 4px; }
+    .exp-role { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .exp-bullets li { font-size: 13px; color: rgba(255,255,255,0.42); line-height: 1.65; padding-left: 18px; position: relative; }
+    .exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 11px; }
+    .exp-tag { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 12px; border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.3); white-space: nowrap; height: fit-content; }
+
+    /* ABOUT */
+    .about { padding: 0 0 120px; display: grid; grid-template-columns: 380px 1fr 1.6fr; gap: 0; align-items: start; overflow: hidden; }
+
+    /* Photo column — full height, no padding, flush to edge */
+    .about-photo {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: var(--black);
+    }
+    .about-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 12%;
+      filter: grayscale(15%) contrast(1.05);
+      opacity: 0.88;
+      display: block;
+    }
+    /* Subtle right-edge fade so photo bleeds into content */
+    .about-photo::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, transparent 60%, var(--off-white) 100%);
+    }
+
+    /* Title column — sticky, padded */
+    .about-left {
+      position: sticky;
+      top: 100px;
+      padding: 120px 48px 0 56px;
+      align-self: start;
+    }
+    .about-title { font-family: 'Playfair Display', serif; font-size: clamp(32px, 2.8vw, 44px); font-weight: 900; line-height: 1.05; letter-spacing: -0.02em; margin-top: 12px; }
+    .about-title em { font-style: italic; color: var(--accent); }
+
+    /* Text column */
+    .about-right { padding: 120px 72px 0 0; }
+    .about-body { font-size: 16px; line-height: 1.85; color: var(--gray); margin-bottom: 24px; }
+    .about-body strong { color: var(--black); font-weight: 500; }
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 48px; }
+    .skill-item { padding: 20px 22px; background: var(--cream); border-left: 3px solid transparent; transition: border-color 0.2s, background 0.2s; }
+    .skill-item:hover { border-left-color: var(--accent); background: #fff; }
+    .skill-name { font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .skill-sub { font-size: 12px; color: var(--gray); line-height: 1.5; }
+
+    /* BLOG */
+    .blog { padding: 120px 48px; background: var(--cream); }
+    .blog-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .blog-title { font-family: 'Playfair Display', serif; font-size: clamp(36px, 3.5vw, 52px); font-weight: 900; line-height: 1.05; }
+    .blog-title em { font-style: italic; color: var(--accent); }
+    .blog-subtitle { font-size: 15px; color: var(--gray); line-height: 1.7; max-width: 520px; margin-bottom: 56px; }
+    .blog-view-all { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; white-space: nowrap; margin-top: 8px; }
+    .blog-view-all:hover { color: var(--accent); }
+    .blog-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2px; margin-bottom: 2px; }
+    .blog-grid-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .blog-card { background: var(--off-white); padding: 36px 32px; text-decoration: none; color: var(--black); display: flex; flex-direction: column; justify-content: space-between; min-height: 300px; position: relative; overflow: hidden; transition: all 0.25s ease; }
+    .blog-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+    .blog-card:hover { background: #fff; transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+    .blog-card:hover::after { transform: scaleX(1); }
+    .blog-card.featured { background: var(--black); color: var(--off-white); }
+    .blog-card.featured:hover { background: #111; }
+    .blog-card-wide { min-height: 180px; }
+    .blog-cat { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .blog-card-title { font-family: 'Playfair Display', serif; font-weight: 700; line-height: 1.25; margin-bottom: 12px; flex-grow: 1; }
+    .blog-card.featured .blog-card-title { font-size: clamp(20px, 2vw, 28px); }
+    .blog-card:not(.featured) .blog-card-title { font-size: 19px; }
+    .blog-excerpt { font-size: 13px; line-height: 1.65; margin-top: 8px; color: rgba(255,255,255,0.42); }
+    .blog-card:not(.featured) .blog-excerpt { color: var(--gray); }
+    .blog-card-meta { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.08em; display: flex; justify-content: space-between; align-items: center; margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(0,0,0,0.08); color: var(--light-gray); }
+    .blog-card.featured .blog-card-meta { border-top-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.3); }
+    .blog-arrow { font-size: 16px; transition: transform 0.2s; }
+    .blog-card:hover .blog-arrow { transform: translate(3px,-3px); }
+
+    /* CONTACT */
+    .contact { background: var(--black); padding: 120px 48px; position: relative; overflow: hidden; }
+    .contact-bg-text { font-family: 'Playfair Display', serif; font-size: clamp(100px, 14vw, 200px); font-weight: 900; font-style: italic; color: rgba(255,255,255,0.03); position: absolute; bottom: -20px; right: -20px; white-space: nowrap; pointer-events: none; line-height: 1; user-select: none; }
+    .contact-inner { max-width: 680px; position: relative; z-index: 2; }
+    .contact-heading { font-family: 'Playfair Display', serif; font-size: clamp(40px, 4.5vw, 68px); font-weight: 900; color: var(--off-white); line-height: 1.05; margin-bottom: 12px; margin-top: 16px; }
+    .contact-heading em { font-style: italic; color: var(--accent); }
+    .contact-desc { font-size: 16px; color: rgba(255,255,255,0.42); line-height: 1.75; margin-bottom: 48px; max-width: 460px; }
+    .contact-links { display: flex; gap: 14px; flex-wrap: wrap; }
+    .contact-link { padding: 14px 28px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: all 0.25s ease; }
+    .contact-link.primary { background: var(--accent); color: #fff; }
+    .contact-link.primary:hover { background: #fff; color: var(--black); transform: translate(-3px,-3px); box-shadow: 6px 6px 0 var(--accent); }
+    .contact-link.secondary { border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.55); }
+    .contact-link.secondary:hover { border-color: var(--off-white); color: var(--off-white); }
+
+    /* FOOTER */
+    footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.05); padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-left { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: rgba(255,255,255,0.22); }
+    .footer-left strong { color: rgba(255,255,255,0.45); }
+    .footer-right { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.08em; color: rgba(255,255,255,0.18); }
+    .footer-right a { color: var(--accent); text-decoration: none; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* MODAL */
+    .modal-overlay { display: none; position: fixed; inset: 0; z-index: 8000; background: rgba(10,10,10,0.88); backdrop-filter: blur(6px); justify-content: center; align-items: center; }
+    .modal-overlay.open { display: flex; }
+    .modal-box { background: var(--off-white); padding: 56px 48px; max-width: 400px; width: 90%; text-align: center; }
+    .modal-cat { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+    .modal-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; line-height: 1.1; margin-bottom: 16px; }
+    .modal-title em { font-style: italic; color: var(--accent); }
+    .modal-desc { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 36px; }
+    .modal-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .modal-btn-primary { background: var(--black); color: var(--off-white); padding: 12px 24px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s; }
+    .modal-btn-primary:hover { background: var(--accent); }
+    .modal-btn-secondary { background: none; border: 1px solid var(--light-gray); padding: 12px 24px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; color: var(--gray); }
+    .modal-btn-secondary:hover { border-color: var(--black); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .hero-content { padding: 0 24px 56px; }
+      .hero-stat-grid { grid-template-columns: repeat(2, auto); gap: 0; row-gap: 24px; }
+      .hero-stat { padding: 0 24px 0 0; margin-right: 24px; }
+      .scroll-hint { display: none; }
+      .what-i-do { padding: 72px 24px; }
+      .what-i-do-header { grid-template-columns: 1fr; gap: 24px; margin-bottom: 48px; }
+      .what-i-do-title { position: static; }
+      .pillars { grid-template-columns: 1fr; }
+      .experience { padding: 72px 24px; }
+      .exp-item { grid-template-columns: 1fr; gap: 8px; padding: 28px 0; }
+      .exp-tag { display: none; }
+      .exp-header { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 40px; }
+      .about { grid-template-columns: 1fr; padding-bottom: 72px; }
+      .about-photo { position: relative; height: 480px; top: auto; }
+      .about-photo::after { background: linear-gradient(to bottom, transparent 60%, var(--off-white) 100%); }
+      .about-left { position: static; padding: 40px 24px 0; }
+      .about-right { padding: 32px 24px 0; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .blog { padding: 72px 24px; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .blog-grid-row2 { grid-template-columns: 1fr; }
+      .blog-header { flex-direction: column; gap: 12px; }
+      .contact { padding: 72px 24px; }
+      .contact-links { flex-direction: column; }
+      footer { padding: 24px; flex-direction: column; gap: 10px; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .hero-name { font-size: 48px; }
+      .hero-cta { flex-direction: column; align-items: flex-start; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .modal-box { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modal" onclick="closeModal()">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-cat">Coming Soon</div>
+      <div class="modal-title">This post is<br><em>in the works.</em></div>
+      <div class="modal-desc">Writing this one up properly. Follow on LinkedIn to know when it drops — no spam, just signal.</div>
+      <div class="modal-actions">
+        <a href="https://linkedin.com/in/pratikparashar93" target="_blank" class="modal-btn-primary">Follow on LinkedIn</a>
+        <button onclick="closeModal()" class="modal-btn-secondary">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <a href="#" class="nav-logo">alloutoftokens.com</a>
+    <ul class="nav-links">
+      <li><a href="#what-i-do">What I Do</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#blog">Writing</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-hamburger" id="hamburger" onclick="openMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" onclick="closeMenu()">✕ Close</button>
+    <a href="#what-i-do" onclick="closeMenu()">What I Do</a>
+    <a href="#experience" onclick="closeMenu()">Experience</a>
+    <a href="#about" onclick="closeMenu()">About</a>
+    <a href="#blog" onclick="closeMenu()">Writing</a>
+    <a href="#contact" onclick="closeMenu()">Contact</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="available-badge">
+        <div class="available-dot"></div>
+        <span class="available-text">Open to new roles</span>
+      </div>
+      <h1 class="hero-name">Pratik<em>Parashar</em></h1>
+      <p class="hero-tagline">
+        I help finance teams move from<br>
+        <strong>manual to automated</strong> —
+        before they have to.
+      </p>
+      <p class="hero-desc">
+        7+ years in Big-4 finance across India &amp; the Netherlands.
+        Now at the intersection of <strong>deep finance expertise</strong>
+        and <strong>practical AI implementation</strong> — helping companies
+        build the finance function of the next decade.
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary">Let's talk</a>
+        <a href="#experience" class="btn-secondary">See my work →</a>
+      </div>
+      <div class="hero-stat-grid">
+        <div class="hero-stat">
+          <div class="hero-stat-num">7+</div>
+          <div class="hero-stat-label">Years Big-4</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">2</div>
+          <div class="hero-stat-label">Countries</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">FS</div>
+          <div class="hero-stat-label">Sector Focus</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">AI</div>
+          <div class="hero-stat-label">In Practice</div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      Scroll to explore
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span class="ticker-item"><span>✦</span> Finance Transformation</span>
+      <span class="ticker-item"><span>✦</span> AI in Finance</span>
+      <span class="ticker-item"><span>✦</span> KPMG Netherlands</span>
+      <span class="ticker-item"><span>✦</span> IFRS · Dutch GAAP · Ind AS</span>
+      <span class="ticker-item"><span>✦</span> Alteryx · Power BI · SAP</span>
+      <span class="ticker-item"><span>✦</span> NN Group · ASR · Van Lanschot Kempen</span>
+      <span class="ticker-item"><span>✦</span> Manual → Automated</span>
+      <span class="ticker-item"><span>✦</span> Private Equity · KKR</span>
+      <span class="ticker-item"><span>✦</span> Finance Transformation</span>
+      <span class="ticker-item"><span>✦</span> AI in Finance</span>
+      <span class="ticker-item"><span>✦</span> KPMG Netherlands</span>
+      <span class="ticker-item"><span>✦</span> IFRS · Dutch GAAP · Ind AS</span>
+      <span class="ticker-item"><span>✦</span> Alteryx · Power BI · SAP</span>
+      <span class="ticker-item"><span>✦</span> NN Group · ASR · Van Lanschot Kempen</span>
+      <span class="ticker-item"><span>✦</span> Manual → Automated</span>
+      <span class="ticker-item"><span>✦</span> Private Equity · KKR</span>
+    </div>
+  </div>
+
+  <!-- WHAT I DO -->
+  <section class="what-i-do" id="what-i-do">
+    <div class="what-i-do-header reveal">
+      <div>
+        <div class="section-label">What I Do</div>
+        <h2 class="what-i-do-title">The<br><em>intersection.</em></h2>
+      </div>
+      <p class="what-i-do-intro">
+        Most finance professionals understand the numbers. Most AI tools don't understand finance.
+        <strong>I sit in between.</strong> I've spent 7+ years inside the balance sheets of banks,
+        insurers, and PE funds — and the last few years figuring out exactly where AI can replace
+        the manual work, and where human judgment still matters. That combination is rare.
+        And increasingly, it's what companies need.
+      </p>
+    </div>
+    <div class="pillars reveal">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <div class="pillar-title">Finance Depth</div>
+        <div class="pillar-desc">
+          IFRS, Dutch GAAP, Ind AS. Group consolidation, NAV reporting,
+          variance analysis, management reporting. Built across Big-4 engagements
+          in financial services, PE, FMCG, and retail — across two countries.
+        </div>
+        <div class="pillar-tags">
+          <span class="pillar-tag">IFRS</span>
+          <span class="pillar-tag">Dutch GAAP</span>
+          <span class="pillar-tag">Consolidation</span>
+          <span class="pillar-tag">FP&amp;A</span>
+          <span class="pillar-tag">NAV</span>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <div class="pillar-title">AI in Practice</div>
+        <div class="pillar-desc">
+          Not theory — I've actually done it. Pitched and demonstrated AI agents
+          for financial analysis to a Big-4 partner. Joined KPMG's Audit Innovation
+          team. Use prompt engineering daily. Building the case for AI adoption
+          in finance functions, one use case at a time.
+        </div>
+        <div class="pillar-tags">
+          <span class="pillar-tag">AI Agents</span>
+          <span class="pillar-tag">Prompt Engineering</span>
+          <span class="pillar-tag">Alteryx</span>
+          <span class="pillar-tag">Power BI</span>
+          <span class="pillar-tag">Automation</span>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <div class="pillar-title">The Pivot</div>
+        <div class="pillar-desc">
+          Finance is mid-revolution. The manual execution layer is being automated.
+          What remains — and grows in value — is judgment, translation, and implementation.
+          I'm targeting roles where I can lead that transition:
+          Finance Transformation, FP&amp;A, Financial Controller.
+        </div>
+        <div class="pillar-tags">
+          <span class="pillar-tag">Finance Transformation</span>
+          <span class="pillar-tag">FP&amp;A</span>
+          <span class="pillar-tag">Controller</span>
+          <span class="pillar-tag">Open to work</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="experience" id="experience">
+    <div class="exp-header reveal">
+      <div>
+        <div class="section-label" style="color:rgba(255,60,31,0.8)">Experience</div>
+        <h2 class="exp-title">The <em>work.</em></h2>
+      </div>
+    </div>
+    <div class="exp-list">
+      <div class="exp-item reveal">
+        <div class="exp-period">Oct 2023<br>Present</div>
+        <div>
+          <div class="exp-highlight">Current Role</div>
+          <div class="exp-company">KPMG Netherlands</div>
+          <div class="exp-role">Senior Auditor · Financial Services</div>
+          <ul class="exp-bullets">
+            <li>Pitched AI agents for financial analysis of Van Lanschot Kempen's annual report — demonstrated live to a partner; invited to join the Audit Innovation team</li>
+            <li>External audit for NN Group and ASR; engaged directly with AFM/DNB regulators</li>
+            <li>Identified undisclosed bank accounts and material variances; insights used by Treasury to tighten governance</li>
+            <li>Led NAV validation and dividend income reviews for ASR VB</li>
+          </ul>
+        </div>
+        <div class="exp-tag">Amstelveen, NL</div>
+      </div>
+      <div class="exp-item reveal">
+        <div class="exp-period">Jan 2021<br>Oct 2022</div>
+        <div>
+          <div class="exp-company">Deloitte India</div>
+          <div class="exp-role">Audit Senior · Private Equity</div>
+          <ul class="exp-bullets">
+            <li>Led valuation reviews for KKR &amp; Co. billion-dollar portfolios — DCF models, NAV calculations, carried interest</li>
+            <li>Proposed automation for carried interest calculations; inputs used in internal tool development</li>
+            <li>Coordinated 75+ person offshore audit team · Spot Award winner</li>
+          </ul>
+        </div>
+        <div class="exp-tag">Bengaluru, IN</div>
+      </div>
+      <div class="exp-item reveal">
+        <div class="exp-period">Mar 2015<br>Jul 2018</div>
+        <div>
+          <div class="exp-company">KPMG India</div>
+          <div class="exp-role">Associate → Senior Associate</div>
+          <ul class="exp-bullets">
+            <li>Statutory audits for Britannia, United Spirits, and clients across FMCG, retail, auto, healthcare, IT</li>
+            <li>Only articled assistant to lead branch audits for Britannia — typically reserved for qualified CAs</li>
+            <li>Flagged material Ind AS misinterpretations in lease and revenue standards; led to corrections in client policy</li>
+            <li>Above and Beyond Award, 2017</li>
+          </ul>
+        </div>
+        <div class="exp-tag">Bengaluru, IN</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <!-- Photo column -->
+    <div class="about-photo">
+      <img src="pratik.jpg" alt="Pratik Parashar" loading="lazy" />
+    </div>
+    <!-- Title column -->
+    <div class="about-left">
+      <div class="section-label">About</div>
+      <h2 class="about-title">The<br>person<br><em>behind it.</em></h2>
+    </div>
+    <!-- Text column -->
+    <div class="about-right">
+      <p class="about-body reveal">
+        I grew up in finance. Started as an articled assistant in Bengaluru,
+        worked my way through Big-4 audits across sectors, moved countries,
+        and somewhere along the way started noticing that the job I was doing
+        was changing faster than most people in the room were willing to admit.
+      </p>
+      <p class="about-body reveal">
+        <strong>The AI piece isn't a side interest.</strong> I've been building it into
+        my actual work — using it on real engagements, pitching it to partners,
+        joining innovation teams. I think the finance professionals who figure out
+        how to work alongside these tools — rather than pretend they don't exist —
+        are going to be the ones who matter in 10 years.
+      </p>
+      <p class="about-body reveal">
+        Outside of work: motorcycles, basketball, dramas, and collecting
+        other people's stories like they're alternate versions of my own.
+        Based in Almere, the Netherlands.
+        <strong>ACCA</strong> (9/13 papers), <strong>CA Finalist</strong>, B.Com (8.2 CGPA).
+      </p>
+      <div class="skills-grid reveal">
+        <div class="skill-item">
+          <div class="skill-name">Financial Reporting</div>
+          <div class="skill-sub">IFRS, Dutch GAAP, Ind AS, Group Consolidation</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">FP&amp;A</div>
+          <div class="skill-sub">Variance analysis, forecasting, management reporting</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">AI &amp; Automation</div>
+          <div class="skill-sub">Alteryx, Power BI, AI agents, prompt engineering</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">Systems</div>
+          <div class="skill-sub">SAP, Oracle, iXBRL, Excel (advanced)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section class="blog" id="blog">
+    <div class="blog-header reveal">
+      <div>
+        <div class="section-label">Writing</div>
+        <h2 class="blog-title">All Out<br>of <em>Tokens.</em></h2>
+      </div>
+      <a href="#" onclick="openModal(event)" class="blog-view-all">All posts →</a>
+    </div>
+    <p class="blog-subtitle reveal">
+      Thinking out loud about AI, finance, and what happens when the two collide.
+      Written for finance professionals who want to understand where this is going —
+      before it arrives.
+    </p>
+    <div class="blog-grid reveal">
+      <a href="blog-ai-agents.html" class="blog-card featured">
+        <div>
+          <div class="blog-cat">Featured · AI in Finance</div>
+          <div class="blog-card-title">Why I Pitched AI Agents to a Big-4 Partner (And What Happened Next)</div>
+          <div class="blog-excerpt">Everyone talks about AI transforming finance. I actually tried it — live, in front of a partner. Here's what I showed them, what landed, and what didn't.</div>
+        </div>
+        <div class="blog-card-meta">
+          <span>Mar 2026 · 6 min read</span>
+          <span class="blog-arrow">↗</span>
+        </div>
+      </a>
+      <a href="blog-controller.html" class="blog-card">
+        <div>
+          <div class="blog-cat">Finance Transformation</div>
+          <div class="blog-card-title">The Controller Role Is Being Redefined. Most Controllers Don't Know It Yet.</div>
+          <div class="blog-excerpt">Controller upper-range salaries dropped 21% in one year. The market is saying something loud. Here's what it means.</div>
+        </div>
+        <div class="blog-card-meta">
+          <span>Apr 2026 · 7 min read</span><span class="blog-arrow">↗</span>
+        </div>
+      </a>
+      <a href="#" onclick="openModal(event)" class="blog-card">
+        <div>
+          <div class="blog-cat">AI · Tools</div>
+          <div class="blog-card-title">Prompt Engineering for Finance Professionals: A Practical Start</div>
+          <div class="blog-excerpt">Getting useful output from AI when your work involves numbers and complex documents.</div>
+        </div>
+        <div class="blog-card-meta">
+          <span>Coming soon</span><span class="blog-arrow">↗</span>
+        </div>
+      </a>
+    </div>
+    <div class="blog-grid-row2 reveal">
+      <a href="#" onclick="openModal(event)" class="blog-card blog-card-wide">
+        <div>
+          <div class="blog-cat">Career · Big-4</div>
+          <div class="blog-card-title" style="font-size:19px">From India to the Netherlands: What Moving Countries Did to My Career</div>
+          <div class="blog-excerpt" style="color:var(--gray)">The cultural shift, the professional reset, and what I'd tell anyone considering a similar move.</div>
+        </div>
+        <div class="blog-card-meta"><span>Coming soon</span><span class="blog-arrow">↗</span></div>
+      </a>
+      <a href="#" onclick="openModal(event)" class="blog-card blog-card-wide">
+        <div>
+          <div class="blog-cat">Finance · Audit</div>
+          <div class="blog-card-title" style="font-size:19px">What 7 Years of Audit Taught Me About Reading a Balance Sheet</div>
+          <div class="blog-excerpt" style="color:var(--gray)">The patterns, the red flags, and the instincts you only develop from time in the field.</div>
+        </div>
+        <div class="blog-card-meta"><span>Coming soon</span><span class="blog-arrow">↗</span></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-bg-text">Hello.</div>
+    <div class="contact-inner">
+      <div class="section-label" style="color:rgba(255,60,31,0.8)">Get in Touch</div>
+      <h2 class="contact-heading">Let's build<br>something<br><em>new.</em></h2>
+      <p class="contact-desc">
+        If you're a company figuring out how AI fits into your finance function —
+        or a recruiter looking for someone who can do both — I'd like to talk.
+      </p>
+      <div class="contact-links">
+        <a href="#" onclick="window.location.href='mai'+'lto:parashar.pratik@gmail.com'" class="contact-link primary">✉ Email me</a>
+        <a href="https://linkedin.com/in/pratikparashar93" target="_blank" class="contact-link secondary">LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left"><strong>Pratik Parashar</strong> · alloutoftokens.com · © 2026</div>
+    <div class="footer-right">Built with intention. Hosted on <a href="https://netlify.com" target="_blank">Netlify</a>.</div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    function openModal(e) { e.preventDefault(); document.getElementById('modal').classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeModal() { document.getElementById('modal').classList.remove('open'); document.body.style.overflow = ''; }
+    function openMenu() { document.getElementById('mobileMenu').classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); document.body.style.overflow = ''; }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeMenu(); } });
+
+    const nav = document.getElementById('mainNav');
+    const darkIds = ['hero', 'experience', 'contact'];
+    function updateNav() {
+      if (window.scrollY < 60) { nav.className = 'dark'; return; }
+      let overDark = false;
+      darkIds.forEach(id => { const el = document.getElementById(id); if (el) { const r = el.getBoundingClientRect(); if (r.top <= 70 && r.bottom >= 0) overDark = true; } });
+      nav.className = overDark ? 'dark' : 'light';
+    }
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
+
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.transform = `translate(${mx-6}px,${my-6}px)`; });
+    (function loop() { rx += (mx-rx-18)*0.12; ry += (my-ry-18)*0.12; ring.style.transform = `translate(${rx}px,${ry}px)`; requestAnimationFrame(loop); })();
+
+    const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Why I Pitched AI Agents at Work — Pratik Parashar</title>
+
+  <!-- OG / LinkedIn meta tags -->
+  <meta property="og:title" content="Why I Pitched AI Agents at Work (And What Happened Next)" />
+  <meta property="og:description" content="A 40-hour job done in 40 minutes. Here's what happened when I actually tried pitching AI agents inside a Big-4 firm." />
+  <meta property="og:image" content="https://alloutoftokens.com/og-robot.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="627" />
+  <meta property="og:url" content="https://alloutoftokens.com/blog-ai-agents.html" />
+  <meta property="og:type" content="article" />
+  <meta property="article:author" content="Pratik Parashar" />
+  <meta property="article:published_time" content="2026-03-24" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Why I Pitched AI Agents at Work (And What Happened Next)" />
+  <meta name="twitter:description" content="A 40-hour job done in 40 minutes. Here's what happened when I actually tried pitching AI agents inside a Big-4 firm." />
+  <meta name="twitter:image" content="https://alloutoftokens.com/og-robot.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --off-white: #f0ede6;
+      --cream: #e8e3d8;
+      --accent: #ff3c1f;
+      --gray: #5a5a5a;
+      --light-gray: #c8c3b8;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--off-white);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Cursor */
+    .cursor { width: 12px; height: 12px; background: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; mix-blend-mode: multiply; }
+    .cursor-ring { width: 36px; height: 36px; border: 1px solid var(--black); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998; transition: all 0.15s ease; }
+
+    /* Noise */
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 1000; opacity: 0.4; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      padding: 20px 48px; display: flex;
+      justify-content: space-between; align-items: center;
+      background: rgba(240,237,230,0.96);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+    }
+    .nav-logo { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--black); text-decoration: none; opacity: 0.55; transition: opacity 0.2s; }
+    .nav-logo:hover { opacity: 1; }
+    .nav-back { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.2s; }
+    .nav-back:hover { color: var(--accent); }
+
+    /* HERO */
+    .post-hero {
+      background: var(--black);
+      padding: 140px 0 72px;
+      position: relative;
+      overflow: hidden;
+    }
+    .post-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent);
+    }
+    .post-hero-inner {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    .post-cat {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .post-cat::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+    .post-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 3.8vw, 48px);
+      font-weight: 900; line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--off-white);
+      margin-bottom: 28px;
+    }
+    .post-title em { font-style: italic; color: var(--accent); }
+    .post-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px; letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.35);
+      display: flex; gap: 24px; flex-wrap: wrap;
+    }
+    .post-meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* HERO IMAGE */
+    .post-hero-image {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 48px 48px 0;
+    }
+    .post-hero-image img {
+      width: 100%;
+      height: auto;
+      max-height: 340px;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .post-hero-image { padding: 32px 24px 0; }
+    }
+
+    /* ARTICLE */
+    .post-body {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 72px 48px 120px;
+    }
+
+    .post-body p {
+      font-size: 17px;
+      line-height: 1.85;
+      color: #2a2a2a;
+      margin-bottom: 28px;
+      font-weight: 300;
+    }
+
+    .post-body p + p { margin-top: 0; }
+
+    .post-body hr {
+      border: none;
+      border-top: 1px solid var(--light-gray);
+      margin: 52px 0;
+    }
+
+    .post-body em {
+      font-style: italic;
+      color: var(--black);
+    }
+
+    /* Pull quote / dialogue */
+    .post-body blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 4px 0 4px 24px;
+      margin: 36px 0;
+    }
+    .post-body blockquote p {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-style: italic;
+      color: var(--black);
+      margin-bottom: 0;
+      line-height: 1.6;
+    }
+
+    /* Stats section */
+    .post-stats {
+      background: var(--black);
+      padding: 48px;
+      margin: 52px 0;
+      border-left: 3px solid var(--accent);
+    }
+    .post-stats p {
+      color: rgba(255,255,255,0.7) !important;
+      margin-bottom: 16px !important;
+      font-size: 15px !important;
+    }
+    .post-stats p:last-child { margin-bottom: 0 !important; }
+    .post-stats sup { color: var(--accent); font-size: 11px; }
+
+    /* The 40/40 moment */
+    .forty-moment {
+      text-align: center;
+      padding: 52px 0;
+      margin: 52px 0;
+      border-top: 1px solid var(--light-gray);
+      border-bottom: 1px solid var(--light-gray);
+    }
+    .forty-moment .forty-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .forty-moment .forty-grid {
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      gap: 24px; align-items: center;
+      max-width: 440px; margin: 0 auto;
+    }
+    .forty-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 64px; font-weight: 900;
+      line-height: 1;
+    }
+    .forty-num.old { color: var(--light-gray); }
+    .forty-num.new { color: var(--accent); }
+    .forty-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--gray);
+      margin-top: 8px;
+    }
+    .forty-arrow {
+      font-size: 32px; color: var(--light-gray);
+    }
+
+    /* Sources */
+    .post-sources {
+      background: var(--cream);
+      padding: 40px 48px;
+      margin-top: 72px;
+      margin-left: -48px;
+      margin-right: -48px;
+    }
+    .post-sources-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 24px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .post-sources-title::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+    .source-item {
+      display: flex; gap: 16px; align-items: baseline;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--light-gray);
+    }
+    .source-item:last-child { border-bottom: none; }
+    .source-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px; color: var(--accent);
+      min-width: 20px;
+    }
+    .source-text { font-size: 13px; color: var(--gray); line-height: 1.6; }
+    .source-text a { color: var(--black); text-decoration: none; border-bottom: 1px solid var(--light-gray); transition: border-color 0.2s, color 0.2s; }
+    .source-text a:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* Sign off */
+    .post-signoff {
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid var(--light-gray);
+    }
+    .post-signoff p {
+      font-size: 15px !important;
+      color: var(--gray) !important;
+    }
+    .post-signoff a { color: var(--black); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--light-gray); transition: color 0.2s, border-color 0.2s; }
+    .post-signoff a:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* Author card */
+    .author-card {
+      display: flex; gap: 24px; align-items: center;
+      background: var(--cream); padding: 32px 40px;
+      margin-top: 48px;
+    }
+    .author-avatar {
+      width: 110px; height: 110px; border-radius: 50%;
+      object-fit: cover; object-position: center 25%;
+      flex-shrink: 0;
+    }
+    .author-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .author-bio { font-size: 13px; color: var(--gray); line-height: 1.6; }
+    .author-bio a { color: var(--accent); text-decoration: none; }
+
+    /* Back to blog */
+    .back-strip {
+      background: var(--black);
+      padding: 40px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .back-link { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+    .back-link:hover { color: var(--accent); }
+    .back-strip-logo { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: rgba(255,255,255,0.2); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 18px 24px; }
+      .post-hero { padding: 120px 0 52px; }
+      .post-hero-inner { padding: 0 24px; }
+      .post-body { padding: 52px 24px 80px; }
+      .post-body p { font-size: 16px; }
+      .post-stats { padding: 32px 24px; margin: 40px -24px; }
+      .post-sources { padding: 32px 24px; margin-top: 52px; }
+      .forty-moment { padding: 40px 0; margin: 40px 0; }
+      .forty-num { font-size: 48px; }
+      .author-card { padding: 24px; gap: 16px; }
+      .back-strip { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">alloutoftokens.com</a>
+    <a href="index.html#blog" class="nav-back">← All Writing</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="post-hero">
+    <div class="post-hero-inner">
+      <div class="post-cat">AI in Finance</div>
+      <h1 class="post-title">Why I Pitched AI Agents at <em>Work</em> (And What Happened Next)</h1>
+      <div class="post-meta">
+        <span>Pratik Parashar</span>
+        <span>March 2026</span>
+        <span>7 min read</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO IMAGE -->
+  <div class="post-hero-image">
+    <img src="og-robot.png" alt="A tiny robot working through towering stacks of documents" />
+  </div>
+
+  <!-- ARTICLE -->
+  <article class="post-body">
+
+    <p>I got an email one morning about a newly formed innovation team at my firm. They were looking at AI, prompt engineering, what it all meant for how we work. I read it twice.</p>
+
+    <p>Then I did what they force-feed you with a six-foot spoon in these big firms.</p>
+
+    <p>I turned proactive.</p>
+
+    <p>I went to one of the partners on the team. Told him I was interested. Wanted to be part of it. He said "of course, let me get back to you."</p>
+
+    <p>He never did.</p>
+
+    <p>That's the thing about being proactive in a large firm. They tell you to raise your hand. What happens after is less certain.</p>
+
+    <hr>
+
+    <p>A month later, at an office party, I bumped into a colleague who I knew was sending out those innovation emails. I asked her the same thing — is there a way in?</p>
+
+    <p>She said: come find me at the office one day.</p>
+
+    <p>I did. We sat in a meeting room and talked properly for the first time. She explained the problem she was trying to solve. Annual reports in financial services can run to 300, sometimes 400 pages. Doing a proper financial statement analysis — capturing and explaining movements year-on-year across all the notes — takes a week for a moderately experienced auditor. Sometimes more. She wanted to know if AI could do it faster.</p>
+
+    <p>She asked me to take a crack at it. The test case: Van Lanschot Kempen's 2024 annual report. A publicly published document — 350 pages. I work in financial services, so it was a natural fit.</p>
+
+    <hr>
+
+    <p>I went home that evening and started thinking about approach. The work laptop had Copilot, but it felt limited — basic text and email, not much else. I later found out that's a privacy constraint. EU data regulations mean certain tools get restricted in ways that blunt their usefulness for this kind of analytical work.</p>
+
+    <p>So I opened ChatGPT on my personal laptop instead.</p>
+
+    <p>And right there, the first time I launched it that day, a pop-up appeared.</p>
+
+    <blockquote><p>"Try the new Agent mode."</p></blockquote>
+
+    <p>I sat back.</p>
+
+    <p>Of all the frigging days.</p>
+
+    <hr>
+
+    <p>I spent time building the prompt carefully — giving it the brief a senior auditor would give a very capable junior. It defined materiality from scratch, with the agent documenting its own reasoning for the benchmark it selected. It set up flagging logic: context-aware thresholds, a volatility test for variances above 10%, a sign-change override that flagged items regardless of size if the direction of a number reversed between years. It was asked to independently identify significant risk areas and run the analysis for those regardless of the other criteria.</p>
+
+    <p>Then I opened a fresh session, uploaded the 350-page PDF, and hit go.</p>
+
+    <p>I watched it work for a few minutes — the way agents reason through steps, pull from the document, document their own thinking. Then I realised this was probably going to take a while.</p>
+
+    <p>So I went and made a coffee.</p>
+
+    <p>Twenty-five minutes later, I came back.</p>
+
+    <p>The Excel was ready.</p>
+
+    <hr>
+
+    <p>I've done a lot of financial statement analysis over the years. FS analytical review, variance explanations, movement notes across complex group structures. A thorough job on a report this size — 40 hours for a moderately experienced auditor, conservatively.</p>
+
+    <div class="forty-moment">
+      <div class="forty-label">The number that changed everything</div>
+      <div class="forty-grid">
+        <div>
+          <div class="forty-num old">40h</div>
+          <div class="forty-sub">Manual audit</div>
+        </div>
+        <div class="forty-arrow">→</div>
+        <div>
+          <div class="forty-num new">40m</div>
+          <div class="forty-sub">AI agent</div>
+        </div>
+      </div>
+    </div>
+
+    <p>I opened the file expecting gaps, errors, things I'd need to fix. Instead I found myself going through it like a reviewer, not a builder. The materiality calculations were solid, with the reasoning documented step by step. Every line item explained individually, cross-referenced to the relevant notes, flagged where the logic said to flag. It had even gone beyond the financials — researching the company's environment, the macro context it was operating in, the industry movements that explained what the numbers were doing.</p>
+
+    <p>I went to sleep that night thinking about it. Not anxiously. In that rarer way where something has genuinely shifted and your brain won't let it go.</p>
+
+    <hr>
+
+    <p>The next time I was in the office, I showed my colleague. She didn't say much. She didn't need to — it was written across her face.</p>
+
+    <p>She immediately set up a meeting with the manager overseeing the audit financial services innovation team.</p>
+
+    <p>Same walkthrough. Same reaction. He looked at the output for a while and said:</p>
+
+    <blockquote><p>"Things were fine until now. But after seeing agents — things are about to get very interesting."</p></blockquote>
+
+    <p>He meant it as a compliment. Mostly. There was a pause — the kind that contains more than it says — and then he added something about the nature of certain roles changing faster than people expected. We all sat with that for a moment without saying much.</p>
+
+    <p>He wanted to set up a follow-up with the partner heading the team. That meeting never happened. Scheduling, competing priorities, the general friction of large organisations moving slower than the ideas inside them. I didn't push too hard. These things happen.</p>
+
+    <hr>
+
+    <p>A couple of months later, at a firm training, a senior manager from the broader assurance innovation team gave a session on where things were heading with AI. How clients were already using it. How the audit approach itself was beginning to shift. It was the kind of talk that makes you feel the industry is actually paying attention.</p>
+
+    <p>I wanted to speak to him after, but he was occupied. I let it go and found a table at lunch with some of the people I'd met during the day.</p>
+
+    <p>A few minutes later, he walked over with his plate and asked if he could join us.</p>
+
+    <p>We talked about a lot of things — careers, where people were, where they wanted to go. At some point I mentioned what I'd built. He looked at me and said:</p>
+
+    <blockquote><p>"Oh — that was yours? I've seen it. It was pretty cool."</p></blockquote>
+
+    <p>He asked what I thought the main obstacle to implementation would be. I said consistency, initially — but that agents learn fast, and the curve is steep. He was nodding. He told me they were seriously considering it. The thing holding it back was data privacy — ChatGPT's policies conflicting with client confidentiality requirements. But Copilot agents were coming, he said. When they did, something similar could be built inside the firm's own infrastructure.</p>
+
+    <p>Whether he sat down at our table by chance or by design, I genuinely don't know. I've thought about it.</p>
+
+    <hr>
+
+    <p>The audit financial services innovation manager did eventually ask me to join the team in a more formal capacity.</p>
+
+    <p>It never quite materialised.</p>
+
+    <p>The question that 40-minute Excel file had planted wasn't <em>"how do we use this in one process?"</em> It was something broader: if a task that took 40 hours now takes 40 minutes, what does the next version do? And the one after that?</p>
+
+    <p>That was roughly a year ago.</p>
+
+    <p>Here's where things stand now.</p>
+
+    <div class="post-stats">
+      <p>Across the financial services industry, AI agents are no longer a proof of concept. Early agentic AI deployments are already reducing manual workloads in finance functions by 30–50%.<sup>1</sup> And adoption is accelerating fast — 82% of midsize companies and 95% of PE firms have either begun or plan to implement agentic AI in their operations in 2026, with financial planning and analysis, fraud detection, and compliance monitoring leading the way.<sup>2</sup></p>
+      <p>The tools have moved too. The privacy constraints that stopped my work from going live inside the firm? Infrastructure is catching up to capability — and fast.<sup>3</sup></p>
+      <p>What this means practically: the analysis I ran on a 350-page annual report in 40 minutes — that's not impressive anymore. That's the floor. The question now is what gets built on top of it.</p>
+    </div>
+
+    <p>I don't think finance professionals disappear. I think the ones who understand both the numbers and the tools become harder to replace, not easier. But only if they move.</p>
+
+    <p>The thing nobody tells you about these industrial revolutions — and that's exactly what this is — is that the people who thrive aren't the ones who predicted it earliest. They're the ones who stayed curious long enough to actually do something with what they saw.</p>
+
+    <p>An email landed in my inbox. I turned proactive.</p>
+
+    <p>It didn't materialise the way I expected. But it put a question in my head I haven't been able to put down since.</p>
+
+    <p><strong>Where do you want to stand when this lands properly?</strong></p>
+
+    <!-- SOURCES -->
+    <div class="post-sources">
+      <div class="post-sources-title">Sources</div>
+      <div class="source-item">
+        <span class="source-num">1</span>
+        <span class="source-text">McKinsey &amp; Company — <em>The state of AI in early 2025</em> · <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank">mckinsey.com</a></span>
+      </div>
+      <div class="source-item">
+        <span class="source-num">2</span>
+        <span class="source-text">Citizens Bank — <em>2026 AI Trends in Financial Management</em> · <a href="https://www.citizensbank.com/corporate-finance/insights/ai-trends-financial-management-2026.aspx" target="_blank">citizensbank.com</a></span>
+      </div>
+      <div class="source-item">
+        <span class="source-num">3</span>
+        <span class="source-text">Neurons Lab — <em>Agentic AI in Financial Services: A Research Roundup for 2026</em> · <a href="https://neurons-lab.com/article/agentic-ai-in-financial-services-2026/" target="_blank">neurons-lab.com</a></span>
+      </div>
+    </div>
+
+    <!-- SIGN OFF -->
+    <div class="post-signoff">
+      <p>I'd genuinely like to hear where you are with this — whether you're a finance professional figuring out the right move, or someone already building in this space. Find me on <a href="https://linkedin.com/in/pratikparashar93" target="_blank">LinkedIn</a>.</p>
+    </div>
+
+    <!-- AUTHOR CARD -->
+    <div class="author-card">
+      <img src="pratik.jpg" alt="Pratik Parashar" class="author-avatar" />
+      <div>
+        <div class="author-name">Pratik Parashar</div>
+        <div class="author-bio">Senior Auditor at a Big-4 firm in the Netherlands. Writing about AI, finance, and what happens when the two collide. Open to new roles in Finance Transformation, FP&amp;A, and Financial Control. <a href="https://linkedin.com/in/pratikparashar93" target="_blank">LinkedIn →</a></div>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- BACK STRIP -->
+  <div class="back-strip">
+    <a href="index.html#blog" class="back-link">← Back to all writing</a>
+    <span class="back-strip-logo">alloutoftokens.com</span>
+  </div>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.transform = `translate(${mx-6}px,${my-6}px)`;
+    });
+    (function loop() {
+      rx += (mx-rx-18)*0.12; ry += (my-ry-18)*0.12;
+      ring.style.transform = `translate(${rx}px,${ry}px)`;
+      requestAnimationFrame(loop);
+    })();
+  </script>
+</body>
+</html>
