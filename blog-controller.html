@@ -224,6 +224,8 @@
       border-top: 1px solid var(--border);
     }
 
+    sup { color: var(--red); font-size: 11px; }
+
     /* ── Post illustration ──────────────────────────────────────── */
     .post-illustration {
       margin: 48px -24px;
@@ -309,27 +311,40 @@
 
     /* ── Sources ────────────────────────────────────────────────── */
     .sources {
-      border-top: 1px solid var(--border);
-      margin-top: 64px;
-      padding-top: 32px;
+      background: #ede8e0;
+      padding: 40px 48px;
+      margin-top: 72px;
+      margin-left: -48px;
+      margin-right: -48px;
     }
 
-    .sources h3 {
+    .sources-title {
       font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--mid);
-      margin-bottom: 16px;
+      font-size: 10px; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--red);
+      margin-bottom: 24px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .sources-title::before { content: ''; width: 24px; height: 1px; background: var(--red); }
+
+    .source-item {
+      display: flex; gap: 16px; align-items: baseline;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(13,13,13,0.1);
+    }
+    .source-item:last-child { border-bottom: none; }
+
+    .source-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px; color: var(--red);
+      min-width: 20px;
     }
 
-    .sources p {
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      line-height: 1.8;
-      color: var(--mid);
-      margin: 0;
+    .source-text {
+      font-size: 13px; color: var(--mid); line-height: 1.6;
     }
+    .source-text a { color: var(--black); text-decoration: none; border-bottom: 1px solid rgba(13,13,13,0.2); transition: border-color 0.2s, color 0.2s; }
+    .source-text a:hover { color: var(--red); border-color: var(--red); }
 
     /* ── Author card ────────────────────────────────────────────── */
     .author-card {
@@ -475,6 +490,7 @@
       .nav-links { display: none; }
       .hamburger { display: flex; }
     }
+
   </style>
 </head>
 <body>
@@ -535,7 +551,7 @@
 
       <p class="reveal">Controller upper-range salaries dropped 21% in a single year.</p>
 
-      <p class="reveal">Not slowly, over a decade. One year — $170,000 down to $134,000, according to Datarails' March 2026 analysis of over 5,000 US finance job postings. In that same period, CFO salaries at the lower range went up 9%.</p>
+      <p class="reveal">Not slowly, over a decade. One year — $170,000 down to $134,000, according to Datarails' March 2026 analysis of over 5,000 US finance job postings. In that same period, CFO salaries at the lower range went up 9%.<sup>1</sup></p>
 
       <p class="reveal">That's not a coincidence. The market is telling you something about what it thinks a controller is worth, and it's saying it louder than most people in the role seem to have heard.</p>
 
@@ -552,9 +568,9 @@
 
       <p class="reveal">A lot of what gets written about AI in finance is abstract. So here's what's concrete.</p>
 
-      <p class="reveal">An MIT and Stanford study from August 2025 found that accountants using generative AI cut 7.5 days off the monthly close. Not from a particularly slow baseline — just off. The same study found they could support 55% more clients per week. These aren't vendor claims. They're peer-reviewed findings.</p>
+      <p class="reveal">An MIT and Stanford study from August 2025 found that accountants using generative AI cut 7.5 days off the monthly close. Not from a particularly slow baseline — just off. The same study found they could support 55% more clients per week. These aren't vendor claims. They're peer-reviewed findings.<sup>2</sup></p>
 
-      <p class="reveal">Real companies are posting harder numbers. Avis Budget's close-and-forecast cycle got 60% shorter after an Oracle deployment. HPE's CFO Marie Myers built an AI tool that eliminated 90% of the manual work her team spent preparing for weekly reviews — work that used to eat entire weekends. BlackLine customers now reconcile up to 85% of accounts automatically.</p>
+      <p class="reveal">Real companies are posting harder numbers. Avis Budget's close-and-forecast cycle got 60% shorter after an Oracle deployment. HPE's CFO Marie Myers built an AI tool that eliminated 90% of the manual work her team spent preparing for weekly reviews — work that used to eat entire weekends.<sup>3</sup> BlackLine customers now reconcile up to 85% of accounts automatically.</p>
 
       <div class="stat-row reveal">
         <div class="stat-chip">
@@ -569,27 +585,27 @@
 
       <p class="reveal">The tasks getting automated fastest are the ones that have always defined a controller's week. Reconciliations. Journal entries. Invoice matching. Variance analysis. At large enterprises, with production systems, right now.</p>
 
-      <p class="reveal">Two things are worth keeping in mind. This is moving faster at big companies than at smaller ones — the controller at a Fortune 500 is on a very different timeline to the controller at a €50 million business. And AI hallucinates in up to 41% of finance-related queries, according to research from FailSafeQA. So the automation is real, and so is the continued need for someone who can catch it when it's wrong.</p>
+      <p class="reveal">Two things are worth keeping in mind. This is moving faster at big companies than at smaller ones — the controller at a Fortune 500 is on a very different timeline to the controller at a €50 million business. And AI hallucinates in up to 41% of finance-related queries, according to research from FailSafeQA.<sup>4</sup> So the automation is real, and so is the continued need for someone who can catch it when it's wrong.</p>
 
       <!-- Section 2 -->
       <h2 class="reveal">The role isn't changing. It's splitting.</h2>
 
-      <p class="reveal">86% of controllers expect their role to change significantly within five years. That's from EY's DNA of the Financial Controller survey. What's interesting isn't the 86%. It's what the split actually looks like up close.</p>
+      <p class="reveal">86% of controllers expect their role to change significantly within five years. That's from EY's DNA of the Financial Controller survey.<sup>5</sup> What's interesting isn't the 86%. It's what the split actually looks like up close.</p>
 
       <div class="pull-quote reveal">
         <p>30% of controllers use spreadsheets as their primary modelling tool. 3% use AI. That gap is the story.</p>
       </div>
 
-      <p class="reveal">One version of the controller is getting squeezed. The work that's always filled the calendar — closing the books, chasing reconciliations, building variance reports — is being taken over. Deloitte and IMA surveyed 900+ finance professionals and found that while AI adoption in controllership is expected to double over the next few years, spreadsheets are still the most common modelling tool by a wide margin. 30% use them. 3% use AI. The gap between where things are heading and where most controllers are standing is genuinely large.</p>
+      <p class="reveal">One version of the controller is getting squeezed. The work that's always filled the calendar — closing the books, chasing reconciliations, building variance reports — is being taken over. Deloitte and IMA surveyed 900+ finance professionals and found that while AI adoption in controllership is expected to double over the next few years, spreadsheets are still the most common modelling tool by a wide margin. 30% use them. 3% use AI. The gap between where things are heading and where most controllers are standing is genuinely large.<sup>6</sup></p>
 
-      <p class="reveal">The other version is getting more valuable. Controllers who can govern AI tools, interpret their outputs, and translate numbers into actual business thinking — those people are harder to replace than they've ever been. Gartner's March 2026 survey found that acquiring AI talent is now CFOs' number-one near-term challenge. What finance leaders want and can't find enough of is someone who understands both the numbers and the technology well enough to connect them.</p>
+      <p class="reveal">The other version is getting more valuable. Controllers who can govern AI tools, interpret their outputs, and translate numbers into actual business thinking — those people are harder to replace than they've ever been. Gartner's March 2026 survey found that acquiring AI talent is now CFOs' number-one near-term challenge.<sup>7</sup> What finance leaders want and can't find enough of is someone who understands both the numbers and the technology well enough to connect them.</p>
 
       <p class="reveal">This pattern isn't new. Spreadsheets didn't kill bookkeepers — they turned them into analysts. ERPs didn't eliminate controllers — they pushed the role upward. Every automation wave has compressed the transactional layer and expanded the interpretive one. What's different now is how fast it's moving.</p>
 
       <!-- Section 3 -->
       <h2 class="reveal">The gap between believing it and doing something about it</h2>
 
-      <p class="reveal">AICPA and CIMA surveyed 1,446 senior finance leaders in December 2025. 88% said AI will be the most transformative technology trend in accounting over the next one to two years. Only 8% said their organisation feels very well prepared for it.</p>
+      <p class="reveal">AICPA and CIMA surveyed 1,446 senior finance leaders in December 2025. 88% said AI will be the most transformative technology trend in accounting over the next one to two years. Only 8% said their organisation feels very well prepared for it.<sup>8</sup></p>
 
       <div class="pull-quote reveal">
         <p>88% say it's coming. 8% feel ready. The rest are somewhere in between — which is exactly where most controllers are right now.</p>
@@ -597,14 +613,14 @@
 
       <p class="reveal">That gap is where most controllers are sitting. They can see it coming. They don't have a clear answer for what to do next.</p>
 
-      <p class="reveal">Robert Half's 2026 report found that only 6% of finance and accounting leaders say they currently have the capabilities to deliver on their priority projects. And AI mentions in accountant job postings rose 67% in the year to March 2026 — the market isn't waiting for the profession to catch up. The job descriptions are already being rewritten. The question is whether the people in those roles are changing alongside them.</p>
+      <p class="reveal">Robert Half's 2026 report found that only 6% of finance and accounting leaders say they currently have the capabilities to deliver on their priority projects.<sup>9</sup> And AI mentions in accountant job postings rose 67% in the year to March 2026<sup>1</sup> — the market isn't waiting for the profession to catch up. The job descriptions are already being rewritten. The question is whether the people in those roles are changing alongside them.</p>
 
       <p class="reveal">The skills that keep showing up as gaps aren't obscure. Generative AI literacy. Data analytics. Business partnering. These are the exact things that separate the version of this role that's growing from the version that isn't.</p>
 
       <!-- Section 4 -->
       <h2 class="reveal">What this actually means</h2>
 
-      <p class="reveal">Gartner predicts that by 2028, cloud ERP with embedded AI will produce a 30% faster financial close. By 2030, 80% or more of finance functions will have AI driving core processes autonomously.</p>
+      <p class="reveal">Gartner predicts that by 2028, cloud ERP with embedded AI will produce a 30% faster financial close. By 2030, 80% or more of finance functions will have AI driving core processes autonomously.<sup>7</sup></p>
 
       <p class="reveal">The controller who fits into that world isn't the one who knows the most Excel shortcuts. It's the one who can look at an AI-generated reconciliation and know whether to trust it. The one who, when the close gets compressed from two weeks to two days, has something to say about what the numbers mean — not just what they are.</p>
 
@@ -627,19 +643,43 @@
 
       <!-- Sources -->
       <div class="sources reveal">
-        <h3>Sources</h3>
-        <p>
-          Datarails CFO's Office 2.0 (March 2026) &middot;
-          MIT/Stanford GenAI in Accounting Study (August 2025) &middot;
-          EY DNA of the Financial Controller Survey &middot;
-          Gartner Finance AI Predictions (2024–2026) &middot;
-          AICPA/CIMA Future-Ready Finance Survey (December 2025) &middot;
-          Robert Half Finance &amp; Accounting Trends (2026) &middot;
-          CPA Practice Advisor (March 2026) &middot;
-          Fortune — HPE CFO Marie Myers (February 2026) &middot;
-          FailSafeQA Financial LLM Benchmark &middot;
-          Deloitte/IMA Controllership Survey (December 2024)
-        </p>
+        <div class="sources-title">Sources</div>
+        <div class="source-item" id="source-1">
+          <span class="source-num">1</span>
+          <span class="source-text">Datarails — <em>CFO's Office 2.0</em> · March 2026 · <a href="https://www.datarails.com/research/cfos-2026/" target="_blank">datarails.com</a></span>
+        </div>
+        <div class="source-item" id="source-2">
+          <span class="source-num">2</span>
+          <span class="source-text">MIT Sloan — <em>How Generative AI Can Make Accountants More Productive</em> · August 2025 · <a href="https://mitsloan.mit.edu/ideas-made-to-matter/how-generative-ai-can-make-accountants-more-productive" target="_blank">mitsloan.mit.edu</a></span>
+        </div>
+        <div class="source-item" id="source-3">
+          <span class="source-num">3</span>
+          <span class="source-text">Fortune — <em>HPE Turns Finance Into the Front Line of Enterprise AI</em> · February 2026 · <a href="https://fortune.com/2026/02/18/hpe-turns-finance-into-the-front-line-of-enterprise-ai/" target="_blank">fortune.com</a></span>
+        </div>
+        <div class="source-item" id="source-4">
+          <span class="source-num">4</span>
+          <span class="source-text">Writer / FailSafeQA — <em>New Benchmark for LLM Resilience in Finance</em> · <a href="https://writer.com/blog/failsafeqa/" target="_blank">writer.com</a></span>
+        </div>
+        <div class="source-item" id="source-5">
+          <span class="source-num">5</span>
+          <span class="source-text">EY — <em>DNA of the Financial Controller Survey</em> · <a href="https://www.ey.com/en_us/cfo-agenda/dna-financial-controller-survey" target="_blank">ey.com</a></span>
+        </div>
+        <div class="source-item" id="source-6">
+          <span class="source-num">6</span>
+          <span class="source-text">IMA — <em>Next-Gen Controllership: Harnessing AI and Emerging Technologies</em> · December 2024 · <a href="https://www.imanet.org/insights-and-trends/controllership/next-gen-controllership" target="_blank">imanet.org</a></span>
+        </div>
+        <div class="source-item" id="source-7">
+          <span class="source-num">7</span>
+          <span class="source-text">Gartner — <em>Acquiring and Developing AI and Digital Talent is CFOs' Top Near-Term Challenge</em> · <a href="https://www.gartner.com/en/newsroom/press-releases/2026-03-17-gartner-survey-reveals-acquiring-and-developing-ai-and-digital-talent-is-cfos-top-near-term-challenge" target="_blank">gartner.com</a></span>
+        </div>
+        <div class="source-item" id="source-8">
+          <span class="source-num">8</span>
+          <span class="source-text">AICPA / CIMA — <em>Future-Ready Finance Survey</em> · December 2025 · <a href="https://www.aicpa-cima.com/resources/download/future-ready-finance-technology-productivity-and-skills-survey-report" target="_blank">aicpa-cima.com</a></span>
+        </div>
+        <div class="source-item" id="source-9">
+          <span class="source-num">9</span>
+          <span class="source-text">Robert Half — <em>Finance &amp; Accounting Salary Guide</em> · 2026 · <a href="https://www.roberthalf.com/us/en/insights/salary-guide/finance-and-accounting" target="_blank">roberthalf.com</a></span>
+        </div>
       </div>
 
       <!-- Author card -->
