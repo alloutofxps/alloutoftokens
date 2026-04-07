@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>From India to the Netherlands: The Move That Gave Me My Life Back — Pratik Parashar</title>
+
+  <meta property="og:title" content="From India to the Netherlands: The Move That Gave Me My Life Back" />
+  <meta property="og:description" content="I moved from India to the Netherlands in October 2023. I didn't research the culture. I didn't have a plan. I had 75-hour weeks and enough of them." />
+  <meta property="og:image" content="https://alloutoftokens.com/og-india-nl.png" />
+  <meta property="og:url" content="https://alloutoftokens.com/blog-india-nl.html" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="From India to the Netherlands: The Move That Gave Me My Life Back" />
+  <meta name="twitter:description" content="I moved from India to the Netherlands in October 2023. I didn't research the culture. I didn't have a plan. I had 75-hour weeks and enough of them." />
+  <meta name="twitter:image" content="https://alloutoftokens.com/og-india-nl.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0d0d0d;
+      --cream:   #f5f0e8;
+      --red:     #ff3c1f;
+      --mid:     #6b6560;
+      --border:  rgba(13,13,13,0.12);
+      --ff-serif: 'Playfair Display', Georgia, serif;
+      --ff-mono:  'Space Mono', 'Courier New', monospace;
+      --ff-sans:  'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 18px;
+      line-height: 1.7;
+      cursor: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Custom cursor ── */
+    .cursor {
+      position: fixed;
+      width: 10px; height: 10px;
+      background: var(--red);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.08s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease;
+      mix-blend-mode: multiply;
+    }
+    .cursor.hover { width: 28px; height: 28px; background: var(--black); }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      padding: 0 clamp(24px, 5vw, 80px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      color: var(--black);
+      text-transform: uppercase;
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--mid);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--red); }
+
+    /* ── Article layout ── */
+    .article-wrap { max-width: 740px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 48px); }
+
+    /* ── Hero ── */
+    .hero { padding: 72px 0 0; border-bottom: 2px solid var(--black); margin-bottom: 64px; }
+    .hero-meta { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+    .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--cream); background: var(--red); padding: 4px 10px;
+    }
+    .hero-date { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--mid); letter-spacing: 0.06em; }
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900; line-height: 1.1;
+      letter-spacing: -0.02em; margin-bottom: 24px;
+    }
+    .hero h1 em { font-style: italic; color: var(--red); }
+    .hero-deck { font-size: 19px; font-weight: 300; color: #3a3530; line-height: 1.6; margin-bottom: 40px; max-width: 600px; }
+
+    /* ── Hero image ── */
+    .post-hero-image {
+      margin: 0 0 64px;
+      border-top: 2px solid var(--black);
+      border-bottom: 2px solid var(--black);
+    }
+    .post-hero-image img { width: 100%; display: block; object-fit: cover; max-height: 380px; }
+    .post-hero-image figcaption {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px; letter-spacing: 0.06em;
+      color: var(--mid); padding: 12px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Body content ── */
+    .post-body { padding-bottom: 80px; }
+    .post-body p { margin-bottom: 28px; font-size: 18px; line-height: 1.75; color: #1a1714; }
+    .post-body h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(22px, 3vw, 28px);
+      font-weight: 700; line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin: 64px 0 24px;
+      padding-top: 64px;
+      border-top: 1px solid var(--border);
+    }
+
+    sup { color: var(--red); font-size: 11px; }
+
+    /* ── Pull quote ── */
+    .pull-quote { border-left: 4px solid var(--red); margin: 48px 0; padding: 4px 0 4px 28px; }
+    .pull-quote p {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(20px, 2.8vw, 26px);
+      font-weight: 400; font-style: italic;
+      line-height: 1.4; color: var(--black); margin: 0;
+    }
+
+    /* ── Sources ── */
+    .sources {
+      background: #ede8e0;
+      padding: 40px 48px;
+      margin-top: 72px;
+      margin-left: -48px;
+      margin-right: -48px;
+    }
+    .sources-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--red);
+      margin-bottom: 24px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .sources-title::before { content: ''; width: 24px; height: 1px; background: var(--red); }
+    .source-item { display: flex; gap: 16px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid rgba(13,13,13,0.1); }
+    .source-item:last-child { border-bottom: none; }
+    .source-num { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--red); min-width: 20px; }
+    .source-text { font-size: 13px; color: var(--mid); line-height: 1.6; }
+    .source-text a { color: var(--black); text-decoration: none; border-bottom: 1px solid rgba(13,13,13,0.2); transition: border-color 0.2s, color 0.2s; }
+    .source-text a:hover { color: var(--red); border-color: var(--red); }
+
+    /* ── Author card ── */
+    .author-card {
+      background: var(--black); color: var(--cream);
+      padding: 40px; margin-top: 64px;
+      display: flex; align-items: center; gap: 32px;
+    }
+    .author-card img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--red); }
+    .author-card .author-info .name { font-family: 'Playfair Display', Georgia, serif; font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+    .author-card .author-info .bio { font-size: 13px; line-height: 1.6; color: rgba(245,240,232,0.7); margin: 0; }
+    .author-card .author-info .bio a { color: var(--red); text-decoration: none; }
+
+    /* ── Back link ── */
+    .back-link-wrap { padding: 40px 0 0; }
+    .back-link { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+    .back-link:hover { color: var(--red); }
+    .back-link::before { content: '←'; }
+
+    /* ── Sunset photo ── */
+    .sunset-photo {
+      margin: 56px -48px;
+      position: relative;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .sunset-photo img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      max-height: 420px;
+      object-position: center 40%;
+    }
+    .sunset-photo::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to bottom, var(--cream), transparent);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .sunset-photo::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to top, var(--cream), transparent);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .sunset-caption {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--mid);
+      padding: 12px 0 0;
+      margin: 0 -48px;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .sunset-photo { margin: 40px -24px; }
+      .sunset-caption { margin: 0 -24px; }
+    }
+
+    /* ── Scroll reveal ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── Footer ── */
+    footer { border-top: 1px solid var(--border); padding: 32px clamp(24px, 5vw, 80px); display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    footer p { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--mid); margin: 0; }
+    footer a { color: var(--mid); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--red); }
+
+    /* ── Hamburger ── */
+    .hamburger { display: none; background: none; border: none; cursor: none; flex-direction: column; gap: 5px; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--black); transition: all 0.25s ease; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu { display: none; position: fixed; inset: 60px 0 0; background: var(--cream); z-index: 99; padding: 40px clamp(24px, 5vw, 48px); flex-direction: column; gap: 24px; border-top: 2px solid var(--black); }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+
+    @media (max-width: 640px) { .nav-links { display: none; } .hamburger { display: flex; } }
+    @media (max-width: 768px) {
+      .sources { padding: 32px 24px; margin-left: -24px; margin-right: -24px; }
+      .author-card { padding: 24px; gap: 16px; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">All Out <span>of</span> Tokens</a>
+    <ul class="nav-links">
+      <li><a href="index.html#what-i-do">What I Do</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="index.html#blog">Writing</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html#what-i-do">What I Do</a>
+    <a href="index.html#experience">Experience</a>
+    <a href="index.html#blog">Writing</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+
+  <main class="article-wrap">
+
+    <div class="back-link-wrap">
+      <a href="index.html#blog" class="back-link">All posts</a>
+    </div>
+
+    <header class="hero">
+      <div class="hero-meta">
+        <span class="tag">Life &amp; Work</span>
+        <span class="hero-date">April 2026</span>
+      </div>
+      <h1>From India to <em>the Netherlands:</em> The Move That Gave Me My Life Back</h1>
+      <p class="hero-deck">I didn't research Dutch culture before I moved. I didn't have a five-year plan. I had 75-hour weeks, a breaking point, and a one-way ticket.</p>
+    </header>
+
+    <figure class="post-hero-image">
+      <img src="og-india-nl.png" alt="A tropical boy arriving in the Netherlands — two worlds, one move" />
+      <figcaption>October 2023. The grass was genuinely greener. I wasn't ready for any of it.</figcaption>
+    </figure>
+
+    <article class="post-body">
+
+      <p class="reveal">October 2023. I was on a flight, looking out the window as the Netherlands came into view from above — these impossibly neat squares of green, silver waterways cutting through flat land, a country that looked like it had been drawn by someone who actually planned ahead. I hadn't done any research. I didn't know what to expect from Dutch work culture, Dutch people, or Dutch winters. What I did know was that I had spent years in a system where seventy-five hour weeks were normal, where unhappy people in positions of power passed that unhappiness down like inheritance, and where saying no was a career risk. I had enough of it. The ticket was one-way. That was the whole plan.</p>
+
+      <p class="reveal">The moment the plane doors opened and I stepped out into the airport, I got hit by something I wasn't expecting: air. Actual crispy, clean, lung-filling air. I had a moment standing on that tarmac — a tropical boy completely underdressed for October in northern Europe — thinking: okay. Something is already different here.</p>
+
+      <h2 class="reveal">Eduard, and the First Month</h2>
+
+      <p class="reveal">I came alone. I didn't know anyone in the Netherlands when I landed. I was staying in an Airbnb, and the host — Eduard, a man from Suriname — became something close to an elder brother within the first week. A fellow Sanatani, full of warmth and quiet wisdom, who distributed Bhagavad Gitas and didn't ask for anything in return. When I didn't know where to buy groceries, how to read the bus schedule, or what to do on a Sunday in a country where everything closes, Eduard had an answer. Not a dramatic rescue — just steady, unhurried guidance. The kind you don't forget.</p>
+
+      <p class="reveal">There were lonely moments. Moments of genuine lostness. But there was also something I hadn't felt in years: freedom. No aunties commenting on your life choices. No relatives turning up unannounced to ask why you haven't been promoted yet, or why you're still renting, or when you're getting married. Just open evenings, a new city, and all the time in the world to figure it out.</p>
+
+      <div class="pull-quote reveal">
+        <p>About a month in, I found a spot to watch the sunset. I sat there for a long time. I didn't feel like I had to be anywhere else. That was the moment I knew I was really here.</p>
+      </div>
+
+      <h2 class="reveal">The Orientation, the Cold, and the Dutchies in Boxers</h2>
+
+      <p class="reveal">The firm's onboarding took place near the coast. October, so already deep into autumn. The hotel was nice, the sessions were structured, and every international hire was doing what internationals do in cold weather — wearing every layer they owned, cupping warm drinks, walking fast between buildings. And then I saw them: Dutch colleagues, outside, in boxers. Just standing there in the wind like it was a mild Tuesday in June. Not performing toughness. Just genuinely unbothered.</p>
+
+      <p class="reveal">That image stuck with me because it captures something real about the Dutch — they are not trying to impress you. They are not performing anything. They are just exactly who they are, and they assume you'll be the same. It sounds like a small thing. After years in a culture where professional image management was practically a sport, it was a revelation.</p>
+
+      <h2 class="reveal">9:05 AM and the Meeting That Changed How I Think About Management</h2>
+
+      <p class="reveal">A few weeks in, I was showing up to the 9am stand-up at 9:05 a few times too many. My manager asked if we could step into a meeting room. I prepared, instinctively, for a dressing down. In India, this conversation had a familiar shape: silence, disappointment, a mention of how it reflected on the team, maybe a note in your file. You left feeling smaller.</p>
+
+      <p class="reveal">Instead, he asked me if there was something going on. Did I have a morning prayer or ritual that needed accommodating? Was there a family situation back home? Was the commute causing problems? He listed these possibilities with genuine curiosity, not as a trap. I told him about the public transport — cancellations, delayed connections, the unpredictability of getting a tram that actually showed up on time. He nodded, then gave me a detailed, practical breakdown of exactly which connections to take to arrive by 8:45, why the buffer mattered for the team, and what it meant for the junior I was responsible for.</p>
+
+      <p class="reveal">No judgment. No career threat. No power play. Just: here is a problem, here is the underlying cause, here is the fix. That advice, by the way, didn't just make me punctual at work — it changed how I operate across the board. I am early to everything now. Dutch efficiency, applied to one conversation, installed a new habit for life.<sup>1</sup></p>
+
+      <div class="pull-quote reveal">
+        <p>Instead of making me feel like shit, they taught me. They showed me. They made sure I acclimated. That's what a system built on respect actually looks like.</p>
+      </div>
+
+      <h2 class="reveal">Learning to Say No (And What Happened When I Did)</h2>
+
+      <p class="reveal">In Indian corporate culture — or at least in the environments I worked in — you become a yes-man fast. The capacity to say no when your plate is full is not just frowned upon; it can end things. Careers are shaped by your willingness to absorb, endlessly, whatever is handed to you. You internalise it. You stop questioning whether this is sustainable. It just becomes the definition of work.</p>
+
+      <p class="reveal">Here, I was sat down and told the opposite. "Pratik, you need to say no when you have too much on your plate. If you burn out and suddenly you're not there tomorrow, that puts unnecessary pressure on the whole team." I had to hear that a few times before it registered. The first time I actually pushed back on a new task — told my manager I was at capacity — I braced for a reaction. The response was: "Okay. When will you have bandwidth?" That was it. No disappointment. No note in the file. Just a logistics question.</p>
+
+      <p class="reveal">I also learnt — the slightly harder way — about proactive communication. I missed a deadline I'd committed to and didn't flag it early enough. Another sit-down. Same calm energy: we understand things run over, that's fine, but not communicating it isn't fine. Let us know early so we can plan around it. It wasn't a reprimand. It was a lesson in how an efficient system actually requires information to flow both ways.<sup>2</sup></p>
+
+      <div class="sunset-photo reveal">
+        <img src="sunset-almere.jpg" alt="Sunset over the water in the Netherlands — a lone sailboat on the horizon" />
+      </div>
+      <p class="sunset-caption reveal">Somewhere in the Netherlands. A Tuesday. Nothing else to do but watch.</p>
+
+      <h2 class="reveal">6PM and the Question I Didn't Know How to Answer</h2>
+
+      <p class="reveal">The first day I came home at 6pm, I stood in the middle of my apartment and genuinely did not know what to do. In India, I was back at 6am — if I was lucky. The concept of an evening, a real one, that belonged to me, was so unfamiliar that it felt like a mistake at first. Like I'd left early and someone would notice.</p>
+
+      <p class="reveal">I figured it out slowly. I started going to the gym consistently — something that had been impossible for years because there simply wasn't time or energy left. I lost a significant amount of weight. I went from XXL to M. I got more athletic. I became a better cook, learning techniques properly instead of just surviving. I started meeting interesting people — because other people here also have time to actually meet and talk. The quality of friendships is different when everyone isn't exhausted all the time.</p>
+
+      <p class="reveal">The Dutch colleagues helped with this too. There's a culture of small, genuine consideration — if someone is getting coffee, they ask if you want one, they take your cup, they bring it back. Nothing expected in return. It sounds minor. What it actually does is build team chemistry quietly over time. You start mirroring it. You become a little more present, a little more empathetic, a little more human at work.</p>
+
+      <h2 class="reveal">The Honest Part: It's Not All Perfect</h2>
+
+      <p class="reveal">The Netherlands has attracted a lot of internationals over the last decade, and some of them — particularly at managerial levels — bring their home culture's habits with them. Micromanagement, overtime as a metric of commitment, blame games, politics. When this happens without any push to integrate into Dutch work norms, you end up with a split experience: some employees get the structure and respect that Dutch work culture is known for, others get a transplanted version of the thing they moved countries to escape.</p>
+
+      <p class="reveal">I wish there was more institutional pressure on managers to genuinely adapt — not just follow policies, but internalise the efficiency, the directness, the respect for people's time and lives. The Dutch are rigorous about timeliness, about following process. I'd love to see that same rigour applied to how managers treat the people underneath them.<sup>3</sup></p>
+
+      <h2 class="reveal">What I Actually Want to Say</h2>
+
+      <p class="reveal">This isn't a post about the Netherlands being perfect or India being broken. It's about what happens when you encounter a system that was genuinely built around the idea that employees are human beings — and how disorienting that is if you've never experienced it before.</p>
+
+      <p class="reveal">Speaking up got me retaliated against in India. Here, it's encouraged. There are internal boards, open-door policies, structures built to actually receive concerns rather than bury them. I had to relearn how to use my voice professionally. That relearning took time. It still surprises me sometimes that it's safe to do it.</p>
+
+      <p class="reveal">If you're reading this from somewhere with a 75-hour work week and you're wondering whether something better exists — it does. And if you're already somewhere better, I hope you push for it anyway. Not just for yourself. Because how you treat people at work ripples outward. If one person in one meeting decides to ask "what's the underlying issue?" instead of reaching for judgment, something changes.</p>
+
+      <div class="pull-quote reveal">
+        <p>We work to live. We don't have to let work consume us so much that we forget why we started working in the first place. We were meant to be free. Work is how we fund that freedom — not how we surrender it.</p>
+      </div>
+
+      <p class="reveal">I didn't come to the Netherlands with a plan. I came with a breaking point and a window seat. The crispy air hit me first. Everything else followed slowly — through Eduard's quiet wisdom, through a manager who asked the right questions, through 6pm evenings I had to learn to fill.</p>
+
+      <p class="reveal">It gave me my life back. That's really all I have to say.</p>
+
+      <div class="sources reveal">
+        <div class="sources-title">Sources</div>
+        <div class="source-item">
+          <span class="source-num">1</span>
+          <span class="source-text">Hofstede Insights — <em>Country Comparison: Netherlands vs India</em> · Power Distance &amp; Uncertainty Avoidance indices · <a href="https://www.hofstede-insights.com/country-comparison-tool" target="_blank">hofstede-insights.com</a></span>
+        </div>
+        <div class="source-item">
+          <span class="source-num">2</span>
+          <span class="source-text">OECD — <em>Average annual hours actually worked per worker</em> · Netherlands consistently among lowest in OECD; India among highest · <a href="https://stats.oecd.org" target="_blank">stats.oecd.org</a></span>
+        </div>
+        <div class="source-item">
+          <span class="source-num">3</span>
+          <span class="source-text">World Happiness Report — <em>World Happiness Report 2024</em> · Netherlands ranked 6th globally; India ranked 126th · <a href="https://worldhappiness.report" target="_blank">worldhappiness.report</a></span>
+        </div>
+      </div>
+
+      <div class="author-card reveal">
+        <img src="pratik.jpg" alt="Pratik Parashar" />
+        <div class="author-info">
+          <div class="name">Pratik Parashar</div>
+          <p class="bio">Senior Auditor at a Big-4 firm in the Netherlands. 7+ years across India and Europe. Writing about finance, work culture, and the gap between how things are and how they could be. <a href="index.html#contact">Open to new roles.</a></p>
+        </div>
+      </div>
+
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Pratik Parashar</p>
+    <p><a href="index.html">alloutoftokens.com</a></p>
+  </footer>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top  = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const ham  = document.getElementById('hamburger');
+    const menu = document.getElementById('mobile-menu');
+    ham.addEventListener('click', () => { ham.classList.toggle('open'); menu.classList.toggle('open'); });
+  </script>
+</body>
+</html>
