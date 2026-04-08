@@ -139,6 +139,8 @@
     }
 
     sup { color: var(--red); font-size: 11px; }
+    a sup { color: var(--red); }
+    a:has(sup) { text-decoration: none; }
 
     /* ── Pull quote ── */
     .pull-quote { border-left: 4px solid var(--red); margin: 48px 0; padding: 4px 0 4px 28px; }
@@ -191,8 +193,8 @@
 
     /* ── Sunset photo ── */
     .sunset-photo {
-      margin: 56px -48px;
-      position: relative;
+      margin: 56px 0;
+      border: 1px solid var(--border);
       overflow: hidden;
       line-height: 0;
     }
@@ -200,40 +202,19 @@
       width: 100%;
       display: block;
       object-fit: cover;
-      max-height: 420px;
+      max-height: 400px;
       object-position: center 40%;
-    }
-    .sunset-photo::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 80px;
-      background: linear-gradient(to bottom, var(--cream), transparent);
-      z-index: 2;
-      pointer-events: none;
-    }
-    .sunset-photo::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 80px;
-      background: linear-gradient(to top, var(--cream), transparent);
-      z-index: 2;
-      pointer-events: none;
     }
     .sunset-caption {
       font-family: 'Space Mono', monospace;
       font-size: 11px;
       letter-spacing: 0.06em;
       color: var(--mid);
-      padding: 12px 0 0;
-      margin: 0 -48px;
-      text-align: center;
-    }
-
-    @media (max-width: 768px) {
-      .sunset-photo { margin: 40px -24px; }
-      .sunset-caption { margin: 0 -24px; }
+      padding: 12px 16px;
+      border-top: 1px solid var(--border);
+      background: var(--cream);
+      line-height: 1.5;
+      text-align: left;
     }
 
     /* ── Scroll reveal ── */
@@ -335,7 +316,7 @@
 
       <p class="reveal">Instead, he asked me if there was something going on. Did I have a morning prayer or ritual that needed accommodating? Was there a family situation back home? Was the commute causing problems? He listed these possibilities with genuine curiosity, not as a trap. I told him about the public transport — cancellations, delayed connections, the unpredictability of getting a tram that actually showed up on time. He nodded, then gave me a detailed, practical breakdown of exactly which connections to take to arrive by 8:45, why the buffer mattered for the team, and what it meant for the junior I was responsible for.</p>
 
-      <p class="reveal">No judgment. No career threat. No power play. Just: here is a problem, here is the underlying cause, here is the fix. That advice, by the way, didn't just make me punctual at work — it changed how I operate across the board. I am early to everything now. Dutch efficiency, applied to one conversation, installed a new habit for life.<sup>1</sup></p>
+      <p class="reveal">No judgment. No career threat. No power play. Just: here is a problem, here is the underlying cause, here is the fix. That advice, by the way, didn't just make me punctual at work — it changed how I operate across the board. I am early to everything now. Dutch efficiency, applied to one conversation, installed a new habit for life.<a href="#source-1"><sup>1</sup></a></p>
 
       <div class="pull-quote reveal">
         <p>Instead of making me feel like shit, they taught me. They showed me. They made sure I acclimated. That's what a system built on respect actually looks like.</p>
@@ -347,12 +328,12 @@
 
       <p class="reveal">Here, I was sat down and told the opposite. "Pratik, you need to say no when you have too much on your plate. If you burn out and suddenly you're not there tomorrow, that puts unnecessary pressure on the whole team." I had to hear that a few times before it registered. The first time I actually pushed back on a new task — told my manager I was at capacity — I braced for a reaction. The response was: "Okay. When will you have bandwidth?" That was it. No disappointment. No note in the file. Just a logistics question.</p>
 
-      <p class="reveal">I also learnt — the slightly harder way — about proactive communication. I missed a deadline I'd committed to and didn't flag it early enough. Another sit-down. Same calm energy: we understand things run over, that's fine, but not communicating it isn't fine. Let us know early so we can plan around it. It wasn't a reprimand. It was a lesson in how an efficient system actually requires information to flow both ways.<sup>2</sup></p>
+      <p class="reveal">I also learnt — the slightly harder way — about proactive communication. I missed a deadline I'd committed to and didn't flag it early enough. Another sit-down. Same calm energy: we understand things run over, that's fine, but not communicating it isn't fine. Let us know early so we can plan around it. It wasn't a reprimand. It was a lesson in how an efficient system actually requires information to flow both ways.<a href="#source-2"><sup>2</sup></a></p>
 
-      <div class="sunset-photo reveal">
+      <figure class="sunset-photo reveal">
         <img src="sunset-almere.jpg" alt="Sunset over the water in the Netherlands — a lone sailboat on the horizon" />
-      </div>
-      <p class="sunset-caption reveal">Somewhere in the Netherlands. A Tuesday. Nothing else to do but watch.</p>
+        <figcaption class="sunset-caption">Somewhere in the Netherlands. A Tuesday. Nothing else to do but watch.</figcaption>
+      </figure>
 
       <h2 class="reveal">6PM and the Question I Didn't Know How to Answer</h2>
 
@@ -366,7 +347,7 @@
 
       <p class="reveal">The Netherlands has attracted a lot of internationals over the last decade, and some of them — particularly at managerial levels — bring their home culture's habits with them. Micromanagement, overtime as a metric of commitment, blame games, politics. When this happens without any push to integrate into Dutch work norms, you end up with a split experience: some employees get the structure and respect that Dutch work culture is known for, others get a transplanted version of the thing they moved countries to escape.</p>
 
-      <p class="reveal">I wish there was more institutional pressure on managers to genuinely adapt — not just follow policies, but internalise the efficiency, the directness, the respect for people's time and lives. The Dutch are rigorous about timeliness, about following process. I'd love to see that same rigour applied to how managers treat the people underneath them.<sup>3</sup></p>
+      <p class="reveal">I wish there was more institutional pressure on managers to genuinely adapt — not just follow policies, but internalise the efficiency, the directness, the respect for people's time and lives. The Dutch are rigorous about timeliness, about following process. I'd love to see that same rigour applied to how managers treat the people underneath them.<a href="#source-3"><sup>3</sup></a></p>
 
       <h2 class="reveal">What I Actually Want to Say</h2>
 
@@ -386,15 +367,15 @@
 
       <div class="sources reveal">
         <div class="sources-title">Sources</div>
-        <div class="source-item">
+        <div class="source-item" id="source-1">
           <span class="source-num">1</span>
-          <span class="source-text">Hofstede Insights — <em>Country Comparison: Netherlands vs India</em> · Power Distance &amp; Uncertainty Avoidance indices · <a href="https://www.hofstede-insights.com/country-comparison-tool" target="_blank">hofstede-insights.com</a></span>
+          <span class="source-text">Hofstede Insights — <em>Country Comparison: Netherlands vs India</em> · Power Distance &amp; Uncertainty Avoidance indices · <a href="https://www.hofstede-insights.com/fi/product/compare-countries/" target="_blank">hofstede-insights.com</a></span>
         </div>
-        <div class="source-item">
+        <div class="source-item" id="source-2">
           <span class="source-num">2</span>
           <span class="source-text">OECD — <em>Average annual hours actually worked per worker</em> · Netherlands consistently among lowest in OECD; India among highest · <a href="https://stats.oecd.org" target="_blank">stats.oecd.org</a></span>
         </div>
-        <div class="source-item">
+        <div class="source-item" id="source-3">
           <span class="source-num">3</span>
           <span class="source-text">World Happiness Report — <em>World Happiness Report 2024</em> · Netherlands ranked 6th globally; India ranked 126th · <a href="https://worldhappiness.report" target="_blank">worldhappiness.report</a></span>
         </div>
