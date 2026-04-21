@@ -132,11 +132,8 @@
     .exp-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 12px; border: 1px solid rgba(245,240,232,0.1); color: rgba(245,240,232,0.25); white-space: nowrap; height: fit-content; }
 
     /* ABOUT */
-    .about { display: grid; grid-template-columns: 360px 1fr 1.6fr; align-items: start; overflow: hidden; border-bottom: 1px solid var(--border); }
-    .about-photo { position: sticky; top: 0; height: 100vh; overflow: hidden; }
-    .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 58% 10%; filter: grayscale(20%) contrast(1.05); display: block; }
-    .about-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, transparent 40%, var(--sand) 88%); }
-    .about-left { position: sticky; top: 96px; padding: 96px 32px 0 48px; }
+    .about { display: grid; grid-template-columns: 1fr 1.8fr; align-items: start; overflow: hidden; border-bottom: 1px solid var(--border); }
+    .about-left { position: sticky; top: 96px; padding: 96px 32px 0 clamp(24px, 5vw, 80px); }
     .about-heading { font-family: var(--ff-serif); font-size: clamp(30px,2.8vw,44px); font-weight: 900; line-height: 1.05; letter-spacing: -0.02em; margin-top: 8px; }
     .about-heading em { font-style: italic; color: var(--burg); }
     .about-right { padding: 96px 64px 96px 0; }
@@ -226,8 +223,6 @@
       .what-title { position: static; }
       .pillars { grid-template-columns: 1fr; }
       .about { grid-template-columns: 1fr; }
-      .about-photo { position: relative; height: 480px; top: auto; }
-      .about-photo::after { background: linear-gradient(to bottom, transparent 55%, var(--sand) 100%); }
       .about-left { position: static; padding: 48px 32px 0; }
       .about-right { padding: 32px 32px 72px; }
       .blog-grid { grid-template-columns: 1fr; }
@@ -413,9 +408,6 @@
 
   <!-- ABOUT -->
   <section class="about" id="about">
-    <div class="about-photo">
-      <img src="pratik.jpg" alt="Pratik Parashar" loading="lazy" />
-    </div>
     <div class="about-left">
       <div class="section-label">About</div>
       <h2 class="about-heading">The<br>person<br><em>behind it.</em></h2>
