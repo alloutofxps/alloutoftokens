@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Variance Commentary Is Still a Manual Job in 2026 — Pratik Parashar</title>
+
+  <!-- OG / Social -->
+  <meta property="og:title" content="Why Writing Variance Commentary Is Still a Manual Job in 2026" />
+  <meta property="og:description" content="Month-end closes. A spreadsheet with 40 line items. A blank text box where the commentary should go. In 2026, this is still mostly written by hand — and I want to find out how much of it doesn't have to be." />
+  <meta property="og:image" content="https://alloutoftokens.com/og-variance-1.png" />
+  <meta property="og:url" content="https://alloutoftokens.com/blog-variance-1.html" />
+  <meta property="og:type" content="article" />
+  <meta property="article:author" content="Pratik Parashar" />
+  <meta property="article:published_time" content="2026-04-21" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Why Writing Variance Commentary Is Still a Manual Job in 2026" />
+  <meta name="twitter:description" content="Month-end closes. 40 line items. A blank box. In 2026, this is still written by hand. I want to change that." />
+  <meta name="twitter:image" content="https://alloutoftokens.com/og-variance-1.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Reset & tokens ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0d0d0d;
+      --cream:   #f5f0e8;
+      --red:     #ff3c1f;
+      --mid:     #6b6560;
+      --border:  rgba(13,13,13,0.12);
+      --ff-serif: 'Playfair Display', Georgia, serif;
+      --ff-mono:  'Space Mono', 'Courier New', monospace;
+      --ff-sans:  'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 18px;
+      line-height: 1.7;
+      cursor: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Custom cursor ──────────────────────────────────────────── */
+    .cursor {
+      position: fixed;
+      width: 10px; height: 10px;
+      background: var(--red);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.08s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease;
+      mix-blend-mode: multiply;
+    }
+    .cursor.hover { width: 28px; height: 28px; background: var(--black); }
+
+    /* ── Nav ────────────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      padding: 0 clamp(24px, 5vw, 80px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      color: var(--black);
+      text-transform: uppercase;
+    }
+    .nav-logo span { color: var(--red); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--red); }
+
+    /* ── Article layout ─────────────────────────────────────────── */
+    .article-wrap {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 clamp(24px, 5vw, 48px);
+    }
+
+    /* ── Hero ───────────────────────────────────────────────────── */
+    .hero {
+      padding: 72px 0 0;
+      border-bottom: 2px solid var(--black);
+      margin-bottom: 64px;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cream);
+      background: var(--red);
+      padding: 4px 10px;
+    }
+
+    .tag-series {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      border: 1px solid var(--red);
+      padding: 3px 10px;
+    }
+
+    .hero-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--mid);
+      letter-spacing: 0.06em;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 em { font-style: italic; color: var(--red); }
+
+    .hero-deck {
+      font-size: 19px;
+      font-weight: 300;
+      color: #3a3530;
+      line-height: 1.6;
+      margin-bottom: 40px;
+      max-width: 600px;
+    }
+
+    /* ── Series nav ─────────────────────────────────────────────── */
+    .series-nav {
+      background: var(--black);
+      padding: 28px 32px;
+      margin-bottom: 0;
+    }
+
+    .series-nav-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .series-nav-label::before { content: ''; width: 24px; height: 1px; background: var(--red); }
+
+    .series-nav-posts {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
+    }
+
+    .series-post {
+      padding: 12px 10px;
+      background: rgba(245,240,232,0.05);
+      text-align: center;
+    }
+
+    .series-post.active {
+      background: var(--red);
+    }
+
+    .series-post .post-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: rgba(245,240,232,0.3);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .series-post.active .post-num {
+      color: var(--cream);
+    }
+
+    .series-post .post-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      color: rgba(245,240,232,0.3);
+      line-height: 1.3;
+    }
+
+    .series-post.active .post-label {
+      color: rgba(245,240,232,0.9);
+    }
+
+    @media (max-width: 540px) {
+      .series-nav-posts { grid-template-columns: 1fr 1fr; gap: 4px; }
+    }
+
+    /* ── Body content ───────────────────────────────────────────── */
+    .post-body {
+      padding-bottom: 80px;
+    }
+
+    .post-body p {
+      margin-bottom: 28px;
+      font-size: 18px;
+      line-height: 1.75;
+      color: #1a1714;
+    }
+
+    .post-body h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(22px, 3vw, 28px);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin: 64px 0 24px;
+      padding-top: 64px;
+      border-top: 1px solid var(--border);
+    }
+
+    .post-body hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 52px 0;
+    }
+
+    sup { color: var(--red); font-size: 11px; }
+
+    /* ── Commentary comparison table ────────────────────────────── */
+    .commentary-demo {
+      margin: 52px 0;
+      border: 1px solid var(--border);
+    }
+
+    .commentary-demo-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .commentary-demo-table thead th {
+      background: var(--black);
+      color: var(--cream);
+      padding: 12px 16px;
+      text-align: right;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .commentary-demo-table thead th:first-child {
+      text-align: left;
+    }
+
+    .commentary-demo-table tbody td {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      text-align: right;
+      color: #1a1714;
+      font-size: 13px;
+    }
+
+    .commentary-demo-table tbody td:first-child {
+      text-align: left;
+      font-weight: 400;
+      color: var(--black);
+    }
+
+    .commentary-demo-table tbody tr:last-child td {
+      border-bottom: none;
+      font-weight: 700;
+    }
+
+    .variance-neg { color: var(--red); }
+    .variance-pos { color: #2a7a2a; }
+
+    .commentary-box {
+      border-top: 2px solid var(--black);
+    }
+
+    .commentary-box-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .commentary-box-label.bad {
+      color: var(--mid);
+      background: rgba(13,13,13,0.03);
+    }
+
+    .commentary-box-label.good {
+      color: var(--red);
+      background: rgba(255,60,31,0.04);
+    }
+
+    .commentary-box-text {
+      padding: 16px 20px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #1a1714;
+    }
+
+    .commentary-box-text.bad {
+      color: var(--mid);
+      font-style: italic;
+    }
+
+    /* ── Pull quote ─────────────────────────────────────────────── */
+    .pull-quote {
+      border-left: 4px solid var(--red);
+      margin: 48px 0;
+      padding: 4px 0 4px 28px;
+    }
+
+    .pull-quote p {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(20px, 2.8vw, 26px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.4;
+      color: var(--black);
+      margin: 0;
+    }
+
+    /* ── Build spec block ───────────────────────────────────────── */
+    .build-spec {
+      background: var(--black);
+      color: var(--cream);
+      padding: 40px 48px;
+      margin: 52px 0;
+      border-left: 4px solid var(--red);
+    }
+
+    .build-spec-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .build-spec-title::before { content: ''; width: 24px; height: 1px; background: var(--red); }
+
+    .build-spec-row {
+      display: flex;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(245,240,232,0.1);
+      align-items: baseline;
+    }
+    .build-spec-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .build-spec-key {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--red);
+      min-width: 80px;
+      flex-shrink: 0;
+    }
+
+    .build-spec-val {
+      font-size: 14px;
+      line-height: 1.5;
+      color: rgba(245,240,232,0.75);
+    }
+
+    .build-spec-val strong { color: var(--cream); }
+
+    @media (max-width: 540px) {
+      .build-spec { padding: 32px 24px; }
+    }
+
+    /* ── GitHub CTA ─────────────────────────────────────────────── */
+    .github-cta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 24px 28px;
+      border: 2px solid var(--black);
+      margin: 52px 0;
+      text-decoration: none;
+      color: var(--black);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .github-cta:hover {
+      background: var(--black);
+      color: var(--cream);
+    }
+
+    .github-cta-icon {
+      font-size: 28px;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .github-cta-text .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 4px;
+    }
+
+    .github-cta:hover .github-cta-text .label {
+      color: rgba(255,60,31,0.8);
+    }
+
+    .github-cta-text .repo {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .github-cta-text .desc {
+      font-size: 13px;
+      color: var(--mid);
+      margin-top: 2px;
+    }
+
+    .github-cta:hover .github-cta-text .desc {
+      color: rgba(245,240,232,0.6);
+    }
+
+    .github-cta-arrow {
+      margin-left: auto;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    /* ── Sources ────────────────────────────────────────────────── */
+    .sources {
+      background: #ede8e0;
+      padding: 40px 48px;
+      margin-top: 72px;
+      margin-left: -48px;
+      margin-right: -48px;
+    }
+
+    .sources-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sources-title::before { content: ''; width: 24px; height: 1px; background: var(--red); }
+
+    .source-item {
+      display: flex;
+      gap: 16px;
+      align-items: baseline;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(13,13,13,0.1);
+    }
+    .source-item:last-child { border-bottom: none; }
+
+    .source-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--red);
+      min-width: 20px;
+    }
+
+    .source-text {
+      font-size: 13px;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+    .source-text a {
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(13,13,13,0.2);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .source-text a:hover { color: var(--red); border-color: var(--red); }
+
+    /* ── Sign off ───────────────────────────────────────────────── */
+    .post-signoff {
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+    .post-signoff p { font-size: 15px !important; color: var(--mid) !important; margin-bottom: 0 !important; }
+    .post-signoff a { color: var(--black); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--border); transition: color 0.2s, border-color 0.2s; }
+    .post-signoff a:hover { color: var(--red); border-color: var(--red); }
+
+    /* ── Author card ────────────────────────────────────────────── */
+    .author-card {
+      background: var(--black);
+      color: var(--cream);
+      padding: 40px;
+      margin-top: 64px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .author-card img {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid var(--red);
+    }
+
+    .author-card .author-info .name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .author-card .author-info .bio {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(245,240,232,0.7);
+      margin: 0;
+    }
+
+    .author-card .author-info .bio a { color: var(--red); text-decoration: none; }
+
+    @media (max-width: 500px) {
+      .author-card { flex-direction: column; gap: 16px; padding: 24px; }
+    }
+
+    /* ── Back link ──────────────────────────────────────────────── */
+    .back-link-wrap { padding: 40px 0 0; }
+
+    .back-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--red); }
+    .back-link::before { content: '←'; }
+
+    /* ── Scroll reveal ──────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── Footer ─────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px clamp(24px, 5vw, 80px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    footer p {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--mid);
+      margin: 0;
+    }
+
+    footer a { color: var(--mid); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--red); }
+
+    /* ── Hamburger ──────────────────────────────────────────────── */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--black);
+      transition: all 0.25s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 60px 0 0;
+      background: var(--cream);
+      z-index: 99;
+      padding: 40px clamp(24px, 5vw, 48px);
+      flex-direction: column;
+      gap: 24px;
+      border-top: 2px solid var(--black);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    @media (max-width: 768px) {
+      .sources { padding: 32px 24px; margin-left: -24px; margin-right: -24px; }
+      .author-card { padding: 24px; gap: 16px; flex-direction: column; }
+      .commentary-demo-table { font-size: 12px; }
+      .commentary-demo-table tbody td, .commentary-demo-table thead th { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Nav -->
+  <nav>
+    <a href="index.html" class="nav-logo">All Out <span>of</span> Tokens</a>
+    <ul class="nav-links">
+      <li><a href="index.html#what-i-do">What I Do</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="index.html#blog">Writing</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html#what-i-do">What I Do</a>
+    <a href="index.html#experience">Experience</a>
+    <a href="index.html#blog">Writing</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+
+  <!-- Article -->
+  <main class="article-wrap">
+
+    <div class="back-link-wrap">
+      <a href="index.html#blog" class="back-link">All posts</a>
+    </div>
+
+    <!-- Hero -->
+    <header class="hero">
+      <div class="hero-meta">
+        <span class="tag">Finance × AI: In Practice</span>
+        <span class="tag-series">Post 1 of 5</span>
+        <span class="hero-date">April 2026</span>
+      </div>
+      <h1>Why Writing Variance Commentary Is Still a <em>Manual Job</em> in 2026</h1>
+      <p class="hero-deck">Month-end closes. Forty line items. A blank text box. I've watched this process from inside the balance sheets of banks and insurers for seven years. Now I want to find out how much of it an AI can handle — and where it still needs a human.</p>
+
+      <!-- Series nav -->
+      <div class="series-nav">
+        <div class="series-nav-label">Build Log · Variance Commentary Generator</div>
+        <div class="series-nav-posts">
+          <div class="series-post active">
+            <span class="post-num">01</span>
+            <span class="post-label">The Problem</span>
+          </div>
+          <div class="series-post">
+            <span class="post-num">02</span>
+            <span class="post-label">Architecture</span>
+          </div>
+          <div class="series-post">
+            <span class="post-num">03</span>
+            <span class="post-label">First Build</span>
+          </div>
+          <div class="series-post">
+            <span class="post-num">04</span>
+            <span class="post-label">Finance-Grade</span>
+          </div>
+          <div class="series-post">
+            <span class="post-num">05</span>
+            <span class="post-label">What It Can't Do</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Body -->
+    <article class="post-body">
+
+      <p class="reveal">It's 6pm on the last working day of the month. Actuals are in. The Finance Director wants the pack by 9am. Somewhere in your organisation, someone is sitting in front of a spreadsheet with 40 line items and a blank text box where the commentary should go.</p>
+
+      <p class="reveal">That's the situation. And in 2026, filling that box is still mostly a manual job.</p>
+
+      <h2 class="reveal">What variance commentary actually is</h2>
+
+      <p class="reveal">If you've been on the receiving end, you know what a good commentary looks like. It doesn't list every variance. It tells you what moved the needle, why, and whether you should care. The bad version restates the numbers in prose. The useful version explains them.</p>
+
+      <p class="reveal">Here's a concrete illustration. Same five line items. Same numbers. Two versions of what comes out below the table.</p>
+
+      <!-- Commentary comparison demo -->
+      <div class="commentary-demo reveal">
+        <table class="commentary-demo-table">
+          <thead>
+            <tr>
+              <th>Line Item</th>
+              <th>Budget (€k)</th>
+              <th>Actual (€k)</th>
+              <th>Variance (€k)</th>
+              <th>Var %</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Revenue</td>
+              <td>4,200</td>
+              <td>4,000</td>
+              <td class="variance-neg">−200</td>
+              <td class="variance-neg">−4.8%</td>
+            </tr>
+            <tr>
+              <td>Cost of Sales</td>
+              <td>1,800</td>
+              <td>1,780</td>
+              <td class="variance-pos">+20</td>
+              <td class="variance-pos">+1.1%</td>
+            </tr>
+            <tr>
+              <td>Gross Margin</td>
+              <td>2,400</td>
+              <td>2,220</td>
+              <td class="variance-neg">−180</td>
+              <td class="variance-neg">−7.5%</td>
+            </tr>
+            <tr>
+              <td>Opex</td>
+              <td>900</td>
+              <td>1,050</td>
+              <td class="variance-neg">−150</td>
+              <td class="variance-neg">−16.7%</td>
+            </tr>
+            <tr>
+              <td>EBITDA</td>
+              <td>1,500</td>
+              <td>1,170</td>
+              <td class="variance-neg">−330</td>
+              <td class="variance-neg">−22.0%</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="commentary-box">
+          <div class="commentary-box-label bad">✗ &nbsp;The version that restates the table</div>
+          <p class="commentary-box-text bad">Revenue came in €200k below budget. Cost of sales was €20k favourable. Gross margin was therefore €180k below plan. Operating expenses were €150k above budget. EBITDA was €330k below plan at €1,170k, representing a 22% unfavourable variance.</p>
+        </div>
+        <div class="commentary-box" style="border-top: 1px solid var(--border);">
+          <div class="commentary-box-label good">✓ &nbsp;The version that earns its place in the pack</div>
+          <p class="commentary-box-text">Revenue was €200k below budget, driven by two enterprise deals that slipped into Q3 — timing, not a pipeline issue. Opex was €150k above plan, largely the Amsterdam office fit-out landing in April rather than May as phased. The EBITDA miss is mostly timing-related; full-year run rate looks intact.</p>
+        </div>
+      </div>
+
+      <p class="reveal">Same numbers. One of those paragraphs earns its place in the pack. The other just describes what the reader already saw.</p>
+
+      <h2 class="reveal">Why it's still written by hand</h2>
+
+      <p class="reveal">Variance commentary is harder to automate than it looks. The reason standard reporting tools — Power BI, Anaplan, SAP, take your pick — produce great tables and terrible narratives is structural. The tools know the numbers. They don't know what the numbers mean in context.</p>
+
+      <div class="pull-quote reveal">
+        <p>The table knows revenue missed by €200k. It doesn't know about the deal that slipped, or that the CFO already knows about it and doesn't want it in the headline.</p>
+      </div>
+
+      <p class="reveal">Useful variance commentary requires three things that live outside the spreadsheet: context (why did this actually happen), judgment (what's material versus noise this month), and voice (language that sounds like a person who understands the business wrote it, not a system that read a column header).</p>
+
+      <p class="reveal">Every month-end, across finance teams everywhere, someone is doing this manually. In a large company, that's several people, across several reporting packs, for several different audiences. The FD version. The board version. The segment version. Each one slightly different, each one written from scratch.</p>
+
+      <p class="reveal">The time this takes is real. A typical month-end commentary cycle in a finance team of moderate size runs anywhere from half a day to a full one, just on narration — after the numbers are already clean.<sup>1</sup> The work is low judgment, high effort, and repeated every single month. Which is exactly the profile of something worth trying to automate.</p>
+
+      <h2 class="reveal">What I'm going to build</h2>
+
+      <p class="reveal">I've spent seven years in audit, which means I've sat inside the management reporting of banks, insurers, and PE funds as a reviewer rather than a producer. I've read a lot of variance commentary. I've flagged when it was misleading. I've noticed the patterns in what makes the good versions good.</p>
+
+      <p class="reveal">Now I want to see how far a well-designed AI workflow can get toward producing the useful version automatically — and be honest in public about where it falls short.</p>
+
+      <p class="reveal">The plan is a five-post build series. A tool that takes a structured Excel input — actuals vs budget vs prior year — and produces first-draft commentary using the Claude API. Version 1 will be rough. I'll show you the output, the prompt, and where it confidently writes nonsense. Then I'll iterate toward something that could actually sit in a finance team's workflow.</p>
+
+      <!-- Build spec -->
+      <div class="build-spec reveal">
+        <div class="build-spec-title">What I'm building</div>
+        <div class="build-spec-row">
+          <span class="build-spec-key">Input</span>
+          <span class="build-spec-val"><strong>Excel file</strong> — actuals, budget, prior year variance table</span>
+        </div>
+        <div class="build-spec-row">
+          <span class="build-spec-key">Output</span>
+          <span class="build-spec-val"><strong>First-draft commentary</strong> — paragraph-level, finance-grade narrative</span>
+        </div>
+        <div class="build-spec-row">
+          <span class="build-spec-key">Stack</span>
+          <span class="build-spec-val"><strong>Python · Claude API · openpyxl</strong> — no black boxes, everything visible</span>
+        </div>
+        <div class="build-spec-row">
+          <span class="build-spec-key">Goal</span>
+          <span class="build-spec-val">Remove the part where you stare at a table for twenty minutes before writing a sentence you already know how to write</span>
+        </div>
+      </div>
+
+      <p class="reveal">I'm building it in public. The repo is live from today — no code yet, but it will be committed post by post as the series progresses. If you want to follow the build or eventually run it yourself, everything will be there.</p>
+
+      <!-- GitHub CTA -->
+      <a href="https://github.com/alloutofxps/variance-commentary-generator" target="_blank" class="github-cta reveal">
+        <div class="github-cta-icon">⬡</div>
+        <div class="github-cta-text">
+          <div class="label">Repository · Built in public</div>
+          <div class="repo">variance-commentary-generator</div>
+          <div class="desc">github.com/alloutofxps/variance-commentary-generator</div>
+        </div>
+        <div class="github-cta-arrow">↗</div>
+      </a>
+
+      <p class="reveal">Next post: the architecture. What the input structure looks like, what the output actually needs to do to be finance-grade, and the prompt design decisions that determine whether the commentary is useful or just plausible-sounding.</p>
+
+      <p class="reveal">One question before then: if you work in FP&A or financial control, what does your month-end commentary process actually look like? How long does it take, who writes it, and what format does it end up in? Message me on LinkedIn — I want to build against the real version of this problem, not my assumed version of it.</p>
+
+      <!-- Sources -->
+      <div class="sources reveal">
+        <div class="sources-title">Sources</div>
+        <div class="source-item" id="source-1">
+          <span class="source-num">1</span>
+          <span class="source-text">Gartner — <em>Finance Function Benchmark: Close and Consolidation Cycle Times</em> · Finance teams in the top quartile spend 4–6 days on close; commentary and narrative work accounts for a meaningful share of post-close time · <a href="https://www.gartner.com/en/finance/topics/financial-close" target="_blank">gartner.com</a></span>
+        </div>
+      </div>
+
+      <!-- Sign off -->
+      <div class="post-signoff">
+        <p>Following along or building something similar? Find me on <a href="https://linkedin.com/in/pratikparashar93" target="_blank">LinkedIn</a>. The next post in this series goes up when the architecture is locked.</p>
+      </div>
+
+      <!-- Author card -->
+      <div class="author-card reveal">
+        <img src="pratik.jpg" alt="Pratik Parashar" />
+        <div class="author-info">
+          <div class="name">Pratik Parashar</div>
+          <p class="bio">Senior Auditor at a Big-4 firm in the Netherlands. Writing about AI, finance, and what happens when the two collide. Building a Variance Commentary Generator in public. Open to new roles in Finance Transformation, FP&amp;A, and Financial Control. <a href="https://linkedin.com/in/pratikparashar93" target="_blank">LinkedIn →</a></p>
+        </div>
+      </div>
+
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Pratik Parashar</p>
+    <p><a href="index.html">alloutoftokens.com</a></p>
+  </footer>
+
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top  = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Hamburger
+    const ham  = document.getElementById('hamburger');
+    const menu = document.getElementById('mobile-menu');
+    ham.addEventListener('click', () => {
+      ham.classList.toggle('open');
+      menu.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
