@@ -132,8 +132,9 @@
     .exp-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 12px; border: 1px solid rgba(245,240,232,0.1); color: rgba(245,240,232,0.25); white-space: nowrap; height: fit-content; }
 
     /* ABOUT */
-    .about { display: grid; grid-template-columns: 1fr 1.8fr; align-items: start; overflow: hidden; border-bottom: 1px solid var(--border); }
-    .about-left { position: sticky; top: 96px; padding: 96px 32px 0 clamp(24px, 5vw, 80px); }
+    .about-section { border-bottom: 1px solid var(--border); }
+    .about { display: grid; grid-template-columns: 1fr 1.8fr; align-items: start; max-width: var(--max-w); margin: 0 auto; width: 100%; }
+    .about-left { position: sticky; top: 96px; padding: 96px 32px 0 48px; }
     .about-heading { font-family: var(--ff-serif); font-size: clamp(30px,2.8vw,44px); font-weight: 900; line-height: 1.05; letter-spacing: -0.02em; margin-top: 8px; }
     .about-heading em { font-style: italic; color: var(--burg); }
     .about-right { padding: 96px 64px 96px 0; }
@@ -223,7 +224,7 @@
       .what-title { position: static; }
       .pillars { grid-template-columns: 1fr; }
       .about { grid-template-columns: 1fr; }
-      .about-left { position: static; padding: 48px 32px 0; }
+      .about-left { position: static; padding: 48px 24px 0; }
       .about-right { padding: 32px 32px 72px; }
       .blog-grid { grid-template-columns: 1fr; }
       .blog-grid-2 { grid-template-columns: 1fr; }
@@ -407,25 +408,25 @@
   </section>
 
   <!-- ABOUT -->
-  <section class="about" id="about">
-    <div class="about-left">
-      <div class="section-label">About</div>
-      <h2 class="about-heading">The<br>person<br><em>behind it.</em></h2>
-    </div>
-    <div class="about-right">
-      <p class="about-body reveal">I grew up in finance. Started as an articled assistant in Bengaluru, worked my way through Big-4 audits across sectors, moved countries, and somewhere along the way started noticing that the job I was doing was changing faster than most people in the room were willing to admit.</p>
-      <p class="about-body reveal"><strong>The AI piece isn't a side interest.</strong> I've been building it into my actual work — using it on real engagements, pitching it to partners, joining innovation teams. I think the finance professionals who figure out how to work alongside these tools — rather than pretend they don't exist — are going to be the ones who matter in 10 years.</p>
-      <p class="about-body reveal">Outside of work: motorcycles, basketball, dramas, and collecting other people's stories like they're alternate versions of my own. Based in Almere, the Netherlands. <strong>ACCA</strong> (9/13 papers), <strong>CA Finalist</strong>, B.Com (8.2 CGPA).</p>
-      <div class="skills-grid reveal">
-        <div class="skill-item"><div class="skill-name">Financial Reporting</div><div class="skill-sub">IFRS, Dutch GAAP, Ind AS, Group Consolidation</div></div>
-        <div class="skill-item"><div class="skill-name">FP&amp;A</div><div class="skill-sub">Variance analysis, forecasting, management reporting</div></div>
-        <div class="skill-item"><div class="skill-name">AI &amp; Automation</div><div class="skill-sub">Alteryx, Power BI, AI agents, prompt engineering</div></div>
-        <div class="skill-item"><div class="skill-name">Systems</div><div class="skill-sub">SAP, Oracle, iXBRL, Excel (advanced)</div></div>
+  <section class="about-section" id="about">
+    <div class="about">
+      <div class="about-left">
+        <div class="section-label">About</div>
+        <h2 class="about-heading">The<br>person<br><em>behind it.</em></h2>
+      </div>
+      <div class="about-right">
+        <p class="about-body reveal">I grew up in finance. Started as an articled assistant in Bengaluru, worked my way through Big-4 audits across sectors, moved countries, and somewhere along the way started noticing that the job I was doing was changing faster than most people in the room were willing to admit.</p>
+        <p class="about-body reveal"><strong>The AI piece isn't a side interest.</strong> I've been building it into my actual work — using it on real engagements, pitching it to partners, joining innovation teams. I think the finance professionals who figure out how to work alongside these tools — rather than pretend they don't exist — are going to be the ones who matter in 10 years.</p>
+        <p class="about-body reveal">Outside of work: motorcycles, basketball, dramas, and collecting other people's stories like they're alternate versions of my own. Based in Almere, the Netherlands. <strong>ACCA</strong> (9/13 papers), <strong>CA Finalist</strong>, B.Com (8.2 CGPA).</p>
+        <div class="skills-grid reveal">
+          <div class="skill-item"><div class="skill-name">Financial Reporting</div><div class="skill-sub">IFRS, Dutch GAAP, Ind AS, Group Consolidation</div></div>
+          <div class="skill-item"><div class="skill-name">FP&amp;A</div><div class="skill-sub">Variance analysis, forecasting, management reporting</div></div>
+          <div class="skill-item"><div class="skill-name">AI &amp; Automation</div><div class="skill-sub">Alteryx, Power BI, AI agents, prompt engineering</div></div>
+          <div class="skill-item"><div class="skill-name">Systems</div><div class="skill-sub">SAP, Oracle, iXBRL, Excel (advanced)</div></div>
+        </div>
       </div>
     </div>
   </section>
-
-  <!-- WRITING -->
   <section class="writing" id="blog">
     <div class="section-wrap">
       <div class="writing-header reveal">
