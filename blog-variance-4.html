@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Rebuild: From Three Tabs to Nine, And the One Thing That Surprised Me — Pratik Parashar</title>
+
+  <!-- OG / Social -->
+  <meta property="og:title" content="The Rebuild: From Three Tabs to Nine, And the One Thing That Surprised Me" />
+  <meta property="og:description" content="The vfinal of the Variance Commentary Generator. Nine Excel tabs, a transaction trail, a P&L bridge, and the design choice that solved the hallucination problem in a way I didn't see coming." />
+  <meta property="og:image" content="https://alloutoftokens.com/og-variance-4.png" />
+  <meta property="og:url" content="https://alloutoftokens.com/blog-variance-4.html" />
+  <meta property="og:type" content="article" />
+  <meta property="article:author" content="Pratik Parashar" />
+  <meta property="article:published_time" content="2026-05-15" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Rebuild: From Three Tabs to Nine" />
+  <meta name="twitter:description" content="The vfinal of the Variance Commentary Generator. Nine Excel tabs, a transaction trail, and the design choice that solved the hallucination problem." />
+  <meta name="twitter:image" content="https://alloutoftokens.com/og-variance-4.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* Reset & tokens */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0d0d0d;
+      --cream:   #f5f0e8;
+      --red:     #ff3c1f;
+      --mid:     #6b6560;
+      --border:  rgba(13,13,13,0.12);
+      --ff-serif: 'Playfair Display', Georgia, serif;
+      --ff-mono:  'Space Mono', 'Courier New', monospace;
+      --ff-sans:  'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 18px;
+      line-height: 1.7;
+      cursor: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Custom cursor */
+    .cursor {
+      position: fixed;
+      width: 10px; height: 10px;
+      background: var(--red);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.08s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease;
+      mix-blend-mode: multiply;
+    }
+    .cursor.hover { width: 28px; height: 28px; background: var(--black); }
+
+    /* Nav */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      padding: 0 clamp(24px, 5vw, 80px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      color: var(--black);
+      text-transform: uppercase;
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--red); }
+
+    /* Article layout */
+    .article-wrap {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 clamp(24px, 5vw, 48px);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 72px 0 0;
+      border-bottom: 2px solid var(--black);
+      margin-bottom: 64px;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cream);
+      background: var(--red);
+      padding: 4px 10px;
+    }
+    .tag-series {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      border: 1px solid var(--red);
+      padding: 3px 10px;
+    }
+    .hero-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--mid);
+      letter-spacing: 0.06em;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+    .hero h1 em { font-style: italic; color: var(--red); }
+    .hero-deck {
+      font-size: 19px;
+      font-weight: 300;
+      color: #3a3530;
+      line-height: 1.6;
+      margin-bottom: 40px;
+      max-width: 600px;
+    }
+
+    /* Series nav */
+    .series-nav {
+      background: var(--black);
+      padding: 28px 32px;
+      margin-bottom: 0;
+    }
+    .series-nav-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .series-nav-label::before { content: ''; width: 24px; height: 1px; background: var(--red); }
+    .series-nav-posts {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
+    }
+    .series-post {
+      padding: 12px 10px;
+      background: rgba(245,240,232,0.05);
+      text-align: center;
+    }
+    .series-post.active { background: var(--red); }
+    .series-post.done { background: rgba(255,60,31,0.18); }
+    .series-post .post-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: rgba(245,240,232,0.3);
+      display: block;
+      margin-bottom: 6px;
+    }
+    .series-post.active .post-num { color: var(--cream); }
+    .series-post.done .post-num { color: rgba(245,240,232,0.8); }
+    .series-post .post-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      color: rgba(245,240,232,0.3);
+      line-height: 1.3;
+    }
+    .series-post.active .post-label { color: rgba(245,240,232,0.9); }
+    .series-post.done .post-label { color: rgba(245,240,232,0.6); }
+    @media (max-width: 540px) {
+      .series-nav-posts { grid-template-columns: 1fr 1fr; gap: 4px; }
+    }
+
+    /* Body content */
+    .post-body { padding-bottom: 80px; }
+    .post-body p {
+      margin-bottom: 28px;
+      font-size: 18px;
+      line-height: 1.75;
+      color: #1a1714;
+    }
+    .post-body h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(22px, 3vw, 28px);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin: 64px 0 24px;
+      padding-top: 64px;
+      border-top: 1px solid var(--border);
+    }
+    .post-body hr { border: none; border-top: 1px solid var(--border); margin: 52px 0; }
+    sup { color: var(--red); font-size: 11px; }
+    sup a { color: var(--red); text-decoration: none; }
+
+    /* Pull quote */
+    .pull-quote {
+      border-left: 4px solid var(--red);
+      margin: 48px 0;
+      padding: 4px 0 4px 28px;
+    }
+    .pull-quote p {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(20px, 2.8vw, 26px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.4;
+      color: var(--black);
+      margin: 0;
+    }
+
+    /* Build spec */
+    .build-spec {
+      background: var(--black);
+      color: var(--cream);
+      padding: 40px 48px;
+      margin: 52px 0;
+      border-left: 4px solid var(--red);
+    }
+    .build-spec-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .build-spec-title::before { content: ''; width: 24px; height: 1px; background: var(--red); }
+    .build-spec-row {
+      display: flex;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(245,240,232,0.1);
+      align-items: baseline;
+    }
+    .build-spec-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .build-spec-key {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--red);
+      min-width: 80px;
+      flex-shrink: 0;
+    }
+    .build-spec-val { font-size: 14px; line-height: 1.5; color: rgba(245,240,232,0.75); }
+    .build-spec-val strong { color: var(--cream); }
+    @media (max-width: 540px) { .build-spec { padding: 32px 24px; } }
+
+    /* Code block */
+    .code-block {
+      margin: 40px 0;
+      background: var(--black);
+      border-left: 4px solid var(--red);
+      overflow-x: auto;
+    }
+    .code-block-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(245,240,232,0.08);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .code-block-label::before { content: ''; width: 24px; height: 1px; background: var(--red); }
+    .code-block pre {
+      padding: 20px 20px 24px;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      line-height: 1.8;
+      color: rgba(245,240,232,0.82);
+      white-space: pre;
+      overflow-x: auto;
+    }
+    .code-block pre .kw  { color: #ff9d7a; }
+    .code-block pre .fn  { color: #f5c97a; }
+    .code-block pre .st  { color: #a8e6a3; }
+    .code-block pre .cm  { color: rgba(245,240,232,0.35); }
+    .code-block pre .num { color: #7ac5f5; }
+
+    /* Screenshot slot */
+    .screenshot-slot {
+      margin: 40px 0;
+      border: 1px dashed rgba(13,13,13,0.25);
+    }
+    .screenshot-slot-header {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      background: rgba(13,13,13,0.04);
+      padding: 10px 16px;
+      border-bottom: 1px dashed rgba(13,13,13,0.15);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .screenshot-slot-header::before {
+      content: '⌶';
+      color: var(--red);
+      font-size: 14px;
+    }
+    .screenshot-slot img {
+      width: 100%;
+      display: block;
+    }
+    .screenshot-slot-caption {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--mid);
+      padding: 10px 16px;
+      line-height: 1.5;
+      border-top: 1px dashed rgba(13,13,13,0.15);
+    }
+    /* Placeholder state (no img src) */
+    .screenshot-slot .placeholder-area {
+      background: rgba(13,13,13,0.03);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 180px;
+      padding: 32px;
+      color: rgba(13,13,13,0.2);
+    }
+    .screenshot-slot .placeholder-area .ph-icon { font-size: 28px; }
+    .screenshot-slot .placeholder-area .ph-text {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-align: center;
+      line-height: 1.6;
+      max-width: 380px;
+    }
+
+    /* Commentary demo */
+    .commentary-demo { margin: 52px 0; border: 1px solid var(--border); }
+    .commentary-box { border-top: 2px solid var(--black); }
+    .commentary-box-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .commentary-box-label.bad { color: var(--mid); background: rgba(13,13,13,0.03); }
+    .commentary-box-label.good { color: var(--red); background: rgba(255,60,31,0.04); }
+    .commentary-box-text {
+      padding: 16px 20px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #1a1714;
+      margin: 0;
+    }
+    .commentary-box-text.bad { color: var(--mid); font-style: italic; }
+
+    /* Failure log */
+    .failure-log {
+      margin: 40px 0;
+      border: 1px solid var(--border);
+    }
+    .failure-log-header {
+      background: var(--black);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .failure-log-header .flog-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+    .failure-log-item {
+      display: flex;
+      gap: 20px;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .failure-log-item:last-child { border-bottom: none; }
+    .failure-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .failure-content {}
+    .failure-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 6px;
+    }
+    .failure-detail {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #3a3530;
+    }
+    .failure-fix {
+      font-size: 13px;
+      color: var(--mid);
+      margin-top: 6px;
+      padding-left: 12px;
+      border-left: 2px solid var(--red);
+    }
+
+    /* Expandable screenshot (click to enlarge) */
+    .screenshot-slot.expandable img { cursor: zoom-in; transition: opacity 0.2s; }
+    .screenshot-slot.expandable img:hover { opacity: 0.88; }
+    .screenshot-slot .expand-hint {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-left: auto;
+      opacity: 0.7;
+    }
+    .screenshot-slot-header { justify-content: flex-start; }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(13,13,13,0.92);
+      z-index: 9998;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      cursor: zoom-out;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      box-shadow: 0 8px 60px rgba(0,0,0,0.4);
+      cursor: zoom-out;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 24px;
+      right: 32px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cream);
+      background: none;
+      border: 1px solid rgba(245,240,232,0.3);
+      padding: 8px 14px;
+      cursor: zoom-out;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .lightbox-close:hover { border-color: var(--red); color: var(--red); }
+    .lightbox-caption {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: rgba(245,240,232,0.7);
+      letter-spacing: 0.04em;
+      max-width: 80%;
+      text-align: center;
+    }
+    @media (max-width: 540px) {
+      .lightbox { padding: 16px; }
+      .lightbox-close { top: 12px; right: 16px; font-size: 10px; }
+    }
+
+    /* Inline anchor links to sources */
+    a.src-ref {
+      color: var(--red);
+      text-decoration: none;
+      font-size: 11px;
+      vertical-align: super;
+      line-height: 1;
+      padding: 0 1px;
+      border-bottom: none;
+    }
+    a.src-ref:hover { color: var(--black); }
+
+    /* Source items: bidirectional return links */
+    .source-item { scroll-margin-top: 80px; }
+    .source-back {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      margin-left: 10px;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .source-back:hover { color: var(--red); }
+    .source-back::before { content: '↩ '; }
+
+    /* Body paragraphs that get linked-to need scroll margin too */
+    .post-body [id^="ref-"] { scroll-margin-top: 80px; }
+
+    /* GitHub CTA */
+    .github-cta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 24px 28px;
+      border: 2px solid var(--black);
+      margin: 52px 0;
+      text-decoration: none;
+      color: var(--black);
+      transition: background 0.2s, color 0.2s;
+    }
+    .github-cta:hover { background: var(--black); color: var(--cream); }
+    .github-cta-icon { font-size: 28px; flex-shrink: 0; line-height: 1; }
+    .github-cta-text .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 4px;
+    }
+    .github-cta:hover .github-cta-text .label { color: rgba(255,60,31,0.8); }
+    .github-cta-text .repo { font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; }
+    .github-cta-text .desc { font-size: 13px; color: var(--mid); margin-top: 2px; }
+    .github-cta:hover .github-cta-text .desc { color: rgba(245,240,232,0.6); }
+    .github-cta-arrow { margin-left: auto; font-size: 20px; flex-shrink: 0; }
+
+    /* Sources */
+    .sources {
+      background: #ede8e0;
+      padding: 40px 48px;
+      margin-top: 72px;
+      margin-left: -48px;
+      margin-right: -48px;
+    }
+    .sources-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sources-title::before { content: ''; width: 24px; height: 1px; background: var(--red); }
+    .source-item {
+      display: flex;
+      gap: 16px;
+      align-items: baseline;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(13,13,13,0.1);
+    }
+    .source-item:last-child { border-bottom: none; }
+    .source-num { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--red); min-width: 20px; }
+    .source-text { font-size: 13px; color: var(--mid); line-height: 1.6; }
+    .source-text a { color: var(--black); text-decoration: none; border-bottom: 1px solid rgba(13,13,13,0.2); transition: border-color 0.2s, color 0.2s; }
+    .source-text a:hover { color: var(--red); border-color: var(--red); }
+
+    /* Sign off */
+    .post-signoff { margin-top: 72px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .post-signoff p { font-size: 15px !important; color: var(--mid) !important; margin-bottom: 0 !important; }
+    .post-signoff a { color: var(--black); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--border); transition: color 0.2s, border-color 0.2s; }
+    .post-signoff a:hover { color: var(--red); border-color: var(--red); }
+
+    /* Author card */
+    .author-card {
+      background: var(--black);
+      color: var(--cream);
+      padding: 40px;
+      margin-top: 64px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .author-card img {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid var(--red);
+    }
+    .author-card .author-info .name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .author-card .author-info .bio {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(245,240,232,0.7);
+      margin: 0;
+    }
+    .author-card .author-info .bio a { color: var(--red); text-decoration: none; }
+    @media (max-width: 500px) { .author-card { flex-direction: column; gap: 16px; padding: 24px; } }
+
+    /* Back link */
+    .back-link-wrap { padding: 40px 0 0; }
+    .back-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--red); }
+    .back-link::before { content: '←'; }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px clamp(24px, 5vw, 80px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    footer p { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--mid); margin: 0; }
+    footer a { color: var(--mid); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--red); }
+
+    /* Hamburger */
+    .hamburger { display: none; background: none; border: none; cursor: none; flex-direction: column; gap: 5px; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--black); transition: all 0.25s ease; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 60px 0 0;
+      background: var(--cream);
+      z-index: 99;
+      padding: 40px clamp(24px, 5vw, 48px);
+      flex-direction: column;
+      gap: 24px;
+      border-top: 2px solid var(--black);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+    @media (max-width: 640px) { .nav-links { display: none; } .hamburger { display: flex; } }
+    @media (max-width: 768px) {
+      .sources { padding: 32px 24px; margin-left: -24px; margin-right: -24px; }
+      .author-card { padding: 24px; gap: 16px; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">All Out <span>of</span> Tokens</a>
+    <ul class="nav-links">
+      <li><a href="index.html#what-i-do">What I Do</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="index.html#blog">Writing</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html#what-i-do">What I Do</a>
+    <a href="index.html#experience">Experience</a>
+    <a href="index.html#blog">Writing</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+
+  <main class="article-wrap">
+
+    <div class="back-link-wrap">
+      <a href="index.html#blog" class="back-link">All posts</a>
+    </div>
+
+    <header class="hero">
+      <div class="hero-meta">
+        <span class="tag">Finance × AI: In Practice</span>
+        <span class="tag-series">Post 4 of 5</span>
+        <span class="hero-date">May 2026</span>
+      </div>
+      <h1>The Rebuild: From Three Tabs to Nine, And the <em>One Thing That Surprised Me</em></h1>
+      <p class="hero-deck">v1 was thrown out at the end of Post 3. This is what got built in its place. Nine Excel tabs. An interactive HTML dashboard. A 1,388-line Python script. And a design choice in the prompt that solved the hallucination problem in a way I didn't see coming.</p>
+
+      <div class="series-nav">
+        <div class="series-nav-label">Build Log · Variance Commentary Generator</div>
+        <div class="series-nav-posts">
+          <div class="series-post done">
+            <span class="post-num">01</span>
+            <span class="post-label">The Problem</span>
+          </div>
+          <div class="series-post done">
+            <span class="post-num">02</span>
+            <span class="post-label">Architecture</span>
+          </div>
+          <div class="series-post done">
+            <span class="post-num">03</span>
+            <span class="post-label">First Build</span>
+          </div>
+          <div class="series-post active">
+            <span class="post-num">04</span>
+            <span class="post-label">Finance-Grade</span>
+          </div>
+          <div class="series-post">
+            <span class="post-num">05</span>
+            <span class="post-label">What It Can't Do</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <article class="post-body">
+
+      <p class="reveal">Post 3 ended on a hard sentence. The v1 wasn't earning its place. A junior analyst with a calculator could match it. The tool described variances in isolation, never connected the dots between the P&amp;L and the balance sheet, and produced a deliverable a finance director would hand back without reading.</p>
+
+      <p class="reveal">This post is what came next. The rebuild that took the v1 from three tabs to nine, from 250 lines of Python to 1,388, from one prompt rule to four mandatory section headers.<a href="#source-1" class="src-ref" id="ref-1">[1]</a> Multiple iterations, several broken charts, a long fight with sign conventions, and one design choice in the AI prompt that turned the most-feared weakness of LLMs into the most useful feature of the tool.</p>
+
+      <p class="reveal">I'll walk through the changes in the order I'd want a finance reader to encounter them. Then the part that surprised me. Then what's coming in Post 5.</p>
+
+      <div class="build-spec reveal">
+        <div class="build-spec-title">Post 4 in brief</div>
+        <div class="build-spec-row">
+          <span class="build-spec-key">What ran</span>
+          <span class="build-spec-val"><strong>vfinal</strong>, 1,388 lines of Python, <code>claude-opus-4-5</code> at max_tokens=1,500</span>
+        </div>
+        <div class="build-spec-row">
+          <span class="build-spec-key">Outputs</span>
+          <span class="build-spec-val"><strong>9-tab Excel workbook</strong> plus an interactive HTML dashboard, generated in ~25 seconds</span>
+        </div>
+        <div class="build-spec-row">
+          <span class="build-spec-key">What's new</span>
+          <span class="build-spec-val">Tiered materiality, sign-aware prompt, transaction trail, cross-statement coherence, the management-input-required pattern</span>
+        </div>
+        <div class="build-spec-row">
+          <span class="build-spec-key">What stayed</span>
+          <span class="build-spec-val">The merge pipeline, the no-invention guardrails, the Big-4 disposition toward methodology and audit trails</span>
+        </div>
+      </div>
+
+      <h2 class="reveal">What landed when you opened the file</h2>
+
+      <p class="reveal">First thing the reader sees on Tab 01: the headline P&amp;L numbers laid out as KPI tiles, with delta arrows, prior-year comparisons, and a written executive summary directly below. No scrolling, no hunting, no reading prose to find the number. The numbers are right there. The narrative explains them.</p>
+
+      <div class="screenshot-slot expandable reveal" data-caption="vfinal Tab 01: Executive Summary with KPI tiles and the AI-written executive paragraph">
+        <div class="screenshot-slot-header">Screenshot · Tab 01 Executive Summary <span class="expand-hint">click to expand</span></div>
+        <img src="screenshot-vfinal-01-executive-summary.png" alt="Excel screenshot of the vfinal Tab 01 Executive Summary. KPI tiles at the top show Net Revenue 8,595,565 (up 9.7%), Gross Profit 5,926,350 (up 11.0%), EBITDA 1,907,352 (up 25.3%), and GP Margin 68.9% (up 0.8 percentage points). Below the tiles, an AI-written executive summary paragraph and a Top P&L Variances table." />
+        <div class="screenshot-slot-caption">Tab 01. KPI tiles, AI-written executive summary, top P&amp;L variances ranked by absolute impact. The opening view sets the tone for everything below.</div>
+      </div>
+
+      <p class="reveal">v1 had nothing like this. v1 dropped the reader into a single block of narrative text. vfinal opens with a structured visual answer to the implicit board question: how did we do this year, and how does it compare to last? That question is answered before the reader has read a single sentence.</p>
+
+      <h2 class="reveal">Materiality became tiered</h2>
+
+      <p class="reveal">v1 treated materiality as one rule for everything: variance above 1,000 absolute and above 5%. Both conditions had to be met. That's defensible for a sample exercise. It's not defensible for a real chart of accounts where the sensitivity of a 5% movement varies enormously by account type.</p>
+
+      <p class="reveal">vfinal switched to a tiered table. Sales and Cost of Sales need wider thresholds because they're large numbers and a 3% movement is already meaningful. Depreciation needs a tighter percentage threshold because the absolute numbers are small but the line is highly visible to auditors. Balance sheet accounts need much higher absolute thresholds because the values are bigger by orders of magnitude.</p>
+
+      <div class="code-block reveal">
+        <div class="code-block-label">analyse_template.py · materiality thresholds</div>
+        <pre><span class="fn">THRESHOLDS</span> = {
+    <span class="st">"Sales"</span>:                       {<span class="st">"pct"</span>: <span class="num">3.0</span>,  <span class="st">"abs"</span>: <span class="num">10000</span>},
+    <span class="st">"Cost of Sales"</span>:               {<span class="st">"pct"</span>: <span class="num">3.0</span>,  <span class="st">"abs"</span>: <span class="num">10000</span>},
+    <span class="st">"Sales &amp; Distribution"</span>:        {<span class="st">"pct"</span>: <span class="num">5.0</span>,  <span class="st">"abs"</span>: <span class="num">5000</span>},
+    <span class="st">"Marketing"</span>:                   {<span class="st">"pct"</span>: <span class="num">5.0</span>,  <span class="st">"abs"</span>: <span class="num">5000</span>},
+    <span class="st">"Administration"</span>:              {<span class="st">"pct"</span>: <span class="num">5.0</span>,  <span class="st">"abs"</span>: <span class="num">5000</span>},
+    <span class="st">"Depreciation &amp; Amortization"</span>: {<span class="st">"pct"</span>: <span class="num">2.0</span>,  <span class="st">"abs"</span>: <span class="num">500</span>},
+    <span class="st">"Interest &amp; Tax"</span>:              {<span class="st">"pct"</span>: <span class="num">5.0</span>,  <span class="st">"abs"</span>: <span class="num">5000</span>},
+    <span class="st">"Non-operating"</span>:               {<span class="st">"pct"</span>: <span class="num">5.0</span>,  <span class="st">"abs"</span>: <span class="num">1000</span>},
+    <span class="st">"Balance Sheet"</span>:               {<span class="st">"pct"</span>: <span class="num">10.0</span>, <span class="st">"abs"</span>: <span class="num">50000</span>},
+    <span class="st">"DEFAULT"</span>:                     {<span class="st">"pct"</span>: <span class="num">5.0</span>,  <span class="st">"abs"</span>: <span class="num">5000</span>},
+}</pre>
+      </div>
+
+      <p class="reveal">This is also how a Big-4 audit team actually scopes materiality. Different account categories carry different sensitivities, and a single number across the whole ledger is a sign someone hasn't thought about it. The dictionary is configurable<a href="#source-2" class="src-ref" id="ref-2">[2]</a>, sits at the top of the script, and gets reproduced verbatim into the methodology tab so any reviewer can audit the choices.</p>
+
+      <h2 class="reveal">The sign convention had to be hardcoded into the prompt</h2>
+
+      <p class="reveal">In a standard GL, costs are stored as negative numbers. A cost decrease shows as <code>Var &gt; 0</code> because Y1 is less negative than Y0. A model trained on general English doesn't know this. Ask it about a +47,915 movement on Staff Costs, it'll call it adverse, because in plain English "+" reads as "more". In the GL convention, that movement is favourable: staff costs went down.</p>
+
+      <p class="reveal">v1 didn't address this. The output was occasionally wrong about direction in a way that would have humiliated anyone who took it to a board. vfinal has a paragraph in the prompt dedicated to this single point:</p>
+
+      <div class="code-block reveal">
+        <div class="code-block-label">analyse_template.py · sign convention block in the system prompt</div>
+        <pre><span class="st">ALL cost accounts are stored as NEGATIVE numbers in this GL.
+A FAVOURABLE variance on a cost account means Variance &gt; 0
+(cost decreased).
+An ADVERSE variance on a cost account means Variance &lt; 0
+(cost increased).</span></pre>
+      </div>
+
+      <p class="reveal">Three sentences. Built explicitly into the prompt context for every API call. The model now reads "+47,915 on Staff Costs" and labels it favourable. The Excel output applies the same logic in Python: green for any account where <code>Var &gt; 0</code>, red for any account where <code>Var &lt; 0</code>. Prompt and code agree. Reviewer's eye doesn't have to flip the sign.</p>
+
+      <h2 class="reveal">Drilldown via the Transaction Trail tab</h2>
+
+      <p class="reveal">The biggest functional gap in v1: a reader couldn't ask "where did this number come from?" without going back to the source files. vfinal closes that gap with a dedicated tab that explodes every material variance into the GL transactions that drove it.</p>
+
+      <div class="screenshot-slot expandable reveal" data-caption="vfinal Tab 06: Transaction Audit Trail showing GL evidence for each material P&L variance, broken down by transaction type and sub-category">
+        <div class="screenshot-slot-header">Screenshot · Tab 06 Transaction Trail <span class="expand-hint">click to expand</span></div>
+        <img src="screenshot-vfinal-06-transaction-trail.png" alt="Excel screenshot of vfinal Tab 06 Transaction Audit Trail. Each material P&L variance has a coloured header with totals, then a table showing Transaction Type, Sub-Category, FY 2020 Amount, FY 2021 Amount, and Variance. Sales shows Credit Sales and Cash Sales drivers. Cost of Sales, Staff Costs, Commissions, and Taxation each have their own breakdown blocks." />
+        <div class="screenshot-slot-caption">Tab 06. Every claim in the AI commentary above is grounded in a row on this tab. Every line item that hits materiality gets exploded into transaction-type sub-categories. The "verify before sharing" instruction at the top is the audit trail pattern from Big 4 made literal.</div>
+      </div>
+
+      <p class="reveal">This is the tab that earned the loudest reaction when I showed it to colleagues. It's not particularly clever. It's just a careful aggregation of the underlying GL transactions, sorted and presented in a form a reviewer can scan. But it's the difference between "the AI said this" and "the AI said this and here's where the number lives." That difference is everything in finance.</p>
+
+      <p class="reveal">A specific bug worth flagging: the Sub-Category column on this tab kept turning up empty in early iterations. The data was there, the column was rendering, but the values were blank. The issue was a chart-of-accounts column called <code>SubAccount</code> that the script needed to read but wasn't being merged in correctly. Fixing it took most of an afternoon. Generic statement: half the rebuild was making columns show what they were supposed to show. None of it is impressive. All of it is the difference between a tool that works and a tool that doesn't.</p>
+
+      <h2 class="reveal">Cross-statement coherence: the bridge and the balance sheet</h2>
+
+      <p class="reveal">Post 3 made an argument about connectivity. Real commentary does more than describe variances in isolation. It surfaces the connections between them. Two tabs in vfinal exist to make those connections concrete.</p>
+
+      <p class="reveal">The first is the P&amp;L Bridge, which walks line by line from Net Revenue down to EBITDA. Each line shows Y0, Y1, the movement, and the percentage. There's a waterfall chart at the bottom of the same tab. A finance reader can see in twenty seconds where the EBITDA movement came from before reading a single sentence of the AI narrative.</p>
+
+      <div class="screenshot-slot expandable reveal" data-caption="vfinal Tab 03: P&L Bridge from Net Revenue to EBITDA, with a waterfall chart">
+        <div class="screenshot-slot-header">Screenshot · Tab 03 P&amp;L Bridge <span class="expand-hint">click to expand</span></div>
+        <img src="screenshot-vfinal-03-pl-bridge.png" alt="Excel screenshot of vfinal Tab 03 P&L Bridge. A table walks from Net Revenue (8,595,565) through Cost of Sales, to Gross Profit (5,926,350), then through Sales and Distribution, Marketing, and Administration, ending at EBITDA (1,907,352). Each line shows FY 2020, FY 2021, Movement, and Movement percentage. Below the table, a waterfall chart visualises the bridge." />
+        <div class="screenshot-slot-caption">Tab 03. The P&amp;L Bridge. Every row is a formula, not a hardcoded value. The waterfall below shows the same data visually. This is the tab that lets a CFO see the EBITDA story in one screen.</div>
+      </div>
+
+      <p class="reveal">The second is the Balance Sheet Flux tab. Every balance sheet account, with movement, percentage, and a status note. One-off events (share capital movements, long-term liability settlements) are flagged separately. Below-materiality movements are explicitly labelled "no action required" rather than being hidden, because hiding them would cost the reviewer the ability to verify what wasn't acted on.</p>
+
+      <div class="screenshot-slot expandable reveal" data-caption="vfinal Tab 05: Balance Sheet Flux, showing every BS account with movement, percentage, and a status note">
+        <div class="screenshot-slot-header">Screenshot · Tab 05 Balance Sheet Flux <span class="expand-hint">click to expand</span></div>
+        <img src="screenshot-vfinal-05-balance-sheet-flux.png" alt="Excel screenshot of vfinal Tab 05 Balance Sheet Flux. Each balance sheet account is listed with FY 2020, FY 2021, Movement, Movement percentage, and a Note column. Material movements are labelled 'verify with controller', below-threshold movements show 'Below BS materiality threshold, no action required', and one-off Y0 events with no Y1 equivalent are flagged separately. A footer warns that BS movements reflect GL aggregation only and may need controller review for accruals and reclassifications." />
+        <div class="screenshot-slot-caption">Tab 05. Balance Sheet Flux. The footer note is critical: the tool aggregates GL data, but accruals and reclassifications are out of scope and need a human. The tab is honest about what it can and can't see.</div>
+      </div>
+
+      <p class="reveal">A reader can now hold the P&amp;L tab next to the BS Flux tab and check the connections from Post 3. Did profit increase? Yes, EBITDA up 25.3%. Did retained earnings move accordingly? Tab 05 shows retained earnings at +0.1%, flagged as below threshold. The connection isn't holding cleanly, which means something happened (a dividend, a reclassification) that warrants a controller's attention. That's exactly the kind of cross-statement question a board reader is supposed to ask. The tool surfaces it without claiming to answer it.</p>
+
+      <h2 class="reveal">The unglamorous middle</h2>
+
+      <p class="reveal">Between v1 and vfinal there were several iterations. None of them were architectural. All of them were the kind of thing nobody talks about because it isn't impressive but is exactly where building actually happens.</p>
+
+      <div class="failure-log reveal">
+        <div class="failure-log-header">
+          <span class="flog-label">Iteration log · refinements between v1 and vfinal</span>
+        </div>
+        <div class="failure-log-item">
+          <span class="failure-icon">→</span>
+          <div class="failure-content">
+            <div class="failure-title">Sign of variance disagreed with the F/A label</div>
+            <div class="failure-detail">Increases in expense were showing green and labelled favourable in the Excel output. The Python <code>is_fav</code> function had inconsistent logic between the colour rule and the label rule. Fixed with a single universal rule: <code>Var &gt; 0</code> is favourable for every account, given the GL stores costs as negatives.</div>
+          </div>
+        </div>
+        <div class="failure-log-item">
+          <span class="failure-icon">→</span>
+          <div class="failure-content">
+            <div class="failure-title">Charts not loading in the HTML dashboard</div>
+            <div class="failure-detail">A brace mismatch in the embedded JavaScript across 14 functions. The HTML rendered but the chart canvases stayed blank. Caught by writing the HTML out and opening the developer console, not by reading the code.</div>
+          </div>
+        </div>
+        <div class="failure-log-item">
+          <span class="failure-icon">→</span>
+          <div class="failure-content">
+            <div class="failure-title">Transaction Trail sub-categories rendering empty</div>
+            <div class="failure-detail">The chart-of-accounts <code>SubAccount</code> column wasn't being passed through the merge step. The transaction-type column populated correctly but the granular sub-category was blank. Fixed by adding the column to the lookup map.</div>
+          </div>
+        </div>
+        <div class="failure-log-item">
+          <span class="failure-icon">→</span>
+          <div class="failure-content">
+            <div class="failure-title">Executive Summary and section headers turning up blank</div>
+            <div class="failure-detail">The commentary parser was failing to recognise the section markers the prompt asked for, so the text was being written into the rolling buffer but never assigned to a section. Tab 01 showed the commentary heading and an empty cell underneath. Rewriting the parser fixed all four sections at once.</div>
+          </div>
+        </div>
+        <div class="failure-log-item">
+          <span class="failure-icon">→</span>
+          <div class="failure-content">
+            <div class="failure-title">Hidden columns and column-width corruption</div>
+            <div class="failure-detail">openpyxl's column-width handling is finicky. Several iterations hid columns by accident or rendered them at width 2 (which looks hidden). Fixed with explicit width dictionaries at the top of every tab-builder function and a verification pass against actual content widths.</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="reveal">This is the part of building that nobody puts in a LinkedIn post. It's also where the tool actually became usable. Each one of these took an afternoon to find and ten minutes to fix. The architecture from Post 2 held throughout. The failures were at the edges. They always are.</p>
+
+      <h2 class="reveal">The prompt that came out of it</h2>
+
+      <p class="reveal">v1's prompt was seven rules in flowing prose. vfinal's prompt is structurally different: it requires four exact section headers, with explicit length and format rules for each.</p>
+
+      <div class="code-block reveal">
+        <div class="code-block-label">analyse_template.py · vfinal system prompt structure</div>
+        <pre><span class="st">Write commentary using EXACTLY these four section headers
+(no extra ## headers):
+
+## EXECUTIVE SUMMARY
+One paragraph, max 75 words. State net revenue growth, GP margin
+direction, EBITDA movement. End with one forward-looking sentence.
+
+## REVENUE AND GROSS MARGIN
+2-3 paragraphs. Decompose sales movement using driver data. Explain
+cost of sales relative to revenue. Where the cause cannot be
+determined from GL data, write "requires management input."
+
+## OPERATING EXPENSES
+2 paragraphs. Group by category. State what changed, by how much,
+and what the driver data suggests.
+
+## MANAGEMENT INPUT REQUIRED
+Numbered list of exactly 5 items. Each references a specific account
+and variance amount.
+Format: N. Account Name (Δ amount): specific question
+
+RULES: No markdown bold or italic. Plain text only.
+Every claim traceable to the data above.</span></pre>
+      </div>
+
+      <p class="reveal">The shift is from describing what good looks like to dictating structure. The model has less freedom and produces more consistent output. The reviewer always knows where the executive summary ends and the operating expense section begins, because the prompt forces those boundaries.</p>
+
+      <p class="reveal">This is also the principle from Post 2 made concrete: structural instructions beat quality adjectives. "Write good commentary" produces inconsistent results. "Write a 75-word paragraph stating these three metrics in this order, ending on this kind of sentence" produces commentary that fits into a board pack template the reader has seen a hundred times before.</p>
+
+      <h2 class="reveal">The one thing that surprised me</h2>
+
+      <p class="reveal">The fourth section header is the one I want to spend the rest of this post on, because it's the part of the build that genuinely changed how I think about AI in finance.</p>
+
+      <p class="reveal">Most of the conversation about LLMs in finance for the last two years has been about hallucinations. AI tools confidently fabricating reasons. AI commentary inventing market conditions and cost drivers and customer trends with no basis in the data. The dominant criticism, the one every finance director raises within five minutes of any AI demo: "but how do I know it's not making things up?"</p>
+
+      <div class="pull-quote reveal">
+        <p>The fix isn't a smarter model or a tighter "do not invent" rule. It's giving the model somewhere productive to put its uncertainty.</p>
+      </div>
+
+      <p class="reveal">v1 fought hallucinations with a constraint: do not invent reasons. Which works on the cases the rule covers. But "do not invent" is an instruction about what not to do. It tells the model to stop, without telling it what to do instead. When the model hits a variance it can't explain from the data alone, the constraint just produces vague hedging or nothing at all.</p>
+
+      <p class="reveal">The Management Input Required section flips this. Instead of constraining the model away from a bad output, it gives the model a productive job for the cases where it doesn't have enough context. When you don't know, surface five specific questions for a human reviewer, each tied to a specific number. The constraint becomes a deliverable.</p>
+
+      <p class="reveal">The output looks like this in Tab 01 of the Excel:</p>
+
+      <div class="commentary-demo reveal">
+        <div class="commentary-box" style="border-top: none;">
+          <div class="commentary-box-label good">Areas Requiring Management Input · vfinal output</div>
+          <p class="commentary-box-text">1. Cost of Sales (Δ -175,206): What pricing or vendor changes drove the 7.0% increase? Was there a one-off cost adjustment in Q4?<br/><br/>2. Staff Costs (Δ -47,915): Did the sales compensation structure change, or did the increase track sales volume?<br/><br/>3. Commissions (Δ -47,242): What proportion of the increase relates to bad debt provisions versus credit sales activity?<br/><br/>4. Cash &amp; Cash Equivalents (Δ +2,280,727): What drove the 210% increase in cash position? Was this operational, financing-related, or a one-off receipt?<br/><br/>5. Receivables (Δ +105,327): Was the 22% increase driven by sales growth or a deterioration in collections?</p>
+        </div>
+      </div>
+
+      <p class="reveal">A finance director reading the commentary now gets two things. First, the AI's best attempt at narrative based on the data it has. Second, a structured list of five questions the AI couldn't answer, each tied to a specific account and amount, that the controller is now expected to address. The tool isn't pretending to know everything. It's surfacing exactly where its knowledge ends.</p>
+
+      <p class="reveal">This is what makes the tool feel grown-up to a finance audience. Most AI demos fail because the AI is confident about everything. This one ends with five honest questions. The reviewer doesn't have to play "spot the hallucination." The tool has already drawn the line for them.</p>
+
+      <p class="reveal">The design choice didn't come from engineering. It came from audit. Every audit reviewer carries the instinct of "what would I ask the client about this number?" and the Management Input Required section is just that instinct made explicit in the prompt.<a href="#source-3" class="src-ref" id="ref-3">[3]</a> The AI surfaces five questions because that's what a thoughtful auditor would surface. The tool's biggest weakness (limited context) becomes its most useful feature (a structured questionnaire for the controller) by reframing what we're asking the model to do when it hits its limits.</p>
+
+      <h2 class="reveal">What's coming in Post 5</h2>
+
+      <p class="reveal">Post 5 is what the tool still can't do. The hallucinations that survived. The places where the GL alone isn't enough. The cases where structural prompting and tiered materiality and a transaction trail get you to "useful first draft" but not to "ready for the audit committee." Worth a separate post because the limits of the tool are the most honest thing I can write about, and the part most likely to help anyone else trying to build something similar.</p>
+
+      <p class="reveal">There's also a separate companion piece coming: a step-by-step install guide for finance professionals who want to run this tool on their own laptop without a coding background. That'll live on the repo and be linked from each post. The series is meant to be readable and useful in equal measure.</p>
+
+      <a href="https://github.com/alloutofxps/variance-commentary-generator" target="_blank" class="github-cta reveal">
+        <div class="github-cta-icon">⬡</div>
+        <div class="github-cta-text">
+          <div class="label">Repository · vfinal live</div>
+          <div class="repo">variance-commentary-generator</div>
+          <div class="desc">github.com/alloutofxps/variance-commentary-generator · run it on the sample period_0.xlsx and period_1.xlsx files in 25 seconds</div>
+        </div>
+        <div class="github-cta-arrow">↗</div>
+      </a>
+
+      <div class="sources reveal">
+        <div class="sources-title">Notes</div>
+        <div class="source-item" id="source-1">
+          <span class="source-num">1</span>
+          <span class="source-text">vfinal is internally labelled v6.0 in the script. Six is the iteration count, not a marketing version. The earlier numbered versions covered the bug fixes in the iteration log above plus a few that didn't make this post. Naming convention: vfinal is what's running now and what's in the public repo. <a href="#ref-1" class="source-back">back to text</a></span>
+        </div>
+        <div class="source-item" id="source-2">
+          <span class="source-num">2</span>
+          <span class="source-text">The materiality threshold table is configurable, sitting at the top of <code>analyse_template.py</code>. A finance team using this tool against their own GL would adjust the absolute and percentage values to match their own risk tolerance. The current values are calibrated to the sample dataset. <a href="#ref-2" class="source-back">back to text</a></span>
+        </div>
+        <div class="source-item" id="source-3">
+          <span class="source-num">3</span>
+          <span class="source-text">The Management Input Required pattern has a name in the LLM literature: it's a form of <em>structured uncertainty surfacing</em>, related to but distinct from chain-of-thought prompting. The version in this tool is unusually concrete because finance reviewers want specific numbers tied to specific questions, not generic confidence scores. <a href="#ref-3" class="source-back">back to text</a></span>
+        </div>
+      </div>
+
+      <div class="post-signoff">
+        <p>Next post: what the tool still can't do, and why those limits matter more than the capabilities. Find me on <a href="https://linkedin.com/in/pratikparashar93" target="_blank">LinkedIn</a> if you want to follow along, or if you've built something similar and want to compare notes on the management-input-required pattern.</p>
+      </div>
+
+      <div class="author-card reveal">
+        <img src="pratik.jpg" alt="Pratik Parashar" />
+        <div class="author-info">
+          <div class="name">Pratik Parashar</div>
+          <p class="bio">Senior Auditor at a Big-4 firm in the Netherlands. Writing about AI, finance, and what happens when the two collide. Building a Variance Commentary Generator in public. Open to new roles in Finance Transformation, FP&amp;A, and Financial Control. <a href="https://linkedin.com/in/pratikparashar93" target="_blank">LinkedIn →</a></p>
+        </div>
+      </div>
+
+    </article>
+  </main>
+
+  <!-- Lightbox for expandable screenshots -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Expanded screenshot">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close expanded view">Close · Esc</button>
+    <img id="lightbox-img" src="" alt="" />
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Pratik Parashar</p>
+    <p><a href="index.html">alloutoftokens.com</a></p>
+  </footer>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top  = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const ham  = document.getElementById('hamburger');
+    const menu = document.getElementById('mobile-menu');
+    ham.addEventListener('click', () => {
+      ham.classList.toggle('open');
+      menu.classList.toggle('open');
+    });
+
+    // Lightbox: click an expandable screenshot's image to enlarge
+    const lightbox     = document.getElementById('lightbox');
+    const lightboxImg  = document.getElementById('lightbox-img');
+    const lightboxCap  = document.getElementById('lightbox-caption');
+    const lightboxX    = document.getElementById('lightbox-close');
+
+    function openLightbox(src, alt, caption) {
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || '';
+      lightboxCap.textContent = caption || '';
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(() => { lightboxImg.src = ''; }, 200);
+    }
+
+    document.querySelectorAll('.screenshot-slot.expandable img').forEach(img => {
+      img.addEventListener('click', () => {
+        const slot = img.closest('.screenshot-slot');
+        const cap  = slot ? slot.getAttribute('data-caption') || '' : '';
+        openLightbox(img.src, img.alt, cap);
+      });
+    });
+
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox || e.target === lightboxImg) closeLightbox();
+    });
+    lightboxX.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+    });
+  </script>
+</body>
+</html>
