@@ -111,7 +111,7 @@
       width: 100%; border: 1px solid var(--rule-soft);
       /* nudged warm so the cool fog sits inside the cream palette */
       filter: sepia(0.16) saturate(0.94) contrast(1.03);
-      transition: filter 0.4s ease;
+      transition: filter var(--dur-slow) var(--ease-out);
     }
     .personal-photo img:hover { filter: none; }
     .personal-cap { font-size: 0.8125rem; color: var(--ink-3); margin-top: var(--s-2); }
@@ -190,7 +190,7 @@
     <header class="hero on-ink" id="hero">
       <div class="shell grid">
         <div class="hero-badge">
-          <span class="hero-dot" aria-hidden="true"></span>
+          <span class="hero-dot pulse" aria-hidden="true"></span>
           <span>Open to roles in the Netherlands</span>
         </div>
 
@@ -460,6 +460,8 @@
 
   </main>
 
+  <button class="to-top" id="toTop" aria-label="Back to top" title="Back to top">&uarr;</button>
+
   <footer class="site-footer">
     <div class="site-footer__inner">
       <div>
@@ -526,12 +528,29 @@
         Array.prototype.forEach.call(els, function (el) { el.classList.add('visible'); });
         return;
       }
+      // Stagger siblings that arrive together, so a row of cards cascades
+      // instead of snapping in as one block. Index resets per batch.
       var obs = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        var batch = entries.filter(function (e) { return e.isIntersecting; });
+        batch.forEach(function (e, i) {
+          e.target.style.setProperty('--i', i);
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
         });
       }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
       Array.prototype.forEach.call(els, function (el) { obs.observe(el); });
+    })();
+
+    // Scroll to top
+    (function () {
+      var btn = document.getElementById('toTop');
+      if (!btn) return;
+      function update() { btn.classList.toggle('show', window.scrollY > window.innerHeight * 2); }
+      window.addEventListener('scroll', update, { passive: true });
+      btn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      });
+      update();
     })();
   </script>
 </body>

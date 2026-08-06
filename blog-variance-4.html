@@ -60,7 +60,7 @@
       pointer-events: none;
       z-index: 9999;
       transform: translate(-50%, -50%);
-      transition: transform 0.08s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease;
+      transition: transform var(--dur-fast) var(--ease-out), width var(--dur-base) var(--ease-out), height var(--dur-base) var(--ease-out), background var(--dur-base) var(--ease-out);
       mix-blend-mode: multiply;
     }
     .cursor.hover { width: 28px; height: 28px; background: var(--black); }
@@ -96,7 +96,7 @@
       text-transform: uppercase;
       color: var(--mid);
       text-decoration: none;
-      transition: color 0.2s;
+      transition: color var(--dur-base);
     }
     .nav-links a:hover { color: var(--red); }
 
@@ -460,7 +460,7 @@
     }
 
     /* Expandable screenshot (click to enlarge) */
-    .screenshot-slot.expandable img { cursor: zoom-in; transition: opacity 0.2s; }
+    .screenshot-slot.expandable img { cursor: zoom-in; transition: opacity var(--dur-base); }
     .screenshot-slot.expandable img:hover { opacity: 0.88; }
     .screenshot-slot .expand-hint {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
@@ -506,7 +506,7 @@
       border: 1px solid rgba(245,240,232,0.3);
       padding: 8px 14px;
       cursor: zoom-out;
-      transition: border-color 0.2s, color 0.2s;
+      transition: border-color var(--dur-base), color var(--dur-base);
     }
     .lightbox-close:hover { border-color: var(--red); color: var(--red); }
     .lightbox-caption {
@@ -548,7 +548,7 @@
       color: var(--mid);
       text-decoration: none;
       margin-left: 10px;
-      transition: color 0.2s;
+      transition: color var(--dur-base);
       white-space: nowrap;
     }
     .source-back:hover { color: var(--red); }
@@ -567,7 +567,7 @@
       margin: 52px 0;
       text-decoration: none;
       color: var(--black);
-      transition: background 0.2s, color 0.2s;
+      transition: background var(--dur-base), color var(--dur-base);
     }
     .github-cta:hover { background: var(--black); color: var(--cream); }
     .github-cta-icon { font-size: 28px; flex-shrink: 0; line-height: 1; }
@@ -615,13 +615,13 @@
     .source-item:last-child { border-bottom: none; }
     .source-num { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--red); min-width: 20px; }
     .source-text { font-size: 13px; color: var(--mid); line-height: 1.6; }
-    .source-text a { color: var(--black); text-decoration: none; border-bottom: 1px solid rgba(13,13,13,0.2); transition: border-color 0.2s, color 0.2s; }
+    .source-text a { color: var(--black); text-decoration: none; border-bottom: 1px solid rgba(13,13,13,0.2); transition: border-color var(--dur-base), color var(--dur-base); }
     .source-text a:hover { color: var(--red); border-color: var(--red); }
 
     /* Sign off */
     .post-signoff { margin-top: 72px; padding-top: 40px; border-top: 1px solid var(--border); }
     .post-signoff p { font-size: 15px !important; color: var(--mid) !important; margin-bottom: 0 !important; }
-    .post-signoff a { color: var(--black); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--border); transition: color 0.2s, border-color 0.2s; }
+    .post-signoff a { color: var(--black); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--border); transition: color var(--dur-base), border-color var(--dur-base); }
     .post-signoff a:hover { color: var(--red); border-color: var(--red); }
 
     /* Author card */
@@ -668,13 +668,13 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: color 0.2s;
+      transition: color var(--dur-base);
     }
     .back-link:hover { color: var(--red); }
     .back-link::before { content: '←'; }
 
     /* Scroll reveal */
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
     .reveal.visible { opacity: 1; transform: none; }
 
     /* Footer */
@@ -687,12 +687,12 @@
       gap: 16px;
     }
     footer p { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--mid); margin: 0; }
-    footer a { color: var(--mid); text-decoration: none; transition: color 0.2s; }
+    footer a { color: var(--mid); text-decoration: none; transition: color var(--dur-base); }
     footer a:hover { color: var(--red); }
 
     /* Hamburger */
     .hamburger { display: none; background: none; border: none; cursor: none; flex-direction: column; gap: 5px; padding: 4px; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: var(--black); transition: all 0.25s ease; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--black); transition: all var(--dur-base) var(--ease-out); }
     .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -1081,6 +1081,16 @@ Every claim traceable to the data above.</span></pre>
     <div class="lightbox-caption" id="lightbox-caption"></div>
   </div>
 
+  <div class="read-progress" aria-hidden="true"><span id="readBar"></span></div>
+
+  <nav class="toc" id="toc" aria-label="On this page" hidden>
+    <div class="toc-label">On this page</div>
+    <ol id="tocList"></ol>
+  </nav>
+
+  <button class="to-top" id="toTop" aria-label="Back to top" title="Back to top">&uarr;</button>
+  <p class="sr-status" role="status" aria-live="polite" id="srStatus"></p>
+
   <footer class="site-footer">
     <div class="site-footer__inner">
       <div>
@@ -1102,7 +1112,9 @@ Every claim traceable to the data above.</span></pre>
     var y = document.getElementById('year');
     if (y) y.textContent = new Date().getFullYear();
 
-    // Reveal on scroll (falls back to visible)
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Reveal on scroll, staggered per batch
     (function () {
       var els = document.querySelectorAll('.reveal');
       if (!('IntersectionObserver' in window)) {
@@ -1110,8 +1122,11 @@ Every claim traceable to the data above.</span></pre>
         return;
       }
       var obs = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        entries.filter(function (e) { return e.isIntersecting; })
+               .forEach(function (e, i) {
+          e.target.style.setProperty('--i', i);
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
         });
       }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
       Array.prototype.forEach.call(els, function (el) { obs.observe(el); });
@@ -1143,7 +1158,105 @@ Every claim traceable to the data above.</span></pre>
       });
     })();
 
-    // Lightbox — now mouse AND keyboard operable
+    // Reading progress, measured against the article rather than the document
+    // so the footer and post-nav don't count as "unread".
+    (function () {
+      var bar = document.getElementById('readBar');
+      var body = document.querySelector('.post-body');
+      if (!bar || !body) return;
+      var ticking = false;
+      function update() {
+        var r = body.getBoundingClientRect();
+        var total = r.height - window.innerHeight;
+        var done = total > 0 ? (-r.top) / total : 0;
+        bar.style.transform = 'scaleX(' + Math.min(1, Math.max(0, done)) + ')';
+        ticking = false;
+      }
+      window.addEventListener('scroll', function () {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      }, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      update();
+    })();
+
+    // Table of contents + scroll-spy + copy-link on headings
+    (function () {
+      var heads = [].slice.call(document.querySelectorAll('.post-body h2'));
+      if (heads.length < 4) return;   // not worth a TOC on a short post
+
+      function slug(t) {
+        return t.toLowerCase().replace(/[^\w\s-]/g, '').trim()
+                .replace(/\s+/g, '-').slice(0, 60);
+      }
+
+      var toc = document.getElementById('toc');
+      var list = document.getElementById('tocList');
+      var status = document.getElementById('srStatus');
+      var links = [];
+      var used = {};
+
+      heads.forEach(function (h) {
+        var base = slug(h.textContent) || 'section';
+        var id = base;
+        var n = 2;
+        while (used[id] || document.getElementById(id)) { id = base + '-' + n++; }
+        used[id] = true;
+        h.id = id;
+
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.href = '#' + id;
+        a.textContent = h.textContent.trim();
+        li.appendChild(a); list.appendChild(li);
+        links.push(a);
+
+        // copy-link control
+        var btn = document.createElement('button');
+        btn.className = 'heading-link';
+        btn.type = 'button';
+        btn.setAttribute('aria-label', 'Copy link to "' + h.textContent.trim().slice(0, 60) + '"');
+        btn.textContent = '#';
+        btn.addEventListener('click', function () {
+          var url = location.origin + location.pathname + '#' + id;
+          function done() { if (status) status.textContent = 'Link copied'; }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(url).then(done, function () { location.hash = id; });
+          } else {
+            location.hash = id;
+          }
+        });
+        h.appendChild(btn);
+      });
+
+      toc.hidden = false;
+
+      // scroll-spy: the last heading above the reading line wins
+      var spy = new IntersectionObserver(function () {
+        var line = window.innerHeight * 0.28;
+        var current = heads[0];
+        heads.forEach(function (h) {
+          if (h.getBoundingClientRect().top <= line) current = h;
+        });
+        links.forEach(function (a) {
+          a.setAttribute('aria-current', a.getAttribute('href') === '#' + current.id ? 'true' : 'false');
+        });
+      }, { rootMargin: '-28% 0px -70% 0px', threshold: 0 });
+      heads.forEach(function (h) { spy.observe(h); });
+    })();
+
+    // Scroll to top
+    (function () {
+      var btn = document.getElementById('toTop');
+      if (!btn) return;
+      function update() { btn.classList.toggle('show', window.scrollY > window.innerHeight * 2); }
+      window.addEventListener('scroll', update, { passive: true });
+      btn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+      });
+      update();
+    })();
+
+    // Lightbox, mouse and keyboard operable
     (function () {
       var lightbox = document.getElementById('lightbox');
       if (!lightbox) return;
@@ -1190,10 +1303,7 @@ Every claim traceable to the data above.</span></pre>
       });
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && lightbox.classList.contains('open')) close();
-        // keep focus inside the dialog
-        if (e.key === 'Tab' && lightbox.classList.contains('open')) {
-          e.preventDefault(); x.focus();
-        }
+        if (e.key === 'Tab' && lightbox.classList.contains('open')) { e.preventDefault(); x.focus(); }
       });
     })();
   </script>
