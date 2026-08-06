@@ -41,7 +41,7 @@
     }
     .hero > * { position: relative; z-index: 1; }
 
-    .hero-badge { grid-column: 1 / -1; display: inline-flex; align-items: center; gap: var(--s-2); width: fit-content; border: 1px solid rgba(247,243,236,0.22); padding: 7px 14px; margin-bottom: var(--s-6); }
+    .hero-badge { grid-column: 1 / -1; display: inline-flex; align-items: center; gap: var(--s-2); width: fit-content; border: 1px solid rgba(247,243,236,0.22); padding:var(--space-8) var(--space-16); margin-bottom: var(--s-6); }
     .hero-badge span:last-child { font-size: var(--t--1); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--on-dark-2); }
     .hero-dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; }
 
@@ -54,7 +54,7 @@
     .hero-actions { grid-column: 1 / -1; display: flex; gap: var(--s-3); flex-wrap: wrap; margin-bottom: var(--s-9); }
 
     /* Facts, not vibes. Every tile is an actual number. */
-    .facts { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(247,243,236,0.16); border-top: 1px solid rgba(247,243,236,0.16); }
+    .facts { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, 1fr); gap:1px; background: rgba(247,243,236,0.16); border-top: 1px solid rgba(247,243,236,0.16); }
     /* Left padding so figures breathe off the divider; first cell stays flush
        to the shell rail so the row still starts on the page's left edge. */
     .fact { background: var(--ink); padding: var(--s-5) var(--s-5) var(--s-5) var(--s-5); }
@@ -74,33 +74,36 @@
     .role-body { grid-column: 4 / 12; }
     .role-date { font-size: var(--t--1); font-weight: 600; color: var(--ink-2); line-height: 1.5; }
     .role-place { font-size: var(--t--1); color: var(--ink-3); margin-top: var(--s-1); }
-    .role-tags { margin-top: var(--s-4); display: flex; flex-direction: column; gap: 3px; }
+    .role-tags { margin-top: var(--s-4); display: flex; flex-direction: column; gap:3px; }
     .role-tags span { font-size: 0.8125rem; color: var(--ink-3); line-height: 1.45; }
     .role-org { font-family: var(--ff-display); font-size: var(--t-2); font-weight: 600; line-height: 1.15; }
-    .role-title { font-size: var(--t--1); font-weight: 600; color: var(--accent); margin-top: 3px; margin-bottom: var(--s-4); }
+    .role-title { font-size: var(--t--1); font-weight: 600; color: var(--accent); margin-top:3px; margin-bottom: var(--s-4); }
     .role-body ul { list-style: none; display: flex; flex-direction: column; gap: var(--s-3); }
     .role-body li { font-size: 0.9375rem; line-height: 1.6; color: var(--ink-2); padding-left: var(--s-4); position: relative; }
     .role-body li::before { content: ''; position: absolute; left: 0; top: 0.62em; width: 6px; height: 1px; background: var(--accent); }
     .role--quiet .role-org { font-size: var(--t-1); font-weight: 500; }
     .role--quiet .role-body p { font-size: 0.9375rem; color: var(--ink-3); line-height: 1.6; }
+    /* Component breakpoint, off the layout scale on purpose. The meta rail is
+       ~230px against a ~620px body at 1024, which reads fine side by side.
+       Collapsing at 1024 added 821px of page height for no gain. */
     @media (max-width: 900px) {
       .role-meta, .role-body { grid-column: 1 / -1; }
       .role-tags { flex-direction: row; flex-wrap: wrap; gap: var(--s-2); }
     }
 
     /* TECHNICAL — the depth he wants foregrounded */
-    .tech { row-gap: 1px; background: var(--rule-soft); border: 1px solid var(--rule-soft); }
+    .tech { row-gap:1px; background: var(--rule-soft); border: 1px solid var(--rule-soft); }
     .tech-row { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 2.4fr; gap: var(--s-5); background: var(--surface-2); padding: var(--s-5); }
     .tech-key { font-size: var(--t--1); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); }
     .tech-val { font-size: 0.9375rem; line-height: 1.6; color: var(--ink-2); }
-    @media (max-width: 700px) { .tech-row { grid-template-columns: 1fr; gap: var(--s-2); } }
+    @media (max-width: 768px) { .tech-row { grid-template-columns: 1fr; gap: var(--s-2); } }
 
     /* AUTOMATION — deliberately the smallest section on the page */
     .auto-grid { row-gap: var(--s-6); }
     .auto-item { grid-column: span 4; }
     .auto-item h3 { font-size: var(--t-1); margin-bottom: var(--s-3); }
     .auto-item p { font-size: 0.9375rem; line-height: 1.6; color: var(--ink-2); }
-    @media (max-width: 900px) { .auto-item { grid-column: 1 / -1; } }
+    @media (max-width: 1024px) { .auto-item { grid-column: 1 / -1; } }
 
     /* WRITING — .posts / .post-row now live in styles.css (shared with writing.html) */
     .posts .post-row { grid-column: 1 / -1; }
@@ -127,7 +130,7 @@
       font-style: italic; line-height: 1.45; color: var(--ink-1);
     }
     .motto cite { display: block; margin-top: var(--s-3); font-family: var(--ff-sans); font-size: var(--t--1); font-style: normal; color: var(--ink-3); }
-    @media (max-width: 900px) {
+    @media (max-width: 1024px) {
       .personal-photo { grid-column: 1 / -1; max-width: 360px; }
       .personal-body { grid-column: 1 / -1; margin-top: var(--s-6); }
     }
@@ -136,7 +139,7 @@
     .contact-h { grid-column: 1 / 9; font-size: var(--t-3); color: var(--on-dark-1); margin-bottom: var(--s-4); }
     .contact-p { grid-column: 1 / 7; font-size: var(--t-0); line-height: 1.65; color: var(--on-dark-2); margin-bottom: var(--s-6); }
     .contact-actions { grid-column: 1 / -1; display: flex; gap: var(--s-3); flex-wrap: wrap; }
-    @media (max-width: 900px) { .contact-h, .contact-p { grid-column: 1 / -1; } }
+    @media (max-width: 1024px) { .contact-h, .contact-p { grid-column: 1 / -1; } }
   </style>
 
   <script type="application/ld+json">
