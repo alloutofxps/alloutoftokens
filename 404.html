@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page not found — Pratik Parashar</title>
+  <meta name="description" content="That page doesn't exist. Here's the way back." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#1b1714" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    body { background: var(--ink); color: var(--on-dark-1); }
+    body::before { mix-blend-mode: overlay; opacity: 0.05; }
+    .nf { min-height: 100svh; display: flex; align-items: center; }
+    .nf-inner { max-width: 720px; }
+    .nf-code { font-family: var(--ff-display); font-size: clamp(4.5rem, 16vw, 9rem); font-weight: 600; line-height: 1; color: var(--accent-lift); letter-spacing: -0.04em; margin-bottom: var(--s-4); }
+    .nf h1 { font-size: var(--t-3); color: var(--on-dark-1); margin-bottom: var(--s-4); }
+    .nf p { font-size: var(--t-0); color: var(--on-dark-2); line-height: 1.7; margin-bottom: var(--s-7); max-width: 52ch; }
+    .nf-actions { display: flex; gap: var(--s-3); flex-wrap: wrap; }
+    .nf-links { margin-top: var(--s-8); padding-top: var(--s-5); border-top: 1px solid rgba(247,243,236,0.20); }
+    .nf-links-label { font-size: var(--t--1); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--on-dark-3); margin-bottom: var(--s-4); }
+    .nf-links ul { list-style: none; display: flex; flex-direction: column; gap: var(--s-3); }
+    .nf-links a { color: var(--on-dark-2); text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
+    .nf-links a:hover { color: var(--on-dark-1); border-bottom-color: var(--accent-lift); }
+    @media (max-width: 520px) { .nf-actions { flex-direction: column; align-items: stretch; } }
+  </style>
+</head>
+<body>
+  <main class="nf">
+    <div class="shell">
+      <div class="nf-inner">
+        <div class="nf-code">404</div>
+        <h1>This page doesn't exist.</h1>
+        <p>Either the link is wrong, or I moved something and forgot to leave a forwarding address. Both are possible.</p>
+        <div class="nf-actions">
+          <a href="/" class="btn btn--primary">Back to home</a>
+          <a href="/writing.html" class="btn btn--on-ink">Read the writing</a>
+        </div>
+
+        <div class="nf-links">
+          <div class="nf-links-label">Most read</div>
+          <ul>
+            <li><a href="/blog-variance-4.html">The Rebuild: From Three Tabs to Nine</a></li>
+            <li><a href="/blog-controller.html">The Controller Role Is Being Redefined</a></li>
+            <li><a href="/blog-ai-agents.html">Why I Pitched AI Agents at Work</a></li>
+            <li><a href="/blog-india-nl.html">From India to the Netherlands</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

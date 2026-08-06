@@ -18,20 +18,21 @@
   <meta name="twitter:image" content="https://alloutoftokens.com/og-india-nl.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black:   #0d0d0d;
-      --cream:   #f5f0e8;
-      --red:     #ff3c1f;
-      --mid:     #6b6560;
+      --black:   #1c1815;
+      --cream:   #f7f3ec;
+      --red:     #8f2f45;
+      --mid:     #635a52;
       --border:  rgba(13,13,13,0.12);
-      --ff-serif: 'Playfair Display', Georgia, serif;
-      --ff-mono:  'Space Mono', 'Courier New', monospace;
-      --ff-sans:  'DM Sans', system-ui, sans-serif;
+      --ff-serif: 'Newsreader', Georgia, serif;
+      --ff-mono:  'JetBrains Mono', ui-monospace, monospace;
+      --ff-sans:  'Inter', system-ui, sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -39,7 +40,7 @@
     body {
       background: var(--cream);
       color: var(--black);
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
       font-size: 18px;
       line-height: 1.7;
       cursor: none;
@@ -74,7 +75,7 @@
       height: 60px;
     }
     .nav-logo {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 13px; font-weight: 700;
       letter-spacing: 0.06em;
       text-decoration: none;
@@ -84,7 +85,7 @@
     .nav-logo span { color: var(--red); }
     .nav-links { display: flex; gap: 32px; list-style: none; }
     .nav-links a {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 11px; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--mid);
       text-decoration: none; transition: color 0.2s;
@@ -98,14 +99,14 @@
     .hero { padding: 72px 0 0; border-bottom: 2px solid var(--black); margin-bottom: 64px; }
     .hero-meta { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
     .tag {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 10px; font-weight: 700;
       letter-spacing: 0.14em; text-transform: uppercase;
       color: var(--cream); background: var(--red); padding: 4px 10px;
     }
-    .hero-date { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--mid); letter-spacing: 0.06em; }
+    .hero-date { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--mid); letter-spacing: 0.06em; }
     .hero h1 {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Newsreader', Georgia, serif;
       font-size: clamp(32px, 5vw, 52px);
       font-weight: 900; line-height: 1.1;
       letter-spacing: -0.02em; margin-bottom: 24px;
@@ -121,7 +122,7 @@
     }
     .post-hero-image img { width: 100%; display: block; object-fit: cover; max-height: 380px; }
     .post-hero-image figcaption {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 11px; letter-spacing: 0.06em;
       color: var(--mid); padding: 12px 0;
       border-top: 1px solid var(--border);
@@ -131,7 +132,7 @@
     .post-body { padding-bottom: 80px; }
     .post-body p { margin-bottom: 28px; font-size: 18px; line-height: 1.75; color: #1a1714; }
     .post-body h2 {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Newsreader', Georgia, serif;
       font-size: clamp(22px, 3vw, 28px);
       font-weight: 700; line-height: 1.2;
       letter-spacing: -0.01em;
@@ -147,7 +148,7 @@
     /* ── Pull quote ── */
     .pull-quote { border-left: 4px solid var(--red); margin: 48px 0; padding: 4px 0 4px 28px; }
     .pull-quote p {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Newsreader', Georgia, serif;
       font-size: clamp(20px, 2.8vw, 26px);
       font-weight: 400; font-style: italic;
       line-height: 1.4; color: var(--black); margin: 0;
@@ -162,7 +163,7 @@
       margin-right: -48px;
     }
     .sources-title {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 10px; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--red);
       margin-bottom: 24px;
@@ -171,7 +172,7 @@
     .sources-title::before { content: ''; width: 24px; height: 1px; background: var(--red); }
     .source-item { display: flex; gap: 16px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid rgba(13,13,13,0.1); }
     .source-item:last-child { border-bottom: none; }
-    .source-num { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--red); min-width: 20px; }
+    .source-num { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--red); min-width: 20px; }
     .source-text { font-size: 13px; color: var(--mid); line-height: 1.6; }
     .source-text a { color: var(--black); text-decoration: none; border-bottom: 1px solid rgba(13,13,13,0.2); transition: border-color 0.2s, color 0.2s; }
     .source-text a:hover { color: var(--red); border-color: var(--red); }
@@ -183,13 +184,13 @@
       display: flex; align-items: center; gap: 32px;
     }
     .author-card img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--red); }
-    .author-card .author-info .name { font-family: 'Playfair Display', Georgia, serif; font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+    .author-card .author-info .name { font-family: 'Newsreader', Georgia, serif; font-size: 18px; font-weight: 700; margin-bottom: 6px; }
     .author-card .author-info .bio { font-size: 13px; line-height: 1.6; color: rgba(245,240,232,0.7); margin: 0; }
     .author-card .author-info .bio a { color: var(--red); text-decoration: none; }
 
     /* ── Back link ── */
     .back-link-wrap { padding: 40px 0 0; }
-    .back-link { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+    .back-link { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
     .back-link:hover { color: var(--red); }
     .back-link::before { content: '←'; }
 
@@ -208,7 +209,7 @@
       object-position: center 40%;
     }
     .sunset-caption {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 11px;
       letter-spacing: 0.06em;
       color: var(--mid);
@@ -225,7 +226,7 @@
 
     /* ── Footer ── */
     footer { border-top: 1px solid var(--border); padding: 32px clamp(24px, 5vw, 80px); display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-    footer p { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--mid); margin: 0; }
+    footer p { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--mid); margin: 0; }
     footer a { color: var(--mid); text-decoration: none; transition: color 0.2s; }
     footer a:hover { color: var(--red); }
 
@@ -237,7 +238,7 @@
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
     .mobile-menu { display: none; position: fixed; inset: 60px 0 0; background: var(--cream); z-index: 99; padding: 40px clamp(24px, 5vw, 48px); flex-direction: column; gap: 24px; border-top: 2px solid var(--black); }
     .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+    .mobile-menu a { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); text-decoration: none; }
 
     @media (max-width: 640px) { .nav-links { display: none; } .hamburger { display: flex; } }
     @media (max-width: 768px) {
@@ -245,35 +246,63 @@
       .author-card { padding: 24px; gap: 16px; flex-direction: column; }
     }
   </style>
+
+  <link rel="canonical" href="https://alloutoftokens.com/blog-india-nl.html" />
+  <meta name="theme-color" content="#f7f3ec" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="alternate" type="application/rss+xml" title="All Out of Tokens" href="feed.xml" />
+  <meta property="article:published_time" content="2026-04-07" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "From India to the Netherlands: The Move That Gave Me My Life Back",
+    "description": "I moved from India to the Netherlands in October 2023. I didn't research the culture. I didn't have a plan. I had 75-hour weeks and enough of them.",
+    "image": "https://alloutoftokens.com/og-india-nl.png",
+    "datePublished": "2026-04-07",
+    "dateModified": "2026-04-07",
+    "author": { "@type": "Person", "name": "Pratik Parashar", "url": "https://alloutoftokens.com/" },
+    "publisher": { "@type": "Person", "name": "Pratik Parashar" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://alloutoftokens.com/blog-india-nl.html" }
+  }
+  </script>
 </head>
 <body>
 
-  <div class="cursor" id="cursor"></div>
+  <a href="#main" class="skip-link">Skip to content</a>
 
-  <nav>
-    <a href="index.html" class="nav-logo">All Out <span>of</span> Tokens</a>
-    <ul class="nav-links">
-      <li><a href="index.html#what-i-do">What I Do</a></li>
-      <li><a href="index.html#experience">Experience</a></li>
-      <li><a href="index.html#blog">Writing</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+
+  <nav class="site-nav scrolled" aria-label="Primary">
+    <div class="site-nav__inner">
+      <a href="index.html" class="nav-logo">Pratik <em>Parashar</em></a>
+      <ul class="nav-links">
+        <li><a href="index.html#experience">Experience</a></li>
+        <li><a href="index.html#technical">Technical</a></li>
+        <li><a href="index.html#automation">Automation</a></li>
+        <li><a href="writing.html">Writing</a></li>
+        <li><a href="index.html#contact" class="btn btn--secondary btn--sm">Get in touch</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 
-  <div class="mobile-menu" id="mobile-menu">
-    <a href="index.html#what-i-do">What I Do</a>
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <button class="mobile-menu-close" id="menuClose" aria-label="Close menu">Close</button>
     <a href="index.html#experience">Experience</a>
-    <a href="index.html#blog">Writing</a>
-    <a href="index.html#contact">Contact</a>
+    <a href="index.html#technical">Technical</a>
+    <a href="index.html#automation">Automation</a>
+    <a href="writing.html">Writing</a>
+    <a href="index.html#contact">Get in touch</a>
   </div>
 
-  <main class="article-wrap">
+
+  <main class="article-wrap" id="main">
 
     <div class="back-link-wrap">
-      <a href="index.html#blog" class="back-link">All posts</a>
+      <a href="writing.html" class="back-link">All posts</a>
     </div>
 
     <header class="hero">
@@ -371,15 +400,15 @@
         <div class="sources-title">Sources</div>
         <div class="source-item" id="source-1">
           <span class="source-num">1</span>
-          <span class="source-text">Wikipedia — <em>Power Distance</em> · India scores 77 on the Power Distance Index; Netherlands scores 38. The gap is one of the widest between any two comparable economies · <a href="https://en.wikipedia.org/wiki/Power_distance" target="_blank">en.wikipedia.org</a></span>
+          <span class="source-text">Wikipedia — <em>Power Distance</em> · India scores 77 on the Power Distance Index; Netherlands scores 38. The gap is one of the widest between any two comparable economies · <a href="https://en.wikipedia.org/wiki/Power_distance" target="_blank" rel="noopener noreferrer">en.wikipedia.org</a></span>
         </div>
         <div class="source-item" id="source-2">
           <span class="source-num">2</span>
-          <span class="source-text">OECD — <em>Average annual hours actually worked per worker</em> · Netherlands consistently among lowest in OECD; India among highest · <a href="https://stats.oecd.org" target="_blank">stats.oecd.org</a></span>
+          <span class="source-text">OECD — <em>Average annual hours actually worked per worker</em> · Netherlands consistently among lowest in OECD; India among highest · <a href="https://stats.oecd.org" target="_blank" rel="noopener noreferrer">stats.oecd.org</a></span>
         </div>
         <div class="source-item" id="source-3">
           <span class="source-num">3</span>
-          <span class="source-text">World Happiness Report — <em>World Happiness Report 2024</em> · Netherlands ranked 6th globally; India ranked 126th · <a href="https://worldhappiness.report" target="_blank">worldhappiness.report</a></span>
+          <span class="source-text">World Happiness Report — <em>World Happiness Report 2024</em> · Netherlands ranked 6th globally; India ranked 126th · <a href="https://worldhappiness.report" target="_blank" rel="noopener noreferrer">worldhappiness.report</a></span>
         </div>
       </div>
 
@@ -387,39 +416,132 @@
         <img src="pratik.jpg" alt="Pratik Parashar" />
         <div class="author-info">
           <div class="name">Pratik Parashar</div>
-          <p class="bio">Senior Auditor at a Big-4 firm in the Netherlands. 7+ years across India and Europe. Writing about finance, work culture, and the gap between how things are and how they could be. <a href="index.html#contact">Open to new roles.</a></p>
+          <p class="bio">Senior Auditor, Financial Services at KPMG Netherlands. Seven years in audit across India and the Netherlands, four of them on private equity and infrastructure funds. Open to audit, controls, reporting and controlling roles in the Netherlands. <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn &rarr;</a></p>
         </div>
       </div>
 
     </article>
+    <nav class="post-nav" aria-label="More posts">
+      <a href="blog-controller.html" class="prev" rel="prev"><span class="pn-dir">&larr; Previous</span><span class="pn-title">The Controller Role Is Being Redefined. Most Controllers Don't Know It Yet.</span></a>
+      <a href="blog-variance-1.html" class="next" rel="next"><span class="pn-dir">Next &rarr;</span><span class="pn-title">Why Writing Variance Commentary Is Still a Manual Job in 2026</span></a>
+    </nav>
   </main>
 
-  <footer>
-    <p>&copy; 2026 Pratik Parashar</p>
-    <p><a href="index.html">alloutoftokens.com</a></p>
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div>
+        <div class="f-name">Pratik Parashar</div>
+        <div class="f-meta">Senior Auditor, Financial Services &middot; Almere, the Netherlands &middot; <span id="year">2026</span></div>
+      </div>
+      <div class="f-links">
+        <a href="index.html">Home</a>
+        <a href="writing.html">Writing</a>
+        <a href="feed.xml">RSS</a>
+        <a href="mailto:parashar.pratik@gmail.com">Email</a>
+        <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </div>
   </footer>
 
   <script>
-    const cursor = document.getElementById('cursor');
-    document.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top  = e.clientY + 'px';
-    });
-    document.querySelectorAll('a, button').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-    });
+    document.documentElement.classList.add('js');
+    var y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    // Reveal on scroll (falls back to visible)
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        Array.prototype.forEach.call(els, function (el) { el.classList.add('visible'); });
+        return;
+      }
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      Array.prototype.forEach.call(els, function (el) { obs.observe(el); });
+    })();
+
+    // Mobile menu
+    (function () {
+      var toggle = document.getElementById('navToggle');
+      var menu = document.getElementById('mobileMenu');
+      var close = document.getElementById('menuClose');
+      if (!toggle || !menu || !close) return;
+      function open() {
+        menu.hidden = false; menu.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden'; close.focus();
+      }
+      function shut() {
+        menu.classList.remove('open'); menu.hidden = true;
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = ''; toggle.focus();
+      }
+      toggle.addEventListener('click', open);
+      close.addEventListener('click', shut);
+      Array.prototype.forEach.call(menu.querySelectorAll('a'), function (a) {
+        a.addEventListener('click', shut);
       });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && menu.classList.contains('open')) shut();
+      });
+    })();
 
-    const ham  = document.getElementById('hamburger');
-    const menu = document.getElementById('mobile-menu');
-    ham.addEventListener('click', () => { ham.classList.toggle('open'); menu.classList.toggle('open'); });
+    // Lightbox — now mouse AND keyboard operable
+    (function () {
+      var lightbox = document.getElementById('lightbox');
+      if (!lightbox) return;
+      var img = document.getElementById('lightbox-img');
+      var cap = document.getElementById('lightbox-caption');
+      var x = document.getElementById('lightbox-close');
+      var lastFocus = null;
+
+      function open(src, alt, caption, origin) {
+        lastFocus = origin || null;
+        img.src = src; img.alt = alt || '';
+        cap.textContent = caption || '';
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        x.focus();
+      }
+      function close() {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(function () { img.src = ''; }, 200);
+        if (lastFocus) lastFocus.focus();
+      }
+
+      Array.prototype.forEach.call(
+        document.querySelectorAll('.screenshot-slot.expandable img'),
+        function (el) {
+          el.setAttribute('tabindex', '0');
+          el.setAttribute('role', 'button');
+          el.setAttribute('aria-label', 'Expand screenshot: ' + (el.getAttribute('alt') || 'image').slice(0, 80));
+          function fire() {
+            var slot = el.closest('.screenshot-slot');
+            open(el.src, el.alt, slot ? (slot.getAttribute('data-caption') || '') : '', el);
+          }
+          el.addEventListener('click', fire);
+          el.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fire(); }
+          });
+        }
+      );
+
+      x.addEventListener('click', close);
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox || e.target === img) close();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('open')) close();
+        // keep focus inside the dialog
+        if (e.key === 'Tab' && lightbox.classList.contains('open')) {
+          e.preventDefault(); x.focus();
+        }
+      });
+    })();
   </script>
 </body>
 </html>

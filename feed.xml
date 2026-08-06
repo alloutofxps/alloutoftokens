@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>All Out of Tokens</title>
+    <link>https://alloutoftokens.com/</link>
+    <description>Pratik Parashar on AI, finance, and what happens when the two collide.</description>
+    <language>en</language>
+    <managingEditor>parashar.pratik@gmail.com (Pratik Parashar)</managingEditor>
+    <atom:link href="https://alloutoftokens.com/feed.xml" rel="self" type="application/rss+xml" />
+
+    <item>
+      <title>The Rebuild: From Three Tabs to Nine, And the One Thing That Surprised Me</title>
+      <link>https://alloutoftokens.com/blog-variance-4.html</link>
+      <guid isPermaLink="true">https://alloutoftokens.com/blog-variance-4.html</guid>
+      <pubDate>Fri, 15 May 2026 09:00:00 +0000</pubDate>
+      <category>Finance × AI: In Practice</category>
+      <description>The vfinal of the Variance Commentary Generator. Nine Excel tabs, a transaction trail, a P&amp;L bridge, and the design choice that solved the hallucination problem in a way I didn't see coming.</description>
+    </item>
+
+    <item>
+      <title>The First Build: It Worked, And That's the Problem</title>
+      <link>https://alloutoftokens.com/blog-variance-3.html</link>
+      <guid isPermaLink="true">https://alloutoftokens.com/blog-variance-3.html</guid>
+      <pubDate>Fri, 08 May 2026 09:00:00 +0000</pubDate>
+      <category>Finance × AI: In Practice</category>
+      <description>The v1 ran end-to-end. Three Excel tabs, AI-generated commentary, real numbers. So why did I throw it out and start again?</description>
+    </item>
+
+    <item>
+      <title>The Architecture: What the Tool Needs to Do Before Writing a Line of Code</title>
+      <link>https://alloutoftokens.com/blog-variance-2.html</link>
+      <guid isPermaLink="true">https://alloutoftokens.com/blog-variance-2.html</guid>
+      <pubDate>Tue, 21 Apr 2026 09:00:00 +0000</pubDate>
+      <category>Finance × AI: In Practice</category>
+      <description>Before any Python, before any API calls: the input structure, output spec, and prompt decisions that will determine whether this tool actually works.</description>
+    </item>
+
+    <item>
+      <title>Why Writing Variance Commentary Is Still a Manual Job in 2026</title>
+      <link>https://alloutoftokens.com/blog-variance-1.html</link>
+      <guid isPermaLink="true">https://alloutoftokens.com/blog-variance-1.html</guid>
+      <pubDate>Tue, 21 Apr 2026 08:00:00 +0000</pubDate>
+      <category>Finance × AI: In Practice</category>
+      <description>Month-end closes. A spreadsheet with 40 line items. A blank text box where the commentary should go. In 2026, this is still mostly written by hand.</description>
+    </item>
+
+    <item>
+      <title>From India to the Netherlands: The Move That Gave Me My Life Back</title>
+      <link>https://alloutoftokens.com/blog-india-nl.html</link>
+      <guid isPermaLink="true">https://alloutoftokens.com/blog-india-nl.html</guid>
+      <pubDate>Tue, 07 Apr 2026 09:00:00 +0000</pubDate>
+      <category>Life &amp; Work</category>
+      <description>I moved from India to the Netherlands in October 2023. I didn't research the culture. I didn't have a plan. I had 75-hour weeks and enough of them.</description>
+    </item>
+
+    <item>
+      <title>The Controller Role Is Being Redefined. Most Controllers Don't Know It Yet.</title>
+      <link>https://alloutoftokens.com/blog-controller.html</link>
+      <guid isPermaLink="true">https://alloutoftokens.com/blog-controller.html</guid>
+      <pubDate>Tue, 31 Mar 2026 09:00:00 +0000</pubDate>
+      <category>Finance Transformation</category>
+      <description>Controller upper-range salaries dropped 21% in a single year. The market is saying something loud. Most people in the role haven't heard it yet.</description>
+    </item>
+
+    <item>
+      <title>Why I Pitched AI Agents to a Big-4 Partner (And What Happened Next)</title>
+      <link>https://alloutoftokens.com/blog-ai-agents.html</link>
+      <guid isPermaLink="true">https://alloutoftokens.com/blog-ai-agents.html</guid>
+      <pubDate>Tue, 24 Mar 2026 09:00:00 +0000</pubDate>
+      <category>AI in Finance</category>
+      <description>A 40-hour job done in 40 minutes. Here's what happened when I actually tried pitching AI agents inside a Big-4 firm.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Writing — Pratik Parashar</title>
+  <meta name="description" content="Notes on audit, automation, and moving countries. Including a build log for a variance commentary tool, written in the open." />
+  <link rel="canonical" href="https://alloutoftokens.com/writing.html" />
+  <meta name="theme-color" content="#f4efe6" />
+
+  <meta property="og:site_name" content="Pratik Parashar" />
+  <meta property="og:title" content="Writing — Pratik Parashar" />
+  <meta property="og:description" content="Notes on audit, automation, and moving countries. Including a build log for a variance commentary tool, written in the open." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://alloutoftokens.com/writing.html" />
+  <meta property="og:image" content="https://alloutoftokens.com/og-robot.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Writing — Pratik Parashar" />
+  <meta name="twitter:description" content="Notes on audit, automation, and moving countries." />
+  <meta name="twitter:image" content="https://alloutoftokens.com/og-robot.png" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="alternate" type="application/rss+xml" title="All Out of Tokens" href="feed.xml" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .page-head { padding-top: calc(var(--nav-h) + var(--s-9)); padding-bottom: var(--s-7); }
+    .page-head h1 { grid-column: 1 / 10; font-size: var(--t-4); line-height: 1.02; letter-spacing: -0.03em; margin-bottom: var(--s-4); }
+    .page-head .intro { grid-column: 1 / 7; font-size: var(--t-1); line-height: 1.5; color: var(--ink-2); }
+    .page-head .eyebrow { grid-column: 1 / -1; margin-bottom: var(--s-4); }
+    @media (max-width: 900px) { .page-head h1, .page-head .intro { grid-column: 1 / -1; } }
+    .listing { padding-bottom: var(--s-10); }
+    .note {
+      background: var(--surface-0); border-left: 2px solid var(--accent);
+      padding: var(--s-4) var(--s-5); margin-bottom: var(--s-5);
+      font-size: 0.9375rem; color: var(--ink-2); line-height: 1.6; max-width: var(--measure);
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "All Out of Tokens",
+    "url": "https://alloutoftokens.com/writing.html",
+    "description": "Notes on audit, automation, and moving countries.",
+    "author": { "@type": "Person", "name": "Pratik Parashar", "url": "https://alloutoftokens.com/" }
+  }
+  </script>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <nav class="site-nav scrolled" aria-label="Primary">
+    <div class="site-nav__inner">
+      <a href="index.html" class="nav-logo">Pratik <em>Parashar</em></a>
+      <ul class="nav-links">
+        <li><a href="index.html#experience">Experience</a></li>
+        <li><a href="index.html#technical">Technical</a></li>
+        <li><a href="index.html#automation">Automation</a></li>
+        <li><a href="writing.html" aria-current="page">Writing</a></li>
+        <li><a href="index.html#contact" class="btn btn--secondary btn--sm">Get in touch</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <button class="mobile-menu-close" id="menuClose" aria-label="Close menu">Close</button>
+    <a href="index.html#experience">Experience</a>
+    <a href="index.html#technical">Technical</a>
+    <a href="index.html#automation">Automation</a>
+    <a href="writing.html">Writing</a>
+    <a href="index.html#contact">Get in touch</a>
+  </div>
+
+  <main id="main">
+    <header class="page-head">
+      <div class="shell grid">
+        <p class="eyebrow">Writing</p>
+        <h1>All Out of Tokens.</h1>
+        <p class="intro">Notes on audit, automation, and moving countries. Written for people who do this work.</p>
+      </div>
+    </header>
+
+    <div class="shell listing">
+      <h2 class="group-head">Building a variance commentary tool</h2>
+      <p class="group-sub">A build log, written in the open. Posts 1 to 4 are live.</p>
+      <div class="note">Post 5 covers what the tool still cannot do: the hallucinations that survived, and the cases where the general ledger alone is not enough. In progress.</div>
+      <div class="posts">
+        <a class="post-row" href="blog-variance-1.html">
+          <span class="post-date">Apr 2026 &middot; 1</span>
+          <span><span class="post-title">Why Writing Variance Commentary Is Still a Manual Job in 2026</span><span class="post-note">Month-end close, forty line items, and a blank text box. Starting with the problem.</span></span>
+          <span class="post-read">7 min</span>
+        </a>
+        <a class="post-row" href="blog-variance-2.html">
+          <span class="post-date">Apr 2026 &middot; 2</span>
+          <span><span class="post-title">The Architecture: What the Tool Needs to Do Before Writing a Line of Code</span><span class="post-note">Input structure, output spec, and the prompt decisions that matter before any code runs.</span></span>
+          <span class="post-read">7 min</span>
+        </a>
+        <a class="post-row" href="blog-variance-3.html">
+          <span class="post-date">May 2026 &middot; 3</span>
+          <span><span class="post-title">The First Build: It Worked, And That's the Problem</span><span class="post-note">The v1 ran. Three Excel tabs, real numbers, AI-generated commentary. Then I threw it out.</span></span>
+          <span class="post-read">8 min</span>
+        </a>
+        <a class="post-row" href="blog-variance-4.html">
+          <span class="post-date">May 2026 &middot; 4</span>
+          <span><span class="post-title">The Rebuild: From Three Tabs to Nine</span><span class="post-note">A transaction trail, a P&amp;L bridge, and the prompt design that fixed the hallucination problem.</span></span>
+          <span class="post-read">14 min</span>
+        </a>
+      </div>
+
+      <h2 class="group-head">Essays</h2>
+      <p class="group-sub">On the shift underway in the profession, and what it looks like from inside it.</p>
+      <div class="posts">
+        <a class="post-row" href="blog-india-nl.html">
+          <span class="post-date">Apr 2026</span>
+          <span><span class="post-title">From India to the Netherlands</span><span class="post-note">I didn't research the culture. I didn't have a plan. I had 75-hour weeks and enough of them.</span></span>
+          <span class="post-read">8 min</span>
+        </a>
+        <a class="post-row" href="blog-controller.html">
+          <span class="post-date">Mar 2026</span>
+          <span><span class="post-title">The Controller Role Is Being Redefined</span><span class="post-note">Controller upper-range salaries fell 21% in a year. The market is saying something.</span></span>
+          <span class="post-read">7 min</span>
+        </a>
+        <a class="post-row" href="blog-ai-agents.html">
+          <span class="post-date">Mar 2026</span>
+          <span><span class="post-title">Why I Pitched AI Agents at Work</span><span class="post-note">A 40-hour job done in 40 minutes, and what happened after I showed people.</span></span>
+          <span class="post-read">6 min</span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div>
+        <div class="f-name">Pratik Parashar</div>
+        <div class="f-meta">Senior Auditor, Financial Services &middot; Almere, the Netherlands &middot; <span id="year">2026</span></div>
+      </div>
+      <div class="f-links">
+        <a href="index.html">Home</a>
+        <a href="feed.xml">RSS</a>
+        <a href="mailto:parashar.pratik@gmail.com">Email</a>
+        <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/alloutofxps" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.documentElement.classList.add('js');
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (function () {
+      var toggle = document.getElementById('navToggle');
+      var menu = document.getElementById('mobileMenu');
+      var close = document.getElementById('menuClose');
+      function open() {
+        menu.hidden = false; menu.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden'; close.focus();
+      }
+      function shut() {
+        menu.classList.remove('open'); menu.hidden = true;
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = ''; toggle.focus();
+      }
+      toggle.addEventListener('click', open);
+      close.addEventListener('click', shut);
+      Array.prototype.forEach.call(menu.querySelectorAll('a'), function (a) { a.addEventListener('click', shut); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && menu.classList.contains('open')) shut();
+      });
+    })();
+  </script>
+</body>
+</html>

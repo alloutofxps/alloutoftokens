@@ -13,27 +13,27 @@
   <meta property="og:url" content="https://alloutoftokens.com/blog-ai-agents.html" />
   <meta property="og:type" content="article" />
   <meta property="article:author" content="Pratik Parashar" />
-  <meta property="article:published_time" content="2026-03-24" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Why I Pitched AI Agents at Work (And What Happened Next)" />
   <meta name="twitter:description" content="A 40-hour job done in 40 minutes. Here's what happened when I actually tried pitching AI agents inside a Big-4 firm." />
   <meta name="twitter:image" content="https://alloutoftokens.com/og-robot.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black:   #0d0d0d;
-      --cream:   #f5f0e8;
-      --red:     #ff3c1f;
-      --mid:     #6b6560;
+      --black:   #1c1815;
+      --cream:   #f7f3ec;
+      --red:     #8f2f45;
+      --mid:     #635a52;
       --border:  rgba(13,13,13,0.12);
-      --ff-serif: 'Playfair Display', Georgia, serif;
-      --ff-mono:  'Space Mono', 'Courier New', monospace;
-      --ff-sans:  'DM Sans', system-ui, sans-serif;
+      --ff-serif: 'Newsreader', Georgia, serif;
+      --ff-mono:  'JetBrains Mono', ui-monospace, monospace;
+      --ff-sans:  'Inter', system-ui, sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -41,7 +41,7 @@
     body {
       background: var(--cream);
       color: var(--black);
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
       font-size: 18px;
       line-height: 1.7;
       cursor: none;
@@ -77,7 +77,7 @@
     }
 
     .nav-logo {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.06em;
@@ -93,7 +93,7 @@
       list-style: none;
     }
     .nav-links a {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 11px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -125,7 +125,7 @@
     }
 
     .tag {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.14em;
@@ -136,14 +136,14 @@
     }
 
     .hero-date {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 11px;
       color: var(--mid);
       letter-spacing: 0.06em;
     }
 
     .hero h1 {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Newsreader', Georgia, serif;
       font-size: clamp(32px, 5vw, 52px);
       font-weight: 900;
       line-height: 1.1;
@@ -175,7 +175,7 @@
       max-height: 380px;
     }
     .post-hero-image figcaption {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 11px;
       letter-spacing: 0.06em;
       color: var(--mid);
@@ -200,7 +200,7 @@
     }
 
     .post-body h2 {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Newsreader', Georgia, serif;
       font-size: clamp(22px, 3vw, 28px);
       font-weight: 700;
       line-height: 1.2;
@@ -219,7 +219,7 @@
       padding: 4px 0 4px 28px;
     }
     .pull-quote p {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Newsreader', Georgia, serif;
       font-size: clamp(20px, 2.8vw, 26px);
       font-weight: 400;
       font-style: italic;
@@ -237,7 +237,7 @@
       border-bottom: 1px solid var(--border);
     }
     .forty-moment .forty-label {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 10px; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--red);
       margin-bottom: 24px;
@@ -248,13 +248,13 @@
       max-width: 440px; margin: 0 auto;
     }
     .forty-num {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Newsreader', serif;
       font-size: 64px; font-weight: 900; line-height: 1;
     }
     .forty-num.old { color: rgba(13,13,13,0.2); }
     .forty-num.new { color: var(--red); }
     .forty-sub {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 10px; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--mid);
       margin-top: 8px;
@@ -287,7 +287,7 @@
       margin-right: -48px;
     }
     .sources-title {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 10px; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--red);
       margin-bottom: 24px;
@@ -301,7 +301,7 @@
     }
     .source-item:last-child { border-bottom: none; }
     .source-num {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 11px; color: var(--red); min-width: 20px;
     }
     .source-text { font-size: 13px; color: var(--mid); line-height: 1.6; }
@@ -334,7 +334,7 @@
       flex-shrink: 0; border: 2px solid var(--red);
     }
     .author-card .author-info .name {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Newsreader', Georgia, serif;
       font-size: 18px; font-weight: 700; margin-bottom: 6px;
     }
     .author-card .author-info .bio {
@@ -346,7 +346,7 @@
     /* ── Back link ── */
     .back-link-wrap { padding: 40px 0 0; }
     .back-link {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 11px; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--mid);
       text-decoration: none;
@@ -366,7 +366,7 @@
       padding: 32px clamp(24px, 5vw, 80px);
       display: flex; justify-content: space-between; align-items: center; gap: 16px;
     }
-    footer p { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--mid); margin: 0; }
+    footer p { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--mid); margin: 0; }
     footer a { color: var(--mid); text-decoration: none; transition: color 0.2s; }
     footer a:hover { color: var(--red); }
 
@@ -388,7 +388,7 @@
       border-top: 2px solid var(--black);
     }
     .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+    .mobile-menu a { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); text-decoration: none; }
 
     @media (max-width: 640px) { .nav-links { display: none; } .hamburger { display: flex; } }
     @media (max-width: 768px) {
@@ -398,35 +398,63 @@
       .forty-num { font-size: 48px; }
     }
   </style>
+
+  <link rel="canonical" href="https://alloutoftokens.com/blog-ai-agents.html" />
+  <meta name="theme-color" content="#f7f3ec" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="alternate" type="application/rss+xml" title="All Out of Tokens" href="feed.xml" />
+  <meta property="article:published_time" content="2026-03-24" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Why I Pitched AI Agents at Work (And What Happened Next)",
+    "description": "A 40-hour job done in 40 minutes. Here's what happened when I actually tried pitching AI agents inside a Big-4 firm.",
+    "image": "https://alloutoftokens.com/og-robot.png",
+    "datePublished": "2026-03-24",
+    "dateModified": "2026-03-24",
+    "author": { "@type": "Person", "name": "Pratik Parashar", "url": "https://alloutoftokens.com/" },
+    "publisher": { "@type": "Person", "name": "Pratik Parashar" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://alloutoftokens.com/blog-ai-agents.html" }
+  }
+  </script>
 </head>
 <body>
 
-  <div class="cursor" id="cursor"></div>
+  <a href="#main" class="skip-link">Skip to content</a>
 
-  <nav>
-    <a href="index.html" class="nav-logo">All Out <span>of</span> Tokens</a>
-    <ul class="nav-links">
-      <li><a href="index.html#what-i-do">What I Do</a></li>
-      <li><a href="index.html#experience">Experience</a></li>
-      <li><a href="index.html#blog">Writing</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+
+  <nav class="site-nav scrolled" aria-label="Primary">
+    <div class="site-nav__inner">
+      <a href="index.html" class="nav-logo">Pratik <em>Parashar</em></a>
+      <ul class="nav-links">
+        <li><a href="index.html#experience">Experience</a></li>
+        <li><a href="index.html#technical">Technical</a></li>
+        <li><a href="index.html#automation">Automation</a></li>
+        <li><a href="writing.html">Writing</a></li>
+        <li><a href="index.html#contact" class="btn btn--secondary btn--sm">Get in touch</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 
-  <div class="mobile-menu" id="mobile-menu">
-    <a href="index.html#what-i-do">What I Do</a>
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <button class="mobile-menu-close" id="menuClose" aria-label="Close menu">Close</button>
     <a href="index.html#experience">Experience</a>
-    <a href="index.html#blog">Writing</a>
-    <a href="index.html#contact">Contact</a>
+    <a href="index.html#technical">Technical</a>
+    <a href="index.html#automation">Automation</a>
+    <a href="writing.html">Writing</a>
+    <a href="index.html#contact">Get in touch</a>
   </div>
 
-  <main class="article-wrap">
+
+  <main class="article-wrap" id="main">
 
     <div class="back-link-wrap">
-      <a href="index.html#blog" class="back-link">All posts</a>
+      <a href="writing.html" class="back-link">All posts</a>
     </div>
 
     <header class="hero">
@@ -586,59 +614,152 @@
         <div class="sources-title">Sources</div>
         <div class="source-item">
           <span class="source-num">1</span>
-          <span class="source-text">McKinsey &amp; Company — <em>The state of AI in early 2025</em> · <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank">mckinsey.com</a></span>
+          <span class="source-text">McKinsey &amp; Company — <em>The state of AI in early 2025</em> · <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener noreferrer">mckinsey.com</a></span>
         </div>
         <div class="source-item">
           <span class="source-num">2</span>
-          <span class="source-text">Citizens Bank — <em>2026 AI Trends in Financial Management</em> · <a href="https://www.citizensbank.com/corporate-finance/insights/ai-trends-financial-management-2026.aspx" target="_blank">citizensbank.com</a></span>
+          <span class="source-text">Citizens Bank — <em>2026 AI Trends in Financial Management</em> · <a href="https://www.citizensbank.com/corporate-finance/insights/ai-trends-financial-management-2026.aspx" target="_blank" rel="noopener noreferrer">citizensbank.com</a></span>
         </div>
         <div class="source-item">
           <span class="source-num">3</span>
-          <span class="source-text">Neurons Lab — <em>Agentic AI in Financial Services: A Research Roundup for 2026</em> · <a href="https://neurons-lab.com/article/agentic-ai-in-financial-services-2026/" target="_blank">neurons-lab.com</a></span>
+          <span class="source-text">Neurons Lab — <em>Agentic AI in Financial Services: A Research Roundup for 2026</em> · <a href="https://neurons-lab.com/article/agentic-ai-in-financial-services-2026/" target="_blank" rel="noopener noreferrer">neurons-lab.com</a></span>
         </div>
       </div>
 
       <div class="post-signoff">
-        <p>I'd genuinely like to hear where you are with this — whether you're a finance professional figuring out the right move, or someone already building in this space. Find me on <a href="https://linkedin.com/in/pratikparashar93" target="_blank">LinkedIn</a>.</p>
+        <p>I'd genuinely like to hear where you are with this — whether you're a finance professional figuring out the right move, or someone already building in this space. Find me on <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn</a>.</p>
       </div>
 
       <div class="author-card">
         <img src="pratik.jpg" alt="Pratik Parashar" />
         <div class="author-info">
           <div class="name">Pratik Parashar</div>
-          <p class="bio">Senior Auditor at a Big-4 firm in the Netherlands. Writing about AI, finance, and what happens when the two collide. Open to new roles in Finance Transformation, FP&amp;A, and Financial Control. <a href="https://linkedin.com/in/pratikparashar93" target="_blank">LinkedIn →</a></p>
+          <p class="bio">Senior Auditor, Financial Services at KPMG Netherlands. Seven years in audit across India and the Netherlands, four of them on private equity and infrastructure funds. Open to audit, controls, reporting and controlling roles in the Netherlands. <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn &rarr;</a></p>
         </div>
       </div>
 
     </article>
+    <nav class="post-nav" aria-label="More posts">
+      <div class="pn-empty"></div>
+      <a href="blog-controller.html" class="next" rel="next"><span class="pn-dir">Next &rarr;</span><span class="pn-title">The Controller Role Is Being Redefined. Most Controllers Don't Know It Yet.</span></a>
+    </nav>
   </main>
 
-  <footer>
-    <p>&copy; 2026 Pratik Parashar</p>
-    <p><a href="index.html">alloutoftokens.com</a></p>
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div>
+        <div class="f-name">Pratik Parashar</div>
+        <div class="f-meta">Senior Auditor, Financial Services &middot; Almere, the Netherlands &middot; <span id="year">2026</span></div>
+      </div>
+      <div class="f-links">
+        <a href="index.html">Home</a>
+        <a href="writing.html">Writing</a>
+        <a href="feed.xml">RSS</a>
+        <a href="mailto:parashar.pratik@gmail.com">Email</a>
+        <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </div>
   </footer>
 
   <script>
-    const cursor = document.getElementById('cursor');
-    document.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top  = e.clientY + 'px';
-    });
-    document.querySelectorAll('a, button').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-    });
+    document.documentElement.classList.add('js');
+    var y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    // Reveal on scroll (falls back to visible)
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        Array.prototype.forEach.call(els, function (el) { el.classList.add('visible'); });
+        return;
+      }
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      Array.prototype.forEach.call(els, function (el) { obs.observe(el); });
+    })();
+
+    // Mobile menu
+    (function () {
+      var toggle = document.getElementById('navToggle');
+      var menu = document.getElementById('mobileMenu');
+      var close = document.getElementById('menuClose');
+      if (!toggle || !menu || !close) return;
+      function open() {
+        menu.hidden = false; menu.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden'; close.focus();
+      }
+      function shut() {
+        menu.classList.remove('open'); menu.hidden = true;
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = ''; toggle.focus();
+      }
+      toggle.addEventListener('click', open);
+      close.addEventListener('click', shut);
+      Array.prototype.forEach.call(menu.querySelectorAll('a'), function (a) {
+        a.addEventListener('click', shut);
       });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && menu.classList.contains('open')) shut();
+      });
+    })();
 
-    const ham  = document.getElementById('hamburger');
-    const menu = document.getElementById('mobile-menu');
-    ham.addEventListener('click', () => { ham.classList.toggle('open'); menu.classList.toggle('open'); });
+    // Lightbox — now mouse AND keyboard operable
+    (function () {
+      var lightbox = document.getElementById('lightbox');
+      if (!lightbox) return;
+      var img = document.getElementById('lightbox-img');
+      var cap = document.getElementById('lightbox-caption');
+      var x = document.getElementById('lightbox-close');
+      var lastFocus = null;
+
+      function open(src, alt, caption, origin) {
+        lastFocus = origin || null;
+        img.src = src; img.alt = alt || '';
+        cap.textContent = caption || '';
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        x.focus();
+      }
+      function close() {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(function () { img.src = ''; }, 200);
+        if (lastFocus) lastFocus.focus();
+      }
+
+      Array.prototype.forEach.call(
+        document.querySelectorAll('.screenshot-slot.expandable img'),
+        function (el) {
+          el.setAttribute('tabindex', '0');
+          el.setAttribute('role', 'button');
+          el.setAttribute('aria-label', 'Expand screenshot: ' + (el.getAttribute('alt') || 'image').slice(0, 80));
+          function fire() {
+            var slot = el.closest('.screenshot-slot');
+            open(el.src, el.alt, slot ? (slot.getAttribute('data-caption') || '') : '', el);
+          }
+          el.addEventListener('click', fire);
+          el.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fire(); }
+          });
+        }
+      );
+
+      x.addEventListener('click', close);
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox || e.target === img) close();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('open')) close();
+        // keep focus inside the dialog
+        if (e.key === 'Tab' && lightbox.classList.contains('open')) {
+          e.preventDefault(); x.focus();
+        }
+      });
+    })();
   </script>
 </body>
 </html>

@@ -14,7 +14,6 @@
   <meta property="og:url" content="https://alloutoftokens.com/blog-variance-4.html" />
   <meta property="og:type" content="article" />
   <meta property="article:author" content="Pratik Parashar" />
-  <meta property="article:published_time" content="2026-05-15" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="The Rebuild: From Three Tabs to Nine" />
   <meta name="twitter:description" content="The vfinal of the Variance Commentary Generator. Nine Excel tabs, a transaction trail, and the design choice that solved the hallucination problem." />
@@ -22,21 +21,22 @@
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     /* Reset & tokens */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black:   #0d0d0d;
-      --cream:   #f5f0e8;
-      --red:     #ff3c1f;
-      --mid:     #6b6560;
+      --black:   #1c1815;
+      --cream:   #f7f3ec;
+      --red:     #8f2f45;
+      --mid:     #635a52;
       --border:  rgba(13,13,13,0.12);
-      --ff-serif: 'Playfair Display', Georgia, serif;
-      --ff-mono:  'Space Mono', 'Courier New', monospace;
-      --ff-sans:  'DM Sans', system-ui, sans-serif;
+      --ff-serif: 'Newsreader', Georgia, serif;
+      --ff-mono:  'JetBrains Mono', ui-monospace, monospace;
+      --ff-sans:  'Inter', system-ui, sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -44,7 +44,7 @@
     body {
       background: var(--cream);
       color: var(--black);
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
       font-size: 18px;
       line-height: 1.7;
       cursor: none;
@@ -79,7 +79,7 @@
       height: 60px;
     }
     .nav-logo {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.06em;
@@ -90,7 +90,7 @@
     .nav-logo span { color: var(--red); }
     .nav-links { display: flex; gap: 32px; list-style: none; }
     .nav-links a {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 11px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -121,7 +121,7 @@
       flex-wrap: wrap;
     }
     .tag {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.14em;
@@ -131,7 +131,7 @@
       padding: 4px 10px;
     }
     .tag-series {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.14em;
@@ -141,13 +141,13 @@
       padding: 3px 10px;
     }
     .hero-date {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 11px;
       color: var(--mid);
       letter-spacing: 0.06em;
     }
     .hero h1 {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Newsreader', Georgia, serif;
       font-size: clamp(32px, 5vw, 52px);
       font-weight: 900;
       line-height: 1.1;
@@ -171,7 +171,7 @@
       margin-bottom: 0;
     }
     .series-nav-label {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 10px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -193,9 +193,9 @@
       text-align: center;
     }
     .series-post.active { background: var(--red); }
-    .series-post.done { background: rgba(255,60,31,0.18); }
+    .series-post.done { background: rgba(143,47,69,0.18); }
     .series-post .post-num {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 18px;
       font-weight: 700;
       color: rgba(245,240,232,0.3);
@@ -205,7 +205,7 @@
     .series-post.active .post-num { color: var(--cream); }
     .series-post.done .post-num { color: rgba(245,240,232,0.8); }
     .series-post .post-label {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
       font-size: 10px;
       color: rgba(245,240,232,0.3);
       line-height: 1.3;
@@ -225,7 +225,7 @@
       color: #1a1714;
     }
     .post-body h2 {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Newsreader', Georgia, serif;
       font-size: clamp(22px, 3vw, 28px);
       font-weight: 700;
       line-height: 1.2;
@@ -245,7 +245,7 @@
       padding: 4px 0 4px 28px;
     }
     .pull-quote p {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Newsreader', Georgia, serif;
       font-size: clamp(20px, 2.8vw, 26px);
       font-weight: 400;
       font-style: italic;
@@ -263,7 +263,7 @@
       border-left: 4px solid var(--red);
     }
     .build-spec-title {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 10px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -283,7 +283,7 @@
     }
     .build-spec-row:last-child { border-bottom: none; padding-bottom: 0; }
     .build-spec-key {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 11px;
       color: var(--red);
       min-width: 80px;
@@ -301,7 +301,7 @@
       overflow-x: auto;
     }
     .code-block-label {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 10px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -315,7 +315,7 @@
     .code-block-label::before { content: ''; width: 24px; height: 1px; background: var(--red); }
     .code-block pre {
       padding: 20px 20px 24px;
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 12px;
       line-height: 1.8;
       color: rgba(245,240,232,0.82);
@@ -334,7 +334,7 @@
       border: 1px dashed rgba(13,13,13,0.25);
     }
     .screenshot-slot-header {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 10px;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -356,7 +356,7 @@
       display: block;
     }
     .screenshot-slot-caption {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 11px;
       color: var(--mid);
       padding: 10px 16px;
@@ -377,7 +377,7 @@
     }
     .screenshot-slot .placeholder-area .ph-icon { font-size: 28px; }
     .screenshot-slot .placeholder-area .ph-text {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 11px;
       text-align: center;
       line-height: 1.6;
@@ -388,7 +388,7 @@
     .commentary-demo { margin: 52px 0; border: 1px solid var(--border); }
     .commentary-box { border-top: 2px solid var(--black); }
     .commentary-box-label {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 10px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -396,7 +396,7 @@
       border-bottom: 1px solid var(--border);
     }
     .commentary-box-label.bad { color: var(--mid); background: rgba(13,13,13,0.03); }
-    .commentary-box-label.good { color: var(--red); background: rgba(255,60,31,0.04); }
+    .commentary-box-label.good { color: var(--red); background: rgba(143,47,69,0.04); }
     .commentary-box-text {
       padding: 16px 20px;
       font-size: 15px;
@@ -419,7 +419,7 @@
       gap: 12px;
     }
     .failure-log-header .flog-label {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 10px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -440,7 +440,7 @@
     }
     .failure-content {}
     .failure-title {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 12px;
       font-weight: 700;
       color: var(--black);
@@ -463,7 +463,7 @@
     .screenshot-slot.expandable img { cursor: zoom-in; transition: opacity 0.2s; }
     .screenshot-slot.expandable img:hover { opacity: 0.88; }
     .screenshot-slot .expand-hint {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 10px;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -497,7 +497,7 @@
       position: absolute;
       top: 24px;
       right: 32px;
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 11px;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -514,7 +514,7 @@
       bottom: 24px;
       left: 50%;
       transform: translateX(-50%);
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 11px;
       color: rgba(245,240,232,0.7);
       letter-spacing: 0.04em;
@@ -541,7 +541,7 @@
     /* Source items: bidirectional return links */
     .source-item { scroll-margin-top: 80px; }
     .source-back {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 10px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -572,15 +572,15 @@
     .github-cta:hover { background: var(--black); color: var(--cream); }
     .github-cta-icon { font-size: 28px; flex-shrink: 0; line-height: 1; }
     .github-cta-text .label {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 10px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--red);
       margin-bottom: 4px;
     }
-    .github-cta:hover .github-cta-text .label { color: rgba(255,60,31,0.8); }
-    .github-cta-text .repo { font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; }
+    .github-cta:hover .github-cta-text .label { color: rgba(143,47,69,0.8); }
+    .github-cta-text .repo { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; font-weight: 700; }
     .github-cta-text .desc { font-size: 13px; color: var(--mid); margin-top: 2px; }
     .github-cta:hover .github-cta-text .desc { color: rgba(245,240,232,0.6); }
     .github-cta-arrow { margin-left: auto; font-size: 20px; flex-shrink: 0; }
@@ -594,7 +594,7 @@
       margin-right: -48px;
     }
     .sources-title {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 10px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -613,7 +613,7 @@
       border-bottom: 1px solid rgba(13,13,13,0.1);
     }
     .source-item:last-child { border-bottom: none; }
-    .source-num { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--red); min-width: 20px; }
+    .source-num { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--red); min-width: 20px; }
     .source-text { font-size: 13px; color: var(--mid); line-height: 1.6; }
     .source-text a { color: var(--black); text-decoration: none; border-bottom: 1px solid rgba(13,13,13,0.2); transition: border-color 0.2s, color 0.2s; }
     .source-text a:hover { color: var(--red); border-color: var(--red); }
@@ -642,7 +642,7 @@
       border: 2px solid var(--red);
     }
     .author-card .author-info .name {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Newsreader', Georgia, serif;
       font-size: 18px;
       font-weight: 700;
       margin-bottom: 6px;
@@ -659,7 +659,7 @@
     /* Back link */
     .back-link-wrap { padding: 40px 0 0; }
     .back-link {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 11px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -686,7 +686,7 @@
       align-items: center;
       gap: 16px;
     }
-    footer p { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--mid); margin: 0; }
+    footer p { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--mid); margin: 0; }
     footer a { color: var(--mid); text-decoration: none; transition: color 0.2s; }
     footer a:hover { color: var(--red); }
 
@@ -708,42 +708,70 @@
       border-top: 2px solid var(--black);
     }
     .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+    .mobile-menu a { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); text-decoration: none; }
     @media (max-width: 640px) { .nav-links { display: none; } .hamburger { display: flex; } }
     @media (max-width: 768px) {
       .sources { padding: 32px 24px; margin-left: -24px; margin-right: -24px; }
       .author-card { padding: 24px; gap: 16px; flex-direction: column; }
     }
   </style>
+
+  <link rel="canonical" href="https://alloutoftokens.com/blog-variance-4.html" />
+  <meta name="theme-color" content="#f7f3ec" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="alternate" type="application/rss+xml" title="All Out of Tokens" href="feed.xml" />
+  <meta property="article:published_time" content="2026-05-15" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "The Rebuild: From Three Tabs to Nine, And the One Thing That Surprised Me",
+    "description": "The vfinal of the Variance Commentary Generator. Nine Excel tabs, a transaction trail, a P&L bridge, and the design choice that solved the hallucination problem in a way I didn't see coming.",
+    "image": "https://alloutoftokens.com/og-variance-4.png",
+    "datePublished": "2026-05-15",
+    "dateModified": "2026-05-15",
+    "author": { "@type": "Person", "name": "Pratik Parashar", "url": "https://alloutoftokens.com/" },
+    "publisher": { "@type": "Person", "name": "Pratik Parashar" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://alloutoftokens.com/blog-variance-4.html" }
+  }
+  </script>
 </head>
 <body>
 
-  <div class="cursor" id="cursor"></div>
+  <a href="#main" class="skip-link">Skip to content</a>
 
-  <nav>
-    <a href="index.html" class="nav-logo">All Out <span>of</span> Tokens</a>
-    <ul class="nav-links">
-      <li><a href="index.html#what-i-do">What I Do</a></li>
-      <li><a href="index.html#experience">Experience</a></li>
-      <li><a href="index.html#blog">Writing</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+
+  <nav class="site-nav scrolled" aria-label="Primary">
+    <div class="site-nav__inner">
+      <a href="index.html" class="nav-logo">Pratik <em>Parashar</em></a>
+      <ul class="nav-links">
+        <li><a href="index.html#experience">Experience</a></li>
+        <li><a href="index.html#technical">Technical</a></li>
+        <li><a href="index.html#automation">Automation</a></li>
+        <li><a href="writing.html">Writing</a></li>
+        <li><a href="index.html#contact" class="btn btn--secondary btn--sm">Get in touch</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 
-  <div class="mobile-menu" id="mobile-menu">
-    <a href="index.html#what-i-do">What I Do</a>
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <button class="mobile-menu-close" id="menuClose" aria-label="Close menu">Close</button>
     <a href="index.html#experience">Experience</a>
-    <a href="index.html#blog">Writing</a>
-    <a href="index.html#contact">Contact</a>
+    <a href="index.html#technical">Technical</a>
+    <a href="index.html#automation">Automation</a>
+    <a href="writing.html">Writing</a>
+    <a href="index.html#contact">Get in touch</a>
   </div>
 
-  <main class="article-wrap">
+
+  <main class="article-wrap" id="main">
 
     <div class="back-link-wrap">
-      <a href="index.html#blog" class="back-link">All posts</a>
+      <a href="writing.html" class="back-link">All posts</a>
     </div>
 
     <header class="hero">
@@ -758,26 +786,11 @@
       <div class="series-nav">
         <div class="series-nav-label">Build Log · Variance Commentary Generator</div>
         <div class="series-nav-posts">
-          <div class="series-post done">
-            <span class="post-num">01</span>
-            <span class="post-label">The Problem</span>
-          </div>
-          <div class="series-post done">
-            <span class="post-num">02</span>
-            <span class="post-label">Architecture</span>
-          </div>
-          <div class="series-post done">
-            <span class="post-num">03</span>
-            <span class="post-label">First Build</span>
-          </div>
-          <div class="series-post active">
-            <span class="post-num">04</span>
-            <span class="post-label">Finance-Grade</span>
-          </div>
-          <div class="series-post">
-            <span class="post-num">05</span>
-            <span class="post-label">What It Can't Do</span>
-          </div>
+          <a href="blog-variance-1.html" class="series-post done"><span class="post-num">01</span><span class="post-label">The Problem</span></a>
+          <a href="blog-variance-2.html" class="series-post done"><span class="post-num">02</span><span class="post-label">Architecture</span></a>
+          <a href="blog-variance-3.html" class="series-post done"><span class="post-num">03</span><span class="post-label">First Build</span></a>
+          <a href="blog-variance-4.html" class="series-post active" aria-current="page"><span class="post-num">04</span><span class="post-label">Finance-Grade</span></a>
+          <div class="series-post upcoming"><span class="post-num">05</span><span class="post-label">What It Can't Do &middot; soon</span></div>
         </div>
       </div>
     </header>
@@ -1016,7 +1029,7 @@ Every claim traceable to the data above.</span></pre>
 
       <p class="reveal">There's also a separate companion piece coming: a step-by-step install guide for finance professionals who want to run this tool on their own laptop without a coding background. That'll live on the repo and be linked from each post. The series is meant to be readable and useful in equal measure.</p>
 
-      <a href="https://github.com/alloutofxps/variance-commentary-generator" target="_blank" class="github-cta reveal">
+      <a href="https://github.com/alloutofxps/variance-commentary-generator" target="_blank" rel="noopener noreferrer" class="github-cta reveal">
         <div class="github-cta-icon">⬡</div>
         <div class="github-cta-text">
           <div class="label">Repository · vfinal live</div>
@@ -1043,18 +1056,22 @@ Every claim traceable to the data above.</span></pre>
       </div>
 
       <div class="post-signoff">
-        <p>Next post: what the tool still can't do, and why those limits matter more than the capabilities. Find me on <a href="https://linkedin.com/in/pratikparashar93" target="_blank">LinkedIn</a> if you want to follow along, or if you've built something similar and want to compare notes on the management-input-required pattern.</p>
+        <p>Next post: what the tool still can't do, and why those limits matter more than the capabilities. Find me on <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn</a> if you want to follow along, or if you've built something similar and want to compare notes on the management-input-required pattern.</p>
       </div>
 
       <div class="author-card reveal">
         <img src="pratik.jpg" alt="Pratik Parashar" />
         <div class="author-info">
           <div class="name">Pratik Parashar</div>
-          <p class="bio">Senior Auditor at a Big-4 firm in the Netherlands. Writing about AI, finance, and what happens when the two collide. Building a Variance Commentary Generator in public. Open to new roles in Finance Transformation, FP&amp;A, and Financial Control. <a href="https://linkedin.com/in/pratikparashar93" target="_blank">LinkedIn →</a></p>
+          <p class="bio">Senior Auditor, Financial Services at KPMG Netherlands. Seven years in audit across India and the Netherlands, four of them on private equity and infrastructure funds. Writing a variance commentary tool in public. Open to audit, controls, reporting and controlling roles in the Netherlands. <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn &rarr;</a></p>
         </div>
       </div>
 
     </article>
+    <nav class="post-nav" aria-label="More posts">
+      <a href="blog-variance-3.html" class="prev" rel="prev"><span class="pn-dir">&larr; Previous</span><span class="pn-title">The First Build: It Worked, And That's the Problem</span></a>
+      <div class="pn-empty"></div>
+    </nav>
   </main>
 
   <!-- Lightbox for expandable screenshots -->
@@ -1064,73 +1081,121 @@ Every claim traceable to the data above.</span></pre>
     <div class="lightbox-caption" id="lightbox-caption"></div>
   </div>
 
-  <footer>
-    <p>&copy; 2026 Pratik Parashar</p>
-    <p><a href="index.html">alloutoftokens.com</a></p>
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div>
+        <div class="f-name">Pratik Parashar</div>
+        <div class="f-meta">Senior Auditor, Financial Services &middot; Almere, the Netherlands &middot; <span id="year">2026</span></div>
+      </div>
+      <div class="f-links">
+        <a href="index.html">Home</a>
+        <a href="writing.html">Writing</a>
+        <a href="feed.xml">RSS</a>
+        <a href="mailto:parashar.pratik@gmail.com">Email</a>
+        <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </div>
   </footer>
 
   <script>
-    const cursor = document.getElementById('cursor');
-    document.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top  = e.clientY + 'px';
-    });
-    document.querySelectorAll('a, button').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-    });
+    document.documentElement.classList.add('js');
+    var y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
+    // Reveal on scroll (falls back to visible)
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        Array.prototype.forEach.call(els, function (el) { el.classList.add('visible'); });
+        return;
+      }
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      Array.prototype.forEach.call(els, function (el) { obs.observe(el); });
+    })();
+
+    // Mobile menu
+    (function () {
+      var toggle = document.getElementById('navToggle');
+      var menu = document.getElementById('mobileMenu');
+      var close = document.getElementById('menuClose');
+      if (!toggle || !menu || !close) return;
+      function open() {
+        menu.hidden = false; menu.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden'; close.focus();
+      }
+      function shut() {
+        menu.classList.remove('open'); menu.hidden = true;
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = ''; toggle.focus();
+      }
+      toggle.addEventListener('click', open);
+      close.addEventListener('click', shut);
+      Array.prototype.forEach.call(menu.querySelectorAll('a'), function (a) {
+        a.addEventListener('click', shut);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && menu.classList.contains('open')) shut();
+      });
+    })();
+
+    // Lightbox — now mouse AND keyboard operable
+    (function () {
+      var lightbox = document.getElementById('lightbox');
+      if (!lightbox) return;
+      var img = document.getElementById('lightbox-img');
+      var cap = document.getElementById('lightbox-caption');
+      var x = document.getElementById('lightbox-close');
+      var lastFocus = null;
+
+      function open(src, alt, caption, origin) {
+        lastFocus = origin || null;
+        img.src = src; img.alt = alt || '';
+        cap.textContent = caption || '';
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        x.focus();
+      }
+      function close() {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(function () { img.src = ''; }, 200);
+        if (lastFocus) lastFocus.focus();
+      }
+
+      Array.prototype.forEach.call(
+        document.querySelectorAll('.screenshot-slot.expandable img'),
+        function (el) {
+          el.setAttribute('tabindex', '0');
+          el.setAttribute('role', 'button');
+          el.setAttribute('aria-label', 'Expand screenshot: ' + (el.getAttribute('alt') || 'image').slice(0, 80));
+          function fire() {
+            var slot = el.closest('.screenshot-slot');
+            open(el.src, el.alt, slot ? (slot.getAttribute('data-caption') || '') : '', el);
+          }
+          el.addEventListener('click', fire);
+          el.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fire(); }
+          });
+        }
+      );
+
+      x.addEventListener('click', close);
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox || e.target === img) close();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('open')) close();
+        // keep focus inside the dialog
+        if (e.key === 'Tab' && lightbox.classList.contains('open')) {
+          e.preventDefault(); x.focus();
         }
       });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    const ham  = document.getElementById('hamburger');
-    const menu = document.getElementById('mobile-menu');
-    ham.addEventListener('click', () => {
-      ham.classList.toggle('open');
-      menu.classList.toggle('open');
-    });
-
-    // Lightbox: click an expandable screenshot's image to enlarge
-    const lightbox     = document.getElementById('lightbox');
-    const lightboxImg  = document.getElementById('lightbox-img');
-    const lightboxCap  = document.getElementById('lightbox-caption');
-    const lightboxX    = document.getElementById('lightbox-close');
-
-    function openLightbox(src, alt, caption) {
-      lightboxImg.src = src;
-      lightboxImg.alt = alt || '';
-      lightboxCap.textContent = caption || '';
-      lightbox.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeLightbox() {
-      lightbox.classList.remove('open');
-      document.body.style.overflow = '';
-      setTimeout(() => { lightboxImg.src = ''; }, 200);
-    }
-
-    document.querySelectorAll('.screenshot-slot.expandable img').forEach(img => {
-      img.addEventListener('click', () => {
-        const slot = img.closest('.screenshot-slot');
-        const cap  = slot ? slot.getAttribute('data-caption') || '' : '';
-        openLightbox(img.src, img.alt, cap);
-      });
-    });
-
-    lightbox.addEventListener('click', e => {
-      if (e.target === lightbox || e.target === lightboxImg) closeLightbox();
-    });
-    lightboxX.addEventListener('click', closeLightbox);
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
-    });
+    })();
   </script>
 </body>
 </html>
