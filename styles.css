@@ -44,7 +44,12 @@
   /* --- Rules. Two weights, both above the 3:1 non-text floor. --- */
   --rule-strong: rgba(27,23,20,0.30);
   --rule-soft:   rgba(27,23,20,0.13);
-  --rule-dark:   rgba(247,243,236,0.20);
+  /* On dark. The audit found 18 distinct alpha values doing this one job,
+     built on two different base creams. These three are the whole vocabulary:
+     a visible hairline, a barely-there divider, and a raised panel fill. */
+  --rule-dark:      rgba(247,243,236,0.20);
+  --rule-dark-soft: rgba(247,243,236,0.11);
+  --surface-dark-raised: rgba(247,243,236,0.045);
 
   /* --- Type --- */
   --ff-display: 'Newsreader', Georgia, 'Times New Roman', serif;
@@ -340,7 +345,7 @@ h2.section-title { font-size: var(--t-3); }
 .btn--on-ink          { border-color: rgba(247,243,236,0.38); color: var(--on-dark-1); background: transparent; }
 .section--ink .btn--secondary:hover,
 .site-nav.on-ink .btn--secondary:hover,
-.btn--on-ink:hover    { border-color: var(--on-dark-1); background: rgba(247,243,236,0.07); }
+.btn--on-ink:hover    { border-color: var(--on-dark-1); background: var(--surface-dark-raised); }
 
 .btn--sm { font-size: 0.875rem; padding:var(--space-12) var(--space-16) var(--space-8); }
 @media (pointer: coarse) { .btn--sm { min-height: 44px; } }
@@ -374,7 +379,7 @@ h2.section-title { font-size: var(--t-3); }
 .site-nav.scrolled { border-bottom-color: var(--rule-soft); }
 .site-nav.on-ink {
   background: rgba(27,23,20,0.94);
-  border-bottom-color: rgba(247,243,236,0.12);
+  border-bottom-color: var(--rule-dark-soft);
 }
 .site-nav__inner {
   max-width: var(--shell); margin-inline: auto; padding-inline: var(--pad);
@@ -407,8 +412,14 @@ h2.section-title { font-size: var(--t-3); }
 }
 .nav-links > li > a:not(.btn):hover { color: var(--accent); }
 .nav-links > li > a:not(.btn):hover::after { transform: scaleX(1); }
+/* Active section (scroll-spy on the homepage) and active page (everywhere
+   else). Same treatment, so "where am I" reads the same across the site. */
+.nav-links > li > a:not(.btn)[aria-current] { color: var(--accent); }
+.nav-links > li > a:not(.btn)[aria-current]::after { transform: scaleX(1); }
 .site-nav.on-ink .nav-links > li > a:not(.btn) { color: var(--on-dark-2); }
-.site-nav.on-ink .nav-links > li > a:not(.btn):hover { color: var(--on-dark-1); }
+.site-nav.on-ink .nav-links > li > a:not(.btn):hover,
+.site-nav.on-ink .nav-links > li > a:not(.btn)[aria-current] { color: var(--on-dark-1); }
+.mobile-menu a[aria-current] { color: var(--accent); }
 
 .nav-toggle {
   display: none; flex-direction: column; gap:var(--space-4);
@@ -460,6 +471,8 @@ h2.section-title { font-size: var(--t-3); }
 .site-footer .f-links a {
   font-size: var(--t--1); color: var(--on-dark-2); text-decoration: none;
   border-bottom: 1px solid transparent; transition: color var(--dur-base), border-color var(--dur-base);
+  /* WCAG 2.2 AA 2.5.8: these were 21px tall */
+  display: inline-flex; align-items: center; min-height: 24px;
 }
 .site-footer .f-links a:hover { color: var(--on-dark-1); border-bottom-color: var(--accent-lift); }
 
@@ -540,7 +553,11 @@ h2.section-title { font-size: var(--t-3); }
 .article-wrap .hero-date { font-family: var(--ff-sans); font-size: var(--t--1); color: var(--ink-3); letter-spacing: 0; }
 .article-wrap .tag,
 .article-wrap .tag-series { font-family: var(--ff-sans); font-size: var(--t--1); font-weight: 600; letter-spacing: 0.06em; padding:var(--space-4) var(--space-12); }
-.article-wrap .back-link { font-family: var(--ff-sans); font-size: var(--t--1); color: var(--ink-3); }
+.article-wrap .back-link {
+  font-family: var(--ff-sans); font-size: var(--t--1); color: var(--ink-3);
+  /* WCAG 2.2 AA 2.5.8 — standalone link, so the 24px minimum applies */
+  display: inline-flex; align-items: center; min-height: 24px;
+}
 .article-wrap .back-link:hover { color: var(--accent); }
 .article-wrap .pull-quote p { font-family: var(--ff-display); font-weight: 400; color: var(--ink-1); }
 .article-wrap .author-card .name { font-family: var(--ff-display); font-size: 1.25rem; font-weight: 600; color: var(--on-dark-1); }
@@ -578,7 +595,7 @@ h2.section-title { font-size: var(--t-3); }
   font-family: var(--ff-sans); font-size: var(--t--1); font-weight: 600;
   letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--on-dark-1); background: none;
-  border: 1px solid rgba(247, 243, 236, 0.35);
+  border: 1px solid var(--rule-dark);
   padding: var(--space-8) var(--space-16); cursor: pointer;
   transition: border-color var(--dur-base) var(--ease-out),
               color var(--dur-base) var(--ease-out);
@@ -635,7 +652,7 @@ h2.section-title { font-size: var(--t-3); }
 .series-post.upcoming .post-num,
 .series-post.upcoming .post-label { color: var(--on-dark-3) !important; }
 .series-nav-posts a.series-post { text-decoration: none; display: block; transition: background var(--dur-base) var(--ease-out); }
-.series-nav-posts a.series-post:hover { background: rgba(247,243,236,0.16); }
+.series-nav-posts a.series-post:hover { background: var(--rule-dark-soft); }
 
 .flow-node-label { color: var(--on-dark-2) !important; }
 .flow-box.active { background: var(--accent-deep) !important; border-color: var(--accent-deep) !important; color: var(--paper) !important; }
@@ -690,6 +707,7 @@ input, textarea, select { border-radius: var(--radius-sm); }
   display: block; height: 100%; width: 100%;
   background: var(--accent);
   transform: scaleX(0); transform-origin: left;
+  /* linear, not --ease-out: a progress bar that eases reads as inaccurate */
   transition: transform var(--dur-fast) linear;
 }
 
@@ -702,7 +720,7 @@ input, textarea, select { border-radius: var(--radius-sm); }
   .toc:not([hidden]) {
     display: block !important; position: fixed !important;
     top: calc(var(--nav-h) + var(--s-7));
-    left: calc(50% - 620px); width: 200px;
+    left: calc(50% - (var(--shell) / 2) + var(--pad)); width: 200px;
     max-height: calc(100vh - var(--nav-h) - var(--s-9));
     overflow-y: auto; z-index: 400;
   }
@@ -730,7 +748,7 @@ input, textarea, select { border-radius: var(--radius-sm); }
 .post-body h2 { position: relative; }
 .heading-link {
   position: absolute; left: -1.6em; top: 50%; transform: translateY(-40%);
-  width: 1.2em; height: 1.2em; display: inline-flex;
+  width: 1.2em; height: 1.2em; min-width: 24px; min-height: 24px; display: inline-flex;
   align-items: center; justify-content: center;
   border: none; background: none; padding: 0; cursor: pointer;
   font-family: var(--ff-sans); font-size: 0.7em; color: var(--ink-3);

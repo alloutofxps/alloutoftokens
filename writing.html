@@ -244,7 +244,7 @@
     <a href="index.html#experience">Experience</a>
     <a href="index.html#technical">Technical</a>
     <a href="index.html#automation">Automation</a>
-    <a href="writing.html">Writing</a>
+    <a href="writing.html" aria-current="page">Writing</a>
     <a href="index.html#contact">Get in touch</a>
   </div>
 
@@ -310,6 +310,8 @@
     </div>
   </main>
 
+  <button class="to-top" id="toTop" aria-label="Back to top" title="Back to top">&uarr;</button>
+
   <footer class="site-footer">
     <div class="site-footer__inner">
       <div>
@@ -328,7 +330,8 @@
 
   <script>
     document.documentElement.classList.add('js');
-    document.getElementById('year').textContent = new Date().getFullYear();
+    var yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
     (function () {
       var toggle = document.getElementById('navToggle');
       var menu = document.getElementById('mobileMenu');
@@ -349,6 +352,18 @@
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && menu.classList.contains('open')) shut();
       });
+    })();
+    // Back to top — the listing is long enough to need it, and every other
+    // page on the site already has one.
+    (function () {
+      var btn = document.getElementById('toTop');
+      if (!btn) return;
+      function update() { btn.classList.toggle('show', window.scrollY > window.innerHeight); }
+      window.addEventListener('scroll', update, { passive: true });
+      btn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      });
+      update();
     })();
   </script>
 </body>

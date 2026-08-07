@@ -17,22 +17,55 @@
   <style>
     body { background: var(--ink); color: var(--on-dark-1); }
     body::before { mix-blend-mode: overlay; opacity: 0.05; }
-    .nf { min-height: 100svh; display: flex; align-items: center; }
+    /* Leaves room for the nav that now sits above it and the footer below. */
+    .nf { min-height: calc(100svh - var(--nav-h)); display: flex; align-items: center; padding-block: calc(var(--nav-h) + var(--s-7)) var(--s-9); }
+    /* The page is already --ink, so the footer needs a rule to sit against. */
+    .site-footer { border-top: 1px solid var(--rule-dark); }
     .nf-inner { max-width: 720px; }
     .nf-code { font-family: var(--ff-display); font-size: clamp(4.5rem, 16vw, 9rem); font-weight: 600; line-height: 1; color: var(--accent-lift); letter-spacing: -0.04em; margin-bottom: var(--s-4); }
     .nf h1 { font-size: var(--t-3); color: var(--on-dark-1); margin-bottom: var(--s-4); }
     .nf p { font-size: var(--t-0); color: var(--on-dark-2); line-height: 1.7; margin-bottom: var(--s-7); max-width: 52ch; }
     .nf-actions { display: flex; gap: var(--s-3); flex-wrap: wrap; }
-    .nf-links { margin-top: var(--s-8); padding-top: var(--s-5); border-top: 1px solid rgba(247,243,236,0.20); }
+    .nf-links { margin-top: var(--s-8); padding-top: var(--s-5); border-top: 1px solid var(--rule-dark); }
     .nf-links-label { font-size: var(--t--1); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--on-dark-3); margin-bottom: var(--s-4); }
     .nf-links ul { list-style: none; display: flex; flex-direction: column; gap: var(--s-3); }
-    .nf-links a { color: var(--on-dark-2); text-decoration: none; border-bottom: 1px solid transparent; transition: color var(--dur-base), border-color var(--dur-base); }
+    .nf-links a { color: var(--on-dark-2); text-decoration: none; border-bottom: 1px solid transparent;
+      transition: color var(--dur-base), border-color var(--dur-base);
+      display: inline-flex; align-items: center; min-height: 24px; }
     .nf-links a:hover { color: var(--on-dark-1); border-bottom-color: var(--accent-lift); }
     @media (max-width: 540px) { .nf-actions { flex-direction: column; align-items: stretch; } }
   </style>
 </head>
 <body>
-  <main class="nf">
+
+  <a href="/#main" class="skip-link">Skip to content</a>
+
+  <nav class="site-nav on-ink" aria-label="Primary">
+    <div class="site-nav__inner">
+      <a href="/" class="nav-logo">Pratik <em>Parashar</em></a>
+      <ul class="nav-links">
+        <li><a href="/#experience">Experience</a></li>
+        <li><a href="/#technical">Technical</a></li>
+        <li><a href="/#automation">Automation</a></li>
+        <li><a href="/writing.html">Writing</a></li>
+        <li><a href="/#contact" class="btn btn--secondary btn--sm">Get in touch</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <button class="mobile-menu-close" id="menuClose" aria-label="Close menu">Close</button>
+    <a href="/#experience">Experience</a>
+    <a href="/#technical">Technical</a>
+    <a href="/#automation">Automation</a>
+    <a href="/writing.html">Writing</a>
+    <a href="/#contact">Get in touch</a>
+  </div>
+
+  <main class="nf" id="main">
     <div class="shell">
       <div class="nf-inner">
         <div class="nf-code">404</div>
@@ -55,5 +88,50 @@
       </div>
     </div>
   </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div>
+        <div class="f-name">Pratik Parashar</div>
+        <div class="f-meta">Senior Auditor, Financial Services &middot; Almere, the Netherlands &middot; <span id="year">2026</span></div>
+      </div>
+      <div class="f-links">
+        <a href="/">Home</a>
+        <a href="/writing.html">Writing</a>
+        <a href="/feed.xml">RSS</a>
+        <a href="mailto:parashar.pratik@gmail.com">Email</a>
+        <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.documentElement.classList.add('js');
+    var yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    (function () {
+      var toggle = document.getElementById('navToggle');
+      var menu = document.getElementById('mobileMenu');
+      var close = document.getElementById('menuClose');
+      if (!toggle || !menu || !close) return;
+      function open() {
+        menu.hidden = false; menu.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden'; close.focus();
+      }
+      function shut() {
+        menu.classList.remove('open'); menu.hidden = true;
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = ''; toggle.focus();
+      }
+      toggle.addEventListener('click', open);
+      close.addEventListener('click', shut);
+      Array.prototype.forEach.call(menu.querySelectorAll('a'), function (a) { a.addEventListener('click', shut); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && menu.classList.contains('open')) shut();
+      });
+    })();
+  </script>
 </body>
 </html>

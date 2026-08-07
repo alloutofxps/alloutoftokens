@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pratik Parashar — Senior Auditor, Financial Services</title>
-  <meta name="description" content="Senior Auditor in KPMG Netherlands' Financial Services practice. Private equity and infrastructure funds, insurers and banks. IFRS, US GAAP, Dutch GAAP. Open to audit, controls, reporting and controlling roles in the Netherlands." />
+  <meta name="description" content="Senior Auditor in Financial Services at KPMG Netherlands. Seven years in audit, four on private equity and infrastructure funds. Based in Almere." />
   <link rel="canonical" href="https://alloutoftokens.com/" />
   <meta name="theme-color" content="#1b1714" />
 
@@ -41,31 +41,81 @@
     }
     .hero > * { position: relative; z-index: 1; }
 
-    .hero-badge { grid-column: 1 / -1; display: inline-flex; align-items: center; gap: var(--s-2); width: fit-content; border: 1px solid rgba(247,243,236,0.22); padding:var(--space-8) var(--space-16); margin-bottom: var(--s-6); }
+    /* Two columns, not a 12-col span. Row-spanning the card inside the shared
+       grid made the card's height size the text rows, which pushed the lede,
+       the sub and the buttons below the fold. Its own column means the taller
+       of the two sets the hero height and neither pushes the other. */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+      column-gap: var(--space-56);
+      align-items: start;
+    }
+    @media (max-width: 1024px) { .hero-grid { grid-template-columns: minmax(0, 1fr); } }
+
+    .hero-badge { display: inline-flex; align-items: center; gap: var(--s-2); width: fit-content; border: 1px solid var(--rule-dark); padding:var(--space-8) var(--space-16); margin-bottom: var(--s-6); }
     .hero-badge span:last-child { font-size: var(--t--1); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--on-dark-2); }
     .hero-dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; }
 
-    .hero-name { grid-column: 1 / 10; font-size: var(--t-4); line-height: 0.94; letter-spacing: -0.03em; color: var(--on-dark-1); margin-bottom: var(--s-4); }
-    .hero-role { grid-column: 1 / 10; font-family: var(--ff-display); font-size: var(--t-1); font-style: italic; color: var(--accent-lift); margin-bottom: var(--s-6); }
-    /* Both paragraphs share one span so they wrap to the same right edge.
+    .hero-name { font-size: var(--t-4); line-height: 0.94; letter-spacing: -0.03em; color: var(--on-dark-1); margin-bottom: var(--s-4); }
+    .hero-role { font-family: var(--ff-display); font-size: var(--t-1); font-style: italic; color: var(--accent-lift); margin-bottom: var(--s-6); }
+    /* Both paragraphs share one measure so they wrap to the same right edge.
        Three different measures was what read as "not aligned". */
-    .hero-lede { grid-column: 1 / 8; font-size: var(--t-1); line-height: 1.5; color: var(--on-dark-1); margin-bottom: var(--s-5); }
-    .hero-sub  { grid-column: 1 / 8; font-size: var(--t-0); line-height: 1.65; color: var(--on-dark-2); margin-bottom: var(--s-7); }
-    .hero-actions { grid-column: 1 / -1; display: flex; gap: var(--s-3); flex-wrap: wrap; margin-bottom: var(--s-9); }
+    .hero-lede { font-size: var(--t-1); line-height: 1.5; color: var(--on-dark-1); margin-bottom: var(--s-5); max-width: 46ch; }
+    .hero-sub  { font-size: var(--t-0); line-height: 1.65; color: var(--on-dark-2); margin-bottom: var(--s-7); max-width: 58ch; }
+    .hero-actions { display: flex; gap: var(--s-3); flex-wrap: wrap; }
 
-    /* Facts, not vibes. Every tile is an actual number. */
-    .facts { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, 1fr); gap:1px; background: rgba(247,243,236,0.16); border-top: 1px solid rgba(247,243,236,0.16); }
-    /* Left padding so figures breathe off the divider; first cell stays flush
-       to the shell rail so the row still starts on the page's left edge. */
-    .fact { background: var(--ink); padding: var(--s-5) var(--s-5) var(--s-5) var(--s-5); }
-    .fact:first-child { padding-left: 0; }
-    .fact-num { font-family: var(--ff-display); font-size: clamp(1.75rem, 2.6vw, 2.375rem); font-weight: 600; color: var(--on-dark-1); line-height: 1; margin-bottom: var(--s-2); }
-    .fact-label { font-size: var(--t--1); color: var(--on-dark-3); line-height: 1.4; }
-
-    /* Work authorisation — the single biggest de-risker for a Dutch employer */
-    .authz { grid-column: 1 / -1; margin-top: var(--s-7); padding: var(--s-5); border: 1px solid rgba(247,243,236,0.20); border-left: 2px solid var(--accent-lift); max-width: 62ch; }
-    .authz-label { font-size: var(--t--1); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-lift); margin-bottom: var(--s-2); }
-    .authz p { font-size: 0.9375rem; line-height: 1.6; color: var(--on-dark-2); }
+    /* AT A GLANCE — the right rail */
+    .hero-card {
+      align-self: start;
+      background: var(--surface-dark-raised);
+      border: 1px solid var(--rule-dark);
+      border-top: 2px solid var(--accent-lift);
+      padding: var(--space-24);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    }
+    .hero-card-head {
+      font-size: var(--t--1); font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent-lift);
+      padding-bottom: var(--space-12); margin-bottom: var(--space-16);
+      border-bottom: 1px solid var(--rule-dark);
+    }
+    /* minmax(0,1fr) rather than 1fr: plain 1fr is minmax(auto,1fr), which lets
+       "Largest fund audited" set the column width and makes the row ragged. */
+    .hero-card-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-16); }
+    .hero-card-stats dt { font-size: var(--t--1); color: var(--on-dark-3); line-height: 1.3; }
+    .hero-card-stats dd {
+      font-family: var(--ff-display); font-size: 1.75rem; font-weight: 600;
+      color: var(--on-dark-1); line-height: 1; margin-top: var(--space-4);
+    }
+    .hero-card-rows { margin-top: var(--space-24); border-top: 1px solid var(--rule-dark); }
+    .hero-card-rows > div {
+      display: grid; grid-template-columns: 5.5rem 1fr; gap: var(--space-12);
+      padding: var(--space-12) 0; border-bottom: 1px solid var(--rule-dark-soft);
+      font-size: var(--t--1); line-height: 1.45;
+    }
+    .hero-card-rows > div:last-child { border-bottom: none; }
+    .hero-card-rows span:first-child { color: var(--on-dark-3); }
+    .hero-card-rows span:last-child  { color: var(--on-dark-2); }
+    .hero-card-authz {
+      margin-top: var(--space-16); padding-top: var(--space-16);
+      border-top: 1px solid var(--rule-dark);
+      font-size: 0.875rem; line-height: 1.55; color: var(--on-dark-2);
+    }
+    .hero-card-authz strong {
+      display: block; color: var(--accent-lift); font-weight: 600;
+      font-size: var(--t--1); letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: var(--space-8);
+    }
+    /* Below the two-column threshold the rail returns to the single flow. */
+    @media (max-width: 1024px) {
+      .hero-card { margin-top: var(--space-40); }
+      .hero-card-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+    @media (max-width: 560px) {
+      .hero-card-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-20); }
+      .hero-card-rows > div { grid-template-columns: 1fr; gap: var(--space-4); }
+    }
 
     /* EXPERIENCE — meta rail carries dates and the standards sidenote */
     .role { padding-block: var(--s-7); border-top: 1px solid var(--rule-soft); row-gap: var(--s-4); }
@@ -91,6 +141,30 @@
       .role-tags { flex-direction: row; flex-wrap: wrap; gap: var(--s-2); }
     }
 
+
+    /* Experience runs 5.5 screens on a phone. The four earlier entries collapse
+       there. `open` is in the markup and only removed by JS on small screens,
+       so nothing is hidden from a reader without JS, or from search. */
+    .roles-earlier { grid-column: 1 / -1; }
+    .roles-earlier > summary { display: none; }
+    .roles-earlier[open] > summary { display: none; }
+    @media (max-width: 768px) {
+      .roles-earlier > summary,
+      .roles-earlier[open] > summary {
+        display: flex; align-items: baseline; justify-content: space-between;
+        gap: var(--s-4); list-style: none; cursor: pointer;
+        padding-block: var(--s-5); border-top: 1px solid var(--rule-soft);
+        min-height: 44px;
+      }
+      .roles-earlier > summary::-webkit-details-marker { display: none; }
+      .roles-earlier-label {
+        font-size: var(--t--1); font-weight: 600; letter-spacing: 0.06em;
+        text-transform: uppercase; color: var(--accent);
+      }
+      .roles-earlier-label::after { content: ' 93'; }
+      .roles-earlier[open] .roles-earlier-label::after { content: ' 91'; }
+      .roles-earlier-meta { font-size: var(--t--1); color: var(--ink-3); }
+    }
     /* TECHNICAL — the depth he wants foregrounded */
     .tech { row-gap:1px; background: var(--rule-soft); border: 1px solid var(--rule-soft); }
     .tech-row { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 2.4fr; gap: var(--s-5); background: var(--surface-2); padding: var(--s-5); }
@@ -107,6 +181,9 @@
 
     /* WRITING — .posts / .post-row now live in styles.css (shared with writing.html) */
     .posts .post-row { grid-column: 1 / -1; }
+    .writing-more { margin-top: var(--s-5); }
+    /* standalone link, so it needs the 24px target the inline ones are exempt from */
+    .writing-more a { display: inline-flex; align-items: center; min-height: 24px; }
 
     /* PERSONAL — placed late, after the technical proof has landed */
     .personal-photo { grid-column: 1 / 5; }
@@ -136,6 +213,7 @@
     }
 
     /* CONTACT */
+    .contact-eyebrow { grid-column: 1 / -1; margin-bottom: var(--s-4); }
     .contact-h { grid-column: 1 / 9; font-size: var(--t-3); color: var(--on-dark-1); margin-bottom: var(--s-4); }
     .contact-p { grid-column: 1 / 7; font-size: var(--t-0); line-height: 1.65; color: var(--on-dark-2); margin-bottom: var(--s-6); }
     .contact-actions { grid-column: 1 / -1; display: flex; gap: var(--s-3); flex-wrap: wrap; }
@@ -191,35 +269,49 @@
 
     <!-- HERO -->
     <header class="hero on-ink" id="hero">
-      <div class="shell grid">
-        <div class="hero-badge">
-          <span class="hero-dot pulse" aria-hidden="true"></span>
-          <span>Open to roles in the Netherlands</span>
+      <div class="shell hero-grid">
+        <div class="hero-main">
+          <div class="hero-badge">
+            <span class="hero-dot pulse" aria-hidden="true"></span>
+            <span>Open to roles in the Netherlands</span>
+          </div>
+
+          <h1 class="hero-name">Pratik Parashar</h1>
+          <p class="hero-role">Senior Auditor, Financial Services &middot; KPMG Netherlands</p>
+
+          <p class="hero-lede">I audit financial services. Private equity and infrastructure funds, insurers, banks.</p>
+          <p class="hero-sub">Seven years in audit, four of them on fund structures. The work I do best is the judgement-heavy part: pulling apart a valuation model, testing whether the assumptions hold, and saying so when they don't.</p>
+
+          <div class="hero-actions">
+            <a href="#experience" class="btn btn--primary">See the work</a>
+            <a href="Pratik_Parashar_CV.pdf" class="btn btn--on-ink" download>Download CV</a>
+          </div>
         </div>
 
-        <h1 class="hero-name">Pratik Parashar</h1>
-        <p class="hero-role">Senior Auditor, Financial Services &middot; KPMG Netherlands</p>
+        <!-- Right rail. Carries the numbers and the permit status that used to
+             sit below the fold at every desktop width, and fills the 43% of the
+             hero canvas that was empty beside the text column. -->
+        <aside class="hero-card" aria-label="At a glance">
+          <div class="hero-card-head">At a glance</div>
 
-        <p class="hero-lede">I audit financial services. Private equity and infrastructure funds, insurers, banks.</p>
-        <p class="hero-sub">Seven years in audit. Four of them on fund structures: valuations, NAV, carried interest, Level&nbsp;I/II/III investments. The three before that were broad statutory audit across consumer goods, spirits, automotive, retail and technology, in India and for UK and Ireland clients. The work I do best is the judgement-heavy part. Pulling apart a valuation model, testing whether the assumptions hold, and saying so when they don't.</p>
+          <dl class="hero-card-stats">
+            <div><dt>Years in audit</dt><dd>7</dd></div>
+            <div><dt>Largest fund audited</dt><dd>&euro;7bn</dd></div>
+            <div><dt>Reporting frameworks</dt><dd>4</dd></div>
+            <div><dt>Countries</dt><dd>2</dd></div>
+          </dl>
 
-        <div class="hero-actions">
-          <a href="#experience" class="btn btn--primary">See the work</a>
-          <a href="Pratik_Parashar_CV.pdf" class="btn btn--on-ink" download>Download CV</a>
-          <a href="#contact" class="btn btn--on-ink">Get in touch</a>
-        </div>
+          <div class="hero-card-rows">
+            <div><span>Funds</span><span>DIF &mdash; &euro;7bn infrastructure fund, valuations owned end to end</span></div>
+            <div><span>Insurance</span><span>ASR &mdash; two entity audits, run start to finish</span></div>
+            <div><span>Frameworks</span><span>IFRS &middot; US&nbsp;GAAP &middot; Dutch&nbsp;GAAP &middot; Ind&nbsp;AS</span></div>
+          </div>
 
-        <div class="facts">
-          <div class="fact"><div class="fact-num">7</div><div class="fact-label">Years in audit</div></div>
-          <div class="fact"><div class="fact-num">&euro;7bn</div><div class="fact-label">Largest fund audited</div></div>
-          <div class="fact"><div class="fact-num">4</div><div class="fact-label">Reporting frameworks</div></div>
-          <div class="fact"><div class="fact-num">2</div><div class="fact-label">Countries</div></div>
-        </div>
-
-        <div class="authz">
-          <div class="authz-label">Work authorisation</div>
-          <p>Already living and working in the Netherlands on a highly skilled migrant permit. A move means transferring the sponsorship to another IND recognised employer. It is not a new application from abroad, and no relocation is involved.</p>
-        </div>
+          <div class="hero-card-authz">
+            <strong>Work authorisation</strong>
+            Highly skilled migrant permit, already held. A move transfers sponsorship to another IND recognised employer. No relocation, and not a new application from abroad.
+          </div>
+        </aside>
       </div>
     </header>
 
@@ -280,6 +372,8 @@
           </div>
         </article>
 
+        <details class="roles-earlier" open>
+          <summary><span class="roles-earlier-label">Earlier roles</span><span class="roles-earlier-meta">2014&ndash;2020 &middot; 4 entries</span></summary>
         <article class="grid role role--quiet reveal">
           <div class="role-meta">
             <div class="role-date">Nov 2019 &ndash;<br>Mar 2020</div>
@@ -340,6 +434,7 @@
             <p>iXBRL tagging of financial statements for UK and Ireland clients, for regulatory submission.</p>
           </div>
         </article>
+        </details>
       </div>
     </section>
 
@@ -398,28 +493,28 @@
           <p class="lede reveal">Notes on audit, automation, and moving countries. Written for people who do this work.</p>
         </div>
         <div class="grid posts reveal">
+          <a class="post-row" href="blog-variance-5.html">
+            <span class="post-date">Aug 2026</span>
+            <span><span class="post-title">What It Can't Do: The Limits of the Tool</span><span class="post-note">Where the variance generator falls over, and why most of it comes down to context the ledger never had.</span></span>
+            <span class="post-read">7 min</span>
+          </a>
           <a class="post-row" href="blog-variance-4.html">
             <span class="post-date">May 2026</span>
             <span><span class="post-title">The Rebuild: From Three Tabs to Nine</span><span class="post-note">A transaction trail, a P&amp;L bridge, and the prompt design that fixed the hallucination problem.</span></span>
             <span class="post-read">14 min</span>
-          </a>
-          <a class="post-row" href="blog-controller.html">
-            <span class="post-date">Mar 2026</span>
-            <span><span class="post-title">The Controller Role Is Being Redefined</span><span class="post-note">Controller upper-range salaries fell 21% in a year. The market is saying something.</span></span>
-            <span class="post-read">7 min</span>
           </a>
           <a class="post-row" href="blog-india-nl.html">
             <span class="post-date">Apr 2026</span>
             <span><span class="post-title">From India to the Netherlands</span><span class="post-note">I didn't research the culture. I didn't have a plan. I had 75-hour weeks and enough of them.</span></span>
             <span class="post-read">8 min</span>
           </a>
-          <a class="post-row" href="blog-ai-agents.html">
+          <a class="post-row" href="blog-controller.html">
             <span class="post-date">Mar 2026</span>
-            <span><span class="post-title">Why I Pitched AI Agents at Work</span><span class="post-note">A 40-hour job done in 40 minutes, and what happened after I showed people.</span></span>
-            <span class="post-read">6 min</span>
+            <span><span class="post-title">The Controller Role Is Being Redefined</span><span class="post-note">Controller upper-range salaries fell 21% in a year. The market is saying something.</span></span>
+            <span class="post-read">7 min</span>
           </a>
         </div>
-        <p style="margin-top: var(--s-5);"><a href="writing.html" class="link-quiet">All writing</a></p>
+        <p class="writing-more"><a href="writing.html" class="link-quiet">All writing</a></p>
       </div>
     </section>
 
@@ -450,7 +545,7 @@
     <!-- CONTACT -->
     <section class="section section--ink on-ink" id="contact">
       <div class="shell grid">
-        <p class="eyebrow" style="grid-column: 1 / -1; margin-bottom: var(--s-4);">Contact</p>
+        <p class="eyebrow contact-eyebrow">Contact</p>
         <h2 class="contact-h">Open to audit, controls,<br>reporting and controlling roles.</h2>
         <p class="contact-p">External audit, internal audit and controls, financial reporting, financial control, and fund accounting. Netherlands, hybrid or on site. If you are hiring for any of those and the profile fits, I would like to hear from you.</p>
         <div class="contact-actions">
@@ -483,7 +578,8 @@
 
   <script>
     document.documentElement.classList.add('js');
-    document.getElementById('year').textContent = new Date().getFullYear();
+    var yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
     (function () {
       var nav = document.getElementById('mainNav');
@@ -542,6 +638,79 @@
         });
       }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
       Array.prototype.forEach.call(els, function (el) { obs.observe(el); });
+    })();
+
+    // Collapse the earlier roles on small screens only. The markup ships open,
+    // so this can only ever remove content that JS is present to restore.
+    (function () {
+      var d = document.querySelector('.roles-earlier');
+      if (!d) return;
+      var mq = matchMedia('(max-width: 768px)');
+      var touched = false;
+      function apply() {
+        if (mq.matches) { if (!touched) { d.open = false; touched = true; } }
+        else { d.open = true; touched = false; }
+      }
+      apply();
+      mq.addEventListener ? mq.addEventListener('change', apply) : mq.addListener(apply);
+    })();
+
+    // Scroll-spy on the primary nav. The nav carries four in-page anchors and
+    // gave no feedback about which section you were in; the blog pages already
+    // did this for their table of contents, so this is the same idea applied
+    // to the one nav that every visitor uses.
+    (function () {
+      // :not(.btn) — "Get in touch" is an action, not a section marker, and
+      // marking it aria-current made a screen reader announce the CTA as the
+      // current location.
+      var links = [].slice.call(document.querySelectorAll(
+        '.nav-links > li > a:not(.btn)[href^="#"], .mobile-menu a:not(.btn)[href^="#"]'));
+      if (!links.length || !('IntersectionObserver' in window)) return;
+
+      var byId = {};
+      var sections = [];
+      links.forEach(function (a) {
+        var id = a.getAttribute('href').slice(1);
+        var sec = document.getElementById(id);
+        if (!sec) return;
+        (byId[id] = byId[id] || []).push(a);
+        if (sections.indexOf(sec) === -1) sections.push(sec);
+      });
+      if (!sections.length) return;
+
+      var current = null;
+      function mark(id) {
+        if (id === current) return;
+        current = id;
+        links.forEach(function (a) { a.removeAttribute('aria-current'); });
+        (byId[id] || []).forEach(function (a) { a.setAttribute('aria-current', 'true'); });
+      }
+
+      // Containment, not last-passed. Last-passed kept "Automation" lit all the
+      // way through Writing and Personal, because neither has a nav entry, and
+      // a nav that claims you are somewhere you are not is worse than a nav
+      // that admits it does not know.
+      function pick() {
+        var line = window.innerHeight * 0.3;
+        var hit = null;
+        sections.forEach(function (s) {
+          var r = s.getBoundingClientRect();
+          if (r.top <= line && r.bottom > line) hit = s;
+        });
+        if (!hit || window.scrollY < 40) {
+          if (current !== null) {
+            current = null;
+            links.forEach(function (a) { a.removeAttribute('aria-current'); });
+          }
+          return;
+        }
+        mark(hit.id);
+      }
+
+      var obs = new IntersectionObserver(pick, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+      sections.forEach(function (s) { obs.observe(s); });
+      window.addEventListener('scroll', pick, { passive: true });
+      pick();
     })();
 
     // Scroll to top
