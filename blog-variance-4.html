@@ -91,6 +91,7 @@
         <span class="tag">Finance × AI: In Practice</span>
         <span class="tag-series">Post 4 of 5</span>
         <span class="hero-date">May 2026</span>
+        <span class="hero-read">14 min read</span>
       </div>
       <h1>The Rebuild: From Three Tabs to Nine, And the <em>One Thing That Surprised Me</em></h1>
       <p class="hero-deck">v1 was thrown out at the end of Post 3. This is what got built in its place. Nine Excel tabs. An interactive HTML dashboard. A 1,388-line Python script. And a design choice in the prompt that solved the hallucination problem in a way I didn't see coming.</p>
@@ -111,7 +112,7 @@
 
       <p class="reveal">Post 3 ended on a hard sentence. The v1 wasn't earning its place. A junior analyst with a calculator could match it. The tool described variances in isolation, never connected the dots between the P&amp;L and the balance sheet, and produced a deliverable a finance director would hand back without reading.</p>
 
-      <p class="reveal">This post is what came next. The rebuild that took the v1 from three tabs to nine, from 250 lines of Python to 1,388, from one prompt rule to four mandatory section headers.<a href="#source-1" class="src-ref" id="ref-1">[1]</a> Multiple iterations, several broken charts, a long fight with sign conventions, and one design choice in the AI prompt that turned the most-feared weakness of LLMs into the most useful feature of the tool.</p>
+      <p class="reveal">This post is what came next. The rebuild that took the v1 from three tabs to nine, from 250 lines of Python to 1,388, from one prompt rule to four mandatory section headers.<sup class="fn-ref"><a id="fnref-1" href="#fn-1" role="doc-noteref">1</a></sup> Multiple iterations, several broken charts, a long fight with sign conventions, and one design choice in the AI prompt that turned the most-feared weakness of LLMs into the most useful feature of the tool.</p>
 
       <p class="reveal">I'll walk through the changes in the order I'd want a finance reader to encounter them. Then the part that surprised me. Then what's coming in Post 5.</p>
 
@@ -139,11 +140,11 @@
 
       <p class="reveal">First thing the reader sees on Tab 01: the headline P&amp;L numbers laid out as KPI tiles, with delta arrows, prior-year comparisons, and a written executive summary directly below. No scrolling, no hunting, no reading prose to find the number. The numbers are right there. The narrative explains them.</p>
 
-      <div class="screenshot-slot expandable reveal" data-caption="vfinal Tab 01: Executive Summary with KPI tiles and the AI-written executive paragraph">
-        <div class="screenshot-slot-header">Screenshot · Tab 01 Executive Summary <span class="expand-hint">click to expand</span></div>
+      <figure class="fig fig--zoom reveal" data-caption="vfinal Tab 01: Executive Summary with KPI tiles and the AI-written executive paragraph">
+        <figcaption class="fig-label">Screenshot · Tab 01 Executive Summary<span class="fig-hint">click to expand</span></figcaption>
         <img src="screenshot-vfinal-01-executive-summary.png" alt="Excel screenshot of the vfinal Tab 01 Executive Summary. KPI tiles at the top show Net Revenue 8,595,565 (up 9.7%), Gross Profit 5,926,350 (up 11.0%), EBITDA 1,907,352 (up 25.3%), and GP Margin 68.9% (up 0.8 percentage points). Below the tiles, an AI-written executive summary paragraph and a Top P&L Variances table." width="1400" height="574" loading="eager" decoding="async" />
-        <div class="screenshot-slot-caption">Tab 01. KPI tiles, AI-written executive summary, top P&amp;L variances ranked by absolute impact. The opening view sets the tone for everything below.</div>
-      </div>
+        <figcaption>Tab 01. KPI tiles, AI-written executive summary, top P&amp;L variances ranked by absolute impact. The opening view sets the tone for everything below.</figcaption>
+      </figure>
 
       <p class="reveal">v1 had nothing like this. v1 dropped the reader into a single block of narrative text. vfinal opens with a structured visual answer to the implicit board question: how did we do this year, and how does it compare to last? That question is answered before the reader has read a single sentence.</p>
 
@@ -169,7 +170,7 @@
 }</pre>
       </div>
 
-      <p class="reveal">This is also how a Big-4 audit team actually scopes materiality. Different account categories carry different sensitivities, and a single number across the whole ledger is a sign someone hasn't thought about it. The dictionary is configurable<a href="#source-2" class="src-ref" id="ref-2">[2]</a>, sits at the top of the script, and gets reproduced verbatim into the methodology tab so any reviewer can audit the choices.</p>
+      <p class="reveal">This is also how a Big-4 audit team actually scopes materiality. Different account categories carry different sensitivities, and a single number across the whole ledger is a sign someone hasn't thought about it. The dictionary is configurable<sup class="fn-ref"><a id="fnref-2" href="#fn-2" role="doc-noteref">2</a></sup>, sits at the top of the script, and gets reproduced verbatim into the methodology tab so any reviewer can audit the choices.</p>
 
       <h2 class="reveal">The sign convention had to be hardcoded into the prompt</h2>
 
@@ -192,11 +193,11 @@ An ADVERSE variance on a cost account means Variance &lt; 0
 
       <p class="reveal">The biggest functional gap in v1: a reader couldn't ask "where did this number come from?" without going back to the source files. vfinal closes that gap with a dedicated tab that explodes every material variance into the GL transactions that drove it.</p>
 
-      <div class="screenshot-slot expandable reveal" data-caption="vfinal Tab 06: Transaction Audit Trail showing GL evidence for each material P&L variance, broken down by transaction type and sub-category">
-        <div class="screenshot-slot-header">Screenshot · Tab 06 Transaction Trail <span class="expand-hint">click to expand</span></div>
+      <figure class="fig fig--zoom reveal" data-caption="vfinal Tab 06: Transaction Audit Trail showing GL evidence for each material P&L variance, broken down by transaction type and sub-category">
+        <figcaption class="fig-label">Screenshot · Tab 06 Transaction Trail<span class="fig-hint">click to expand</span></figcaption>
         <img src="screenshot-vfinal-06-transaction-trail.png" alt="Excel screenshot of vfinal Tab 06 Transaction Audit Trail. Each material P&L variance has a coloured header with totals, then a table showing Transaction Type, Sub-Category, FY 2020 Amount, FY 2021 Amount, and Variance. Sales shows Credit Sales and Cash Sales drivers. Cost of Sales, Staff Costs, Commissions, and Taxation each have their own breakdown blocks." width="1400" height="575" loading="lazy" decoding="async" />
-        <div class="screenshot-slot-caption">Tab 06. Every claim in the AI commentary above is grounded in a row on this tab. Every line item that hits materiality gets exploded into transaction-type sub-categories. The "verify before sharing" instruction at the top is the audit trail pattern from Big 4 made literal.</div>
-      </div>
+        <figcaption>Tab 06. Every claim in the AI commentary above is grounded in a row on this tab. Every line item that hits materiality gets exploded into transaction-type sub-categories. The "verify before sharing" instruction at the top is the audit trail pattern from Big 4 made literal.</figcaption>
+      </figure>
 
       <p class="reveal">This is the tab that earned the loudest reaction when I showed it to colleagues. It's not particularly clever. It's just a careful aggregation of the underlying GL transactions, sorted and presented in a form a reviewer can scan. But it's the difference between "the AI said this" and "the AI said this and here's where the number lives." That difference is everything in finance.</p>
 
@@ -208,19 +209,19 @@ An ADVERSE variance on a cost account means Variance &lt; 0
 
       <p class="reveal">The first is the P&amp;L Bridge, which walks line by line from Net Revenue down to EBITDA. Each line shows Y0, Y1, the movement, and the percentage. There's a waterfall chart at the bottom of the same tab. A finance reader can see in twenty seconds where the EBITDA movement came from before reading a single sentence of the AI narrative.</p>
 
-      <div class="screenshot-slot expandable reveal" data-caption="vfinal Tab 03: P&L Bridge from Net Revenue to EBITDA, with a waterfall chart">
-        <div class="screenshot-slot-header">Screenshot · Tab 03 P&amp;L Bridge <span class="expand-hint">click to expand</span></div>
+      <figure class="fig fig--zoom reveal" data-caption="vfinal Tab 03: P&L Bridge from Net Revenue to EBITDA, with a waterfall chart">
+        <figcaption class="fig-label">Screenshot · Tab 03 P&amp;L Bridge<span class="fig-hint">click to expand</span></figcaption>
         <img src="screenshot-vfinal-03-pl-bridge.png" alt="Excel screenshot of vfinal Tab 03 P&L Bridge. A table walks from Net Revenue (8,595,565) through Cost of Sales, to Gross Profit (5,926,350), then through Sales and Distribution, Marketing, and Administration, ending at EBITDA (1,907,352). Each line shows FY 2020, FY 2021, Movement, and Movement percentage. Below the table, a waterfall chart visualises the bridge." width="1400" height="575" loading="lazy" decoding="async" />
-        <div class="screenshot-slot-caption">Tab 03. The P&amp;L Bridge. Every row is a formula, not a hardcoded value. The waterfall below shows the same data visually. This is the tab that lets a CFO see the EBITDA story in one screen.</div>
-      </div>
+        <figcaption>Tab 03. The P&amp;L Bridge. Every row is a formula, not a hardcoded value. The waterfall below shows the same data visually. This is the tab that lets a CFO see the EBITDA story in one screen.</figcaption>
+      </figure>
 
       <p class="reveal">The second is the Balance Sheet Flux tab. Every balance sheet account, with movement, percentage, and a status note. One-off events (share capital movements, long-term liability settlements) are flagged separately. Below-materiality movements are explicitly labelled "no action required" rather than being hidden, because hiding them would cost the reviewer the ability to verify what wasn't acted on.</p>
 
-      <div class="screenshot-slot expandable reveal" data-caption="vfinal Tab 05: Balance Sheet Flux, showing every BS account with movement, percentage, and a status note">
-        <div class="screenshot-slot-header">Screenshot · Tab 05 Balance Sheet Flux <span class="expand-hint">click to expand</span></div>
+      <figure class="fig fig--zoom reveal" data-caption="vfinal Tab 05: Balance Sheet Flux, showing every BS account with movement, percentage, and a status note">
+        <figcaption class="fig-label">Screenshot · Tab 05 Balance Sheet Flux<span class="fig-hint">click to expand</span></figcaption>
         <img src="screenshot-vfinal-05-balance-sheet-flux.png" alt="Excel screenshot of vfinal Tab 05 Balance Sheet Flux. Each balance sheet account is listed with FY 2020, FY 2021, Movement, Movement percentage, and a Note column. Material movements are labelled 'verify with controller', below-threshold movements show 'Below BS materiality threshold, no action required', and one-off Y0 events with no Y1 equivalent are flagged separately. A footer warns that BS movements reflect GL aggregation only and may need controller review for accruals and reclassifications." width="1400" height="574" loading="lazy" decoding="async" />
-        <div class="screenshot-slot-caption">Tab 05. Balance Sheet Flux. The footer note is critical: the tool aggregates GL data, but accruals and reclassifications are out of scope and need a human. The tab is honest about what it can and can't see.</div>
-      </div>
+        <figcaption>Tab 05. Balance Sheet Flux. The footer note is critical: the tool aggregates GL data, but accruals and reclassifications are out of scope and need a human. The tab is honest about what it can and can't see.</figcaption>
+      </figure>
 
       <p class="reveal">A reader can now hold the P&amp;L tab next to the BS Flux tab and check the connections from Post 3. Did profit increase? Yes, EBITDA up 25.3%. Did retained earnings move accordingly? Tab 05 shows retained earnings at +0.1%, flagged as below threshold. The connection isn't holding cleanly, which means something happened (a dividend, a reclassification) that warrants a controller's attention. That's exactly the kind of cross-statement question a board reader is supposed to ask. The tool surfaces it without claiming to answer it.</p>
 
@@ -333,7 +334,7 @@ Every claim traceable to the data above.</span></pre>
 
       <p class="reveal">This is what makes the tool feel grown-up to a finance audience. Most AI demos fail because the AI is confident about everything. This one ends with five honest questions. The reviewer doesn't have to play "spot the hallucination." The tool has already drawn the line for them.</p>
 
-      <p class="reveal">The design choice didn't come from engineering. It came from audit. Every audit reviewer carries the instinct of "what would I ask the client about this number?" and the Management Input Required section is just that instinct made explicit in the prompt.<a href="#source-3" class="src-ref" id="ref-3">[3]</a> The AI surfaces five questions because that's what a thoughtful auditor would surface. The tool's biggest weakness (limited context) becomes its most useful feature (a structured questionnaire for the controller) by reframing what we're asking the model to do when it hits its limits.</p>
+      <p class="reveal">The design choice didn't come from engineering. It came from audit. Every audit reviewer carries the instinct of "what would I ask the client about this number?" and the Management Input Required section is just that instinct made explicit in the prompt.<sup class="fn-ref"><a id="fnref-3" href="#fn-3" role="doc-noteref">3</a></sup> The AI surfaces five questions because that's what a thoughtful auditor would surface. The tool's biggest weakness (limited context) becomes its most useful feature (a structured questionnaire for the controller) by reframing what we're asking the model to do when it hits its limits.</p>
 
       <h2 class="reveal">What's coming in Post 5</h2>
 
@@ -351,21 +352,23 @@ Every claim traceable to the data above.</span></pre>
         <div class="github-cta-arrow">↗</div>
       </a>
 
-      <div class="sources reveal">
-        <div class="sources-title">Notes</div>
-        <div class="source-item" id="source-1">
-          <span class="source-num">1</span>
-          <span class="source-text">vfinal is internally labelled v6.0 in the script. Six is the iteration count, not a marketing version. The earlier numbered versions covered the bug fixes in the iteration log above plus a few that didn't make this post. Naming convention: vfinal is what's running now and what's in the public repo. <a href="#ref-1" class="source-back">back to text</a></span>
-        </div>
-        <div class="source-item" id="source-2">
-          <span class="source-num">2</span>
-          <span class="source-text">The materiality threshold table is configurable, sitting at the top of <code>analyse_template.py</code>. A finance team using this tool against their own GL would adjust the absolute and percentage values to match their own risk tolerance. The current values are calibrated to the sample dataset. <a href="#ref-2" class="source-back">back to text</a></span>
-        </div>
-        <div class="source-item" id="source-3">
-          <span class="source-num">3</span>
-          <span class="source-text">The Management Input Required pattern has a name in the LLM literature: it's a form of <em>structured uncertainty surfacing</em>, related to but distinct from chain-of-thought prompting. The version in this tool is unusually concrete because finance reviewers want specific numbers tied to specific questions, not generic confidence scores. <a href="#ref-3" class="source-back">back to text</a></span>
-        </div>
-      </div>
+      <section class="footnotes reveal" role="doc-endnotes" aria-labelledby="fn-heading">
+        <h2 class="footnotes-title" id="fn-heading">Notes</h2>
+        <ol>
+          <li id="fn-1">
+            <span class="fn-body">vfinal is internally labelled v6.0 in the script. Six is the iteration count, not a marketing version. The earlier numbered versions covered the bug fixes in the iteration log above plus a few that didn't make this post. Naming convention: vfinal is what's running now and what's in the public repo.</span>
+            <span class="fn-backs"><a class="fn-back" href="#fnref-1" role="doc-backlink" aria-label="Back to reference 1">&#8617;</a></span>
+          </li>
+          <li id="fn-2">
+            <span class="fn-body">The materiality threshold table is configurable, sitting at the top of <code>analyse_template.py</code>. A finance team using this tool against their own GL would adjust the absolute and percentage values to match their own risk tolerance. The current values are calibrated to the sample dataset.</span>
+            <span class="fn-backs"><a class="fn-back" href="#fnref-2" role="doc-backlink" aria-label="Back to reference 2">&#8617;</a></span>
+          </li>
+          <li id="fn-3">
+            <span class="fn-body">The Management Input Required pattern has a name in the LLM literature: it's a form of <em>structured uncertainty surfacing</em>, related to but distinct from chain-of-thought prompting. The version in this tool is unusually concrete because finance reviewers want specific numbers tied to specific questions, not generic confidence scores.</span>
+            <span class="fn-backs"><a class="fn-back" href="#fnref-3" role="doc-backlink" aria-label="Back to reference 3">&#8617;</a></span>
+          </li>
+        </ol>
+      </section>
 
       <div class="post-signoff">
         <p>Next post: what the tool still can't do, and why those limits matter more than the capabilities. Find me on <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn</a> if you want to follow along, or if you've built something similar and want to compare notes on the management-input-required pattern.</p>
@@ -375,7 +378,7 @@ Every claim traceable to the data above.</span></pre>
         <img src="pratik.jpg" data-full="pratik-full.jpg" alt="Pratik Parashar" width="216" height="216" loading="lazy" decoding="async" />
         <div class="author-info">
           <div class="name">Pratik Parashar</div>
-          <p class="bio">Senior Auditor, Financial Services at KPMG Netherlands. Seven years in audit across India and the Netherlands, four of them on private equity and infrastructure funds. Writing a variance commentary tool in public. Open to audit, controls, reporting and controlling roles in the Netherlands. <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn &rarr;</a></p>
+          <p class="bio">Senior Auditor, Financial Services at KPMG Netherlands. Seven years in audit across India and the Netherlands, four of them on private equity and infrastructure funds. Open to audit, controls, reporting and controlling roles in the Netherlands. <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn &rarr;</a></p>
         </div>
       </div>
 
@@ -593,13 +596,13 @@ Every claim traceable to the data above.</span></pre>
       }
 
       Array.prototype.forEach.call(
-        document.querySelectorAll('.screenshot-slot.expandable img'),
+        document.querySelectorAll('.fig--zoom img'),
         function (el) {
           el.setAttribute('tabindex', '0');
           el.setAttribute('role', 'button');
           el.setAttribute('aria-label', 'Expand screenshot: ' + (el.getAttribute('alt') || 'image').slice(0, 80));
           function fire() {
-            var slot = el.closest('.screenshot-slot');
+            var slot = el.closest('.fig--zoom');
             open(el.src, el.alt, slot ? (slot.getAttribute('data-caption') || '') : '', el);
           }
           el.addEventListener('click', fire);

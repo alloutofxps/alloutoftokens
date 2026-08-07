@@ -91,6 +91,7 @@
         <span class="tag">Finance × AI: In Practice</span>
         <span class="tag-series">Post 5 of 5</span>
         <span class="hero-date">August 2026</span>
+        <span class="hero-read">7 min read</span>
       </div>
       <h1>What It Can't Do: The Limits of the <em>Variance Commentary Generator</em></h1>
       <p class="hero-deck">The last post in the build log. Where the tool falls over, why most of it comes down to context the ledger never had, and why none of it worries me much.</p>
@@ -217,7 +218,7 @@
         <img src="pratik.jpg" data-full="pratik-full.jpg" alt="Pratik Parashar" width="216" height="216" loading="lazy" decoding="async" />
         <div class="author-info">
           <div class="name">Pratik Parashar</div>
-          <p class="bio">Senior Auditor, Financial Services at KPMG Netherlands. Seven years in audit across India and the Netherlands, four of them on private equity and infrastructure funds. Wrote a variance commentary tool in public. Open to audit, controls, reporting and controlling roles in the Netherlands. <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn &rarr;</a></p>
+          <p class="bio">Senior Auditor, Financial Services at KPMG Netherlands. Seven years in audit across India and the Netherlands, four of them on private equity and infrastructure funds. Open to audit, controls, reporting and controlling roles in the Netherlands. <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn &rarr;</a></p>
         </div>
       </div>
 
@@ -435,13 +436,13 @@
       }
 
       Array.prototype.forEach.call(
-        document.querySelectorAll('.screenshot-slot.expandable img'),
+        document.querySelectorAll('.fig--zoom img'),
         function (el) {
           el.setAttribute('tabindex', '0');
           el.setAttribute('role', 'button');
           el.setAttribute('aria-label', 'Expand screenshot: ' + (el.getAttribute('alt') || 'image').slice(0, 80));
           function fire() {
-            var slot = el.closest('.screenshot-slot');
+            var slot = el.closest('.fig--zoom');
             open(el.src, el.alt, slot ? (slot.getAttribute('data-caption') || '') : '', el);
           }
           el.addEventListener('click', fire);

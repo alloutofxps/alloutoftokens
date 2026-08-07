@@ -173,8 +173,7 @@ h1, h2, h3, h4 {
   h1, h2, h3 { margin-block-start: -0.06em; }
 }
 
-a, button, [role="button"], summary, label[for],
-.screenshot-slot.expandable img { cursor: pointer; }
+a, button, [role="button"], summary, label[for] { cursor: pointer; }
 
 a { color: inherit; }
 img { max-width: 100%; height: auto; display: block; }
@@ -563,14 +562,12 @@ h2.section-title { font-size: var(--t-3); }
 .article-wrap .author-card .name { font-family: var(--ff-display); font-size: 1.25rem; font-weight: 600; color: var(--on-dark-1); }
 .article-wrap .author-card .bio { font-family: var(--ff-sans); font-size: 0.9375rem; color: var(--on-dark-2); line-height: 1.65; }
 .article-wrap .author-card .bio a { color: var(--accent-lift); }
-.article-wrap .source-text { font-family: var(--ff-sans); color: var(--ink-2); font-size: 0.9375rem; }
-.article-wrap .sources-title { font-family: var(--ff-sans); }
+
 .article-wrap .code-block pre { font-family: var(--ff-mono); font-size: 0.8125rem; }
 /* was bleeding 48px past the measure on both sides */
-.article-wrap .sources { margin-inline: 0; }
 
 /* was 10px at 2.96:1. The colour was fine; an inherited opacity was diluting it. */
-.expand-hint { color: var(--ink-3) !important; font-size: 0.8125rem !important; opacity: 1 !important; }
+
 /* --------------------------------------------------------------------------
    Lightbox. Lived inline on two posts only; promoted here so every page
    can expand an image (screenshots, and now the author photo).
@@ -628,14 +625,15 @@ h2.section-title { font-size: var(--t-3); }
 }
 .article-wrap table { max-width: none; }
 
-.screenshot-slot.expandable img { cursor: zoom-in; }
-.screenshot-slot.expandable img:focus-visible { outline: 2px solid var(--cta); outline-offset: 4px; }
-
 /* --------------------------------------------------------------------------
    11. Dark blog components — rebind the accent inside the subtree
    -------------------------------------------------------------------------- */
+/* .post-stats was missing here, which put the footnote markers inside it at
+   2.26:1 once they became links. Every dark component in article.css belongs
+   in this list. */
 .series-nav, .build-spec, .code-block, .author-card,
-.stat-hero, .stat-chip, .flow-diagram, .failure-log-header {
+.stat-hero, .stat-chip, .flow-diagram, .failure-log-header,
+.post-stats, .col-table thead th, .commentary-demo-table thead th {
   --accent: var(--accent-lift);
   --red:    var(--accent-lift);
   --mid:    var(--on-dark-3);

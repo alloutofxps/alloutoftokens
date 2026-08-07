@@ -91,6 +91,7 @@
         <span class="tag">Finance × AI: In Practice</span>
         <span class="tag-series">Post 2 of 5</span>
         <span class="hero-date">April 2026</span>
+        <span class="hero-read">6 min read</span>
       </div>
       <h1>The Architecture: What the Tool Needs to Do Before Writing a <em>Line of Code</em></h1>
       <p class="hero-deck">Before any Python, before any API calls. The input structure, output spec, and prompt decisions that will determine whether this tool is useful or just plausible-sounding.</p>
@@ -166,13 +167,13 @@
 
       <p class="reveal">openpyxl reads it flat. Python calculates nothing. The variances come in pre-calculated because if the input is already clean, the model can focus entirely on language rather than arithmetic it might get wrong.</p>
 
-      <p class="reveal">The deliberate constraint: no chart of accounts, no entity hierarchy, no dimension tables. This is a line-item tool. A standard P&amp;L has twelve to twenty items. Flat is readable, flat is testable, and flat means I can validate inputs without a schema validator. Aggregation is a post-v1 problem.<sup><a href="#source-1">1</a></sup></p>
+      <p class="reveal">The deliberate constraint: no chart of accounts, no entity hierarchy, no dimension tables. This is a line-item tool. A standard P&amp;L has twelve to twenty items. Flat is readable, flat is testable, and flat means I can validate inputs without a schema validator. Aggregation is a post-v1 problem.<sup class="fn-ref"><a id="fnref-1" href="#fn-1" role="doc-noteref">1</a></sup></p>
 
       <h2 class="reveal">What "finance-grade" actually means</h2>
 
       <p class="reveal">This is the part that matters more than any technical choice.</p>
 
-      <p class="reveal">When I say finance-grade commentary, I mean three specific things. First, directional specificity. Not "revenue increased" but "Revenue was €140k above budget, up 11.7%." The number has to be in the sentence. The direction has to be explicit. Second, no hallucinated context. The model can only speak to what's in the data. If I give it no reason for a variance, it cannot invent one. "Higher headcount" is not a valid output if headcount isn't in the input. This is the biggest failure mode in naive prompting, and the one I'm most worried about. Third, consistent structure. Each commentary block should follow the same logic: what moved, by how much, in which direction, against which benchmark. Finance people don't want creative variation in structure. They want something they can scan.<sup><a href="#source-2">2</a></sup></p>
+      <p class="reveal">When I say finance-grade commentary, I mean three specific things. First, directional specificity. Not "revenue increased" but "Revenue was €140k above budget, up 11.7%." The number has to be in the sentence. The direction has to be explicit. Second, no hallucinated context. The model can only speak to what's in the data. If I give it no reason for a variance, it cannot invent one. "Higher headcount" is not a valid output if headcount isn't in the input. This is the biggest failure mode in naive prompting, and the one I'm most worried about. Third, consistent structure. Each commentary block should follow the same logic: what moved, by how much, in which direction, against which benchmark. Finance people don't want creative variation in structure. They want something they can scan.<sup class="fn-ref"><a id="fnref-2" href="#fn-2" role="doc-noteref">2</a></sup></p>
 
       <p class="reveal">Here's what that looks like in practice. Same data point, two outputs.</p>
 
@@ -203,7 +204,7 @@
 
       <p class="reveal"><strong style="font-weight:600;">Sentence-level directives beat vague quality adjectives.</strong> "Write two sentences per line item" produces more consistent output than "write concise commentary." "Include the absolute variance in euros and the percentage variance in the first sentence" is more reliable than "be specific." The more structural the instruction, the less the model has to interpret. That's what you want here.</p>
 
-      <p class="reveal"><strong style="font-weight:600;">Why claude-sonnet-4-20250514.</strong> Fast enough for a P&amp;L-sized input, accurate enough for structured text generation. Extended thinking mode isn't worth it for this use case because the structure is doing the heavy lifting. The model's job is to fill a template reliably, not to reason through ambiguity. If the input is clean, Sonnet is the right call.<sup><a href="#source-3">3</a></sup></p>
+      <p class="reveal"><strong style="font-weight:600;">Why claude-sonnet-4-20250514.</strong> Fast enough for a P&amp;L-sized input, accurate enough for structured text generation. Extended thinking mode isn't worth it for this use case because the structure is doing the heavy lifting. The model's job is to fill a template reliably, not to reason through ambiguity. If the input is clean, Sonnet is the right call.<sup class="fn-ref"><a id="fnref-3" href="#fn-3" role="doc-noteref">3</a></sup></p>
 
       <h2 class="reveal">The flow</h2>
 
@@ -261,21 +262,23 @@
         <div class="github-cta-arrow">↗</div>
       </a>
 
-      <div class="sources reveal">
-        <div class="sources-title">Notes</div>
-        <div class="source-item" id="source-1">
-          <span class="source-num">1</span>
-          <span class="source-text">The decision to keep v1 flat is partly pragmatic, partly philosophical. Flat inputs are easier to validate and easier to explain. Once the core loop works, adding dimensional support (entity, period, segment) is additive rather than architectural. Start with a problem you can define cleanly.</span>
-        </div>
-        <div class="source-item" id="source-2">
-          <span class="source-num">2</span>
-          <span class="source-text">The hallucination risk in LLM-generated commentary isn't random fabrication, it's plausible fabrication. "Volume growth driven by new customer wins" is believable. It's also completely invented if the input doesn't include CRM data. The fix isn't model selection, it's prompt design: explicitly forbid inference beyond the data provided, and instruct the model to flag where driver context is missing rather than fill the gap.</span>
-        </div>
-        <div class="source-item" id="source-3">
-          <span class="source-num">3</span>
-          <span class="source-text">Model documentation: <a href="https://docs.anthropic.com/en/docs/about-claude/models" target="_blank" rel="noopener noreferrer">Anthropic model overview</a>. claude-sonnet-4-20250514 is the Sonnet generation used at time of writing.</span>
-        </div>
-      </div>
+      <section class="footnotes reveal" role="doc-endnotes" aria-labelledby="fn-heading">
+        <h2 class="footnotes-title" id="fn-heading">Notes</h2>
+        <ol>
+          <li id="fn-1">
+            <span class="fn-body">The decision to keep v1 flat is partly pragmatic, partly philosophical. Flat inputs are easier to validate and easier to explain. Once the core loop works, adding dimensional support (entity, period, segment) is additive rather than architectural. Start with a problem you can define cleanly.</span>
+            <span class="fn-backs"><a class="fn-back" href="#fnref-1" role="doc-backlink" aria-label="Back to reference 1">&#8617;</a></span>
+          </li>
+          <li id="fn-2">
+            <span class="fn-body">The hallucination risk in LLM-generated commentary isn't random fabrication, it's plausible fabrication. "Volume growth driven by new customer wins" is believable. It's also completely invented if the input doesn't include CRM data. The fix isn't model selection, it's prompt design: explicitly forbid inference beyond the data provided, and instruct the model to flag where driver context is missing rather than fill the gap.</span>
+            <span class="fn-backs"><a class="fn-back" href="#fnref-2" role="doc-backlink" aria-label="Back to reference 2">&#8617;</a></span>
+          </li>
+          <li id="fn-3">
+            <span class="fn-body">Model documentation: <a href="https://docs.anthropic.com/en/docs/about-claude/models" target="_blank" rel="noopener noreferrer">Anthropic model overview</a>. claude-sonnet-4-20250514 is the Sonnet generation used at time of writing.</span>
+            <span class="fn-backs"><a class="fn-back" href="#fnref-3" role="doc-backlink" aria-label="Back to reference 3">&#8617;</a></span>
+          </li>
+        </ol>
+      </section>
 
       <div class="post-signoff">
         <p>Next up: building it. The actual Python, the actual prompt in full, and whatever breaks first when I point it at real numbers. Find me on <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn</a> if you want to follow along or flag something I've got wrong.</p>
@@ -285,7 +288,7 @@
         <img src="pratik.jpg" data-full="pratik-full.jpg" alt="Pratik Parashar" width="216" height="216" loading="eager" decoding="async" />
         <div class="author-info">
           <div class="name">Pratik Parashar</div>
-          <p class="bio">Senior Auditor, Financial Services at KPMG Netherlands. Seven years in audit across India and the Netherlands, four of them on private equity and infrastructure funds. Writing a variance commentary tool in public. Open to audit, controls, reporting and controlling roles in the Netherlands. <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn &rarr;</a></p>
+          <p class="bio">Senior Auditor, Financial Services at KPMG Netherlands. Seven years in audit across India and the Netherlands, four of them on private equity and infrastructure funds. Open to audit, controls, reporting and controlling roles in the Netherlands. <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn &rarr;</a></p>
         </div>
       </div>
 
@@ -502,13 +505,13 @@
       }
 
       Array.prototype.forEach.call(
-        document.querySelectorAll('.screenshot-slot.expandable img'),
+        document.querySelectorAll('.fig--zoom img'),
         function (el) {
           el.setAttribute('tabindex', '0');
           el.setAttribute('role', 'button');
           el.setAttribute('aria-label', 'Expand screenshot: ' + (el.getAttribute('alt') || 'image').slice(0, 80));
           function fire() {
-            var slot = el.closest('.screenshot-slot');
+            var slot = el.closest('.fig--zoom');
             open(el.src, el.alt, slot ? (slot.getAttribute('data-caption') || '') : '', el);
           }
           el.addEventListener('click', fire);

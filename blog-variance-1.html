@@ -95,6 +95,7 @@
         <span class="tag">Finance × AI: In Practice</span>
         <span class="tag-series">Post 1 of 5</span>
         <span class="hero-date">April 2026</span>
+        <span class="hero-read">5 min read</span>
       </div>
       <h1>Why Writing Variance Commentary Is Still a <em>Manual Job</em> in 2026</h1>
       <p class="hero-deck">Month-end closes. Forty line items. A blank text box. I've watched this process from inside the balance sheets of banks and insurers for seven years. Now I want to find out how much of it an AI can handle — and where it still needs a human.</p>
@@ -201,7 +202,7 @@
 
       <p class="reveal">Every month-end, across finance teams everywhere, someone is doing this manually. In a large company, that's several people, across several reporting packs, for several different audiences. The FD version. The board version. The segment version. Each one slightly different, each one written from scratch.</p>
 
-      <p class="reveal">The time this takes is real. A typical month-end commentary cycle in a finance team of moderate size runs anywhere from half a day to a full one, just on narration — after the numbers are already clean.<sup>1</sup> The work is low judgment, high effort, and repeated every single month. Which is exactly the profile of something worth trying to automate.</p>
+      <p class="reveal">The time this takes is real. A typical month-end commentary cycle in a finance team of moderate size runs anywhere from half a day to a full one, just on narration — after the numbers are already clean.<sup class="fn-ref"><a id="fnref-1" href="#fn-1" role="doc-noteref">1</a></sup> The work is low judgment, high effort, and repeated every single month. Which is exactly the profile of something worth trying to automate.</p>
 
       <h2 class="reveal">What I'm going to build</h2>
 
@@ -254,13 +255,15 @@
       <p class="reveal">One question before then: if you work in FP&A or financial control, what does your month-end commentary process actually look like? How long does it take, who writes it, and what format does it end up in? Message me on LinkedIn — I want to build against the real version of this problem, not my assumed version of it.</p>
 
       <!-- Sources -->
-      <div class="sources reveal">
-        <div class="sources-title">Sources</div>
-        <div class="source-item" id="source-1">
-          <span class="source-num">1</span>
-          <span class="source-text">Gartner — <em>Finance Function Benchmark: Close and Consolidation Cycle Times</em> · Finance teams in the top quartile spend 4–6 days on close; commentary and narrative work accounts for a meaningful share of post-close time · <a href="https://www.gartner.com/en/finance/topics/financial-close" target="_blank" rel="noopener noreferrer">gartner.com</a></span>
-        </div>
-      </div>
+      <section class="footnotes reveal" role="doc-endnotes" aria-labelledby="fn-heading">
+        <h2 class="footnotes-title" id="fn-heading">Sources</h2>
+        <ol>
+          <li id="fn-1">
+            <span class="fn-body">Gartner — <em>Finance Function Benchmark: Close and Consolidation Cycle Times</em> · Finance teams in the top quartile spend 4–6 days on close; commentary and narrative work accounts for a meaningful share of post-close time · <a href="https://www.gartner.com/en/finance/topics/financial-close" target="_blank" rel="noopener noreferrer">gartner.com</a></span>
+            <span class="fn-backs"><a class="fn-back" href="#fnref-1" role="doc-backlink" aria-label="Back to reference 1">&#8617;</a></span>
+          </li>
+        </ol>
+      </section>
 
       <!-- Sign off -->
       <div class="post-signoff">
@@ -272,7 +275,7 @@
         <img src="pratik.jpg" data-full="pratik-full.jpg" alt="Pratik Parashar" width="216" height="216" loading="eager" decoding="async" />
         <div class="author-info">
           <div class="name">Pratik Parashar</div>
-          <p class="bio">Senior Auditor, Financial Services at KPMG Netherlands. Seven years in audit across India and the Netherlands, four of them on private equity and infrastructure funds. Writing a variance commentary tool in public. Open to audit, controls, reporting and controlling roles in the Netherlands. <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn &rarr;</a></p>
+          <p class="bio">Senior Auditor, Financial Services at KPMG Netherlands. Seven years in audit across India and the Netherlands, four of them on private equity and infrastructure funds. Open to audit, controls, reporting and controlling roles in the Netherlands. <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn &rarr;</a></p>
         </div>
       </div>
 
@@ -490,13 +493,13 @@
       }
 
       Array.prototype.forEach.call(
-        document.querySelectorAll('.screenshot-slot.expandable img'),
+        document.querySelectorAll('.fig--zoom img'),
         function (el) {
           el.setAttribute('tabindex', '0');
           el.setAttribute('role', 'button');
           el.setAttribute('aria-label', 'Expand screenshot: ' + (el.getAttribute('alt') || 'image').slice(0, 80));
           function fire() {
-            var slot = el.closest('.screenshot-slot');
+            var slot = el.closest('.fig--zoom');
             open(el.src, el.alt, slot ? (slot.getAttribute('data-caption') || '') : '', el);
           }
           el.addEventListener('click', fire);

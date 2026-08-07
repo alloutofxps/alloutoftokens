@@ -88,6 +88,7 @@
       <div class="hero-meta">
         <span class="tag">AI in Finance</span>
         <span class="hero-date">March 2026</span>
+        <span class="hero-read">7 min read</span>
       </div>
       <h1>Why I Pitched AI Agents at <em>Work</em> (And What Happened Next)</h1>
       <p class="hero-deck">A 40-hour job done in 40 minutes. Here's what happened when I actually tried pitching AI agents inside a Big-4 firm.</p>
@@ -222,8 +223,8 @@
       <p>Here's where things stand now.</p>
 
       <div class="post-stats">
-        <p>Across the financial services industry, AI agents are no longer a proof of concept. Early agentic AI deployments are already reducing manual workloads in finance functions by 30–50%.<sup>1</sup> And adoption is accelerating fast: 82% of midsize companies and 95% of PE firms have either begun or plan to implement agentic AI in their operations in 2026, with financial planning and analysis, fraud detection, and compliance monitoring leading the way.<sup>2</sup></p>
-        <p>The tools have moved too. The privacy constraints that stopped my work from going live inside the firm? Infrastructure is catching up to capability, and it's moving quickly.<sup>3</sup></p>
+        <p>Across the financial services industry, AI agents are no longer a proof of concept. Early agentic AI deployments are already reducing manual workloads in finance functions by 30–50%.<sup class="fn-ref"><a id="fnref-1" href="#fn-1" role="doc-noteref">1</a></sup> And adoption is accelerating fast: 82% of midsize companies and 95% of PE firms have either begun or plan to implement agentic AI in their operations in 2026, with financial planning and analysis, fraud detection, and compliance monitoring leading the way.<sup class="fn-ref"><a id="fnref-2" href="#fn-2" role="doc-noteref">2</a></sup></p>
+        <p>The tools have moved too. The privacy constraints that stopped my work from going live inside the firm? Infrastructure is catching up to capability, and it's moving quickly.<sup class="fn-ref"><a id="fnref-3" href="#fn-3" role="doc-noteref">3</a></sup></p>
         <p>What this means practically: the analysis I ran on a 350-page annual report in 40 minutes is not impressive anymore. That's the floor. The question now is what gets built on top of it.</p>
       </div>
 
@@ -237,21 +238,23 @@
 
       <p><strong>Where do you want to stand when this lands properly?</strong></p>
 
-      <div class="sources reveal">
-        <div class="sources-title">Sources</div>
-        <div class="source-item">
-          <span class="source-num">1</span>
-          <span class="source-text">McKinsey &amp; Company — <em>The state of AI in early 2025</em> · <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener noreferrer">mckinsey.com</a></span>
-        </div>
-        <div class="source-item">
-          <span class="source-num">2</span>
-          <span class="source-text">Citizens Bank — <em>2026 AI Trends in Financial Management</em> · <a href="https://www.citizensbank.com/corporate-finance/insights/ai-trends-financial-management-2026.aspx" target="_blank" rel="noopener noreferrer">citizensbank.com</a></span>
-        </div>
-        <div class="source-item">
-          <span class="source-num">3</span>
-          <span class="source-text">Neurons Lab — <em>Agentic AI in Financial Services: A Research Roundup for 2026</em> · <a href="https://neurons-lab.com/article/agentic-ai-in-financial-services-2026/" target="_blank" rel="noopener noreferrer">neurons-lab.com</a></span>
-        </div>
-      </div>
+      <section class="footnotes reveal" role="doc-endnotes" aria-labelledby="fn-heading">
+        <h2 class="footnotes-title" id="fn-heading">Sources</h2>
+        <ol>
+          <li id="fn-1">
+            <span class="fn-body">McKinsey &amp; Company — <em>The state of AI in early 2025</em> · <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener noreferrer">mckinsey.com</a></span>
+            <span class="fn-backs"><a class="fn-back" href="#fnref-1" role="doc-backlink" aria-label="Back to reference 1">&#8617;</a></span>
+          </li>
+          <li id="fn-2">
+            <span class="fn-body">Citizens Bank — <em>2026 AI Trends in Financial Management</em> · <a href="https://www.citizensbank.com/corporate-finance/insights/ai-trends-financial-management-2026.aspx" target="_blank" rel="noopener noreferrer">citizensbank.com</a></span>
+            <span class="fn-backs"><a class="fn-back" href="#fnref-2" role="doc-backlink" aria-label="Back to reference 2">&#8617;</a></span>
+          </li>
+          <li id="fn-3">
+            <span class="fn-body">Neurons Lab — <em>Agentic AI in Financial Services: A Research Roundup for 2026</em> · <a href="https://neurons-lab.com/article/agentic-ai-in-financial-services-2026/" target="_blank" rel="noopener noreferrer">neurons-lab.com</a></span>
+            <span class="fn-backs"><a class="fn-back" href="#fnref-3" role="doc-backlink" aria-label="Back to reference 3">&#8617;</a></span>
+          </li>
+        </ol>
+      </section>
 
       <div class="post-signoff">
         <p>I'd genuinely like to hear where you are with this, whether you're a finance professional figuring out the right move or someone already building in this space. Find me on <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn</a>.</p>
@@ -478,13 +481,13 @@
       }
 
       Array.prototype.forEach.call(
-        document.querySelectorAll('.screenshot-slot.expandable img'),
+        document.querySelectorAll('.fig--zoom img'),
         function (el) {
           el.setAttribute('tabindex', '0');
           el.setAttribute('role', 'button');
           el.setAttribute('aria-label', 'Expand screenshot: ' + (el.getAttribute('alt') || 'image').slice(0, 80));
           function fire() {
-            var slot = el.closest('.screenshot-slot');
+            var slot = el.closest('.fig--zoom');
             open(el.src, el.alt, slot ? (slot.getAttribute('data-caption') || '') : '', el);
           }
           el.addEventListener('click', fire);
