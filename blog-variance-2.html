@@ -821,7 +821,7 @@
       </div>
 
       <div class="author-card reveal">
-        <img src="pratik.jpg" alt="Pratik Parashar" width="216" height="216" loading="eager" decoding="async" />
+        <img src="pratik.jpg" data-full="pratik-full.jpg" alt="Pratik Parashar" width="216" height="216" loading="eager" decoding="async" />
         <div class="author-info">
           <div class="name">Pratik Parashar</div>
           <p class="bio">Senior Auditor, Financial Services at KPMG Netherlands. Seven years in audit across India and the Netherlands, four of them on private equity and infrastructure funds. Writing a variance commentary tool in public. Open to audit, controls, reporting and controlling roles in the Netherlands. <a href="https://linkedin.com/in/pratikparashar93" target="_blank" rel="noopener noreferrer">LinkedIn &rarr;</a></p>
@@ -844,6 +844,12 @@
 
   <button class="to-top" id="toTop" aria-label="Back to top" title="Back to top">&uarr;</button>
   <p class="sr-status" role="status" aria-live="polite" id="srStatus"></p>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Expanded image">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close expanded view">Close &middot; Esc</button>
+    <img id="lightbox-img" src="" alt="" />
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
 
   <footer class="site-footer">
     <div class="site-footer__inner">
@@ -1050,6 +1056,20 @@
           });
         }
       );
+      // Author photo expands to the full portrait
+      var av = document.querySelector('.author-card img');
+      if (av) {
+        av.setAttribute('tabindex', '0');
+        av.setAttribute('role', 'button');
+        av.setAttribute('aria-label', 'Expand photo of Pratik Parashar');
+        var full = av.getAttribute('data-full') || av.src;
+        function fireAv() { open(full, 'Pratik Parashar', '', av); }
+        av.addEventListener('click', fireAv);
+        av.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fireAv(); }
+        });
+      }
+
 
       x.addEventListener('click', close);
       lightbox.addEventListener('click', function (e) {

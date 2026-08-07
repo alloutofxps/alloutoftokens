@@ -570,6 +570,45 @@ nav.post-nav a.pn-index .pn-title { color: var(--ink-2); font-style: italic; }
 
 /* was 10px at 2.96:1. The colour was fine; an inherited opacity was diluting it. */
 .expand-hint { color: var(--ink-3) !important; font-size: 0.8125rem !important; opacity: 1 !important; }
+/* --------------------------------------------------------------------------
+   Lightbox. Lived inline on two posts only; promoted here so every page
+   can expand an image (screenshots, and now the author photo).
+   -------------------------------------------------------------------------- */
+.lightbox {
+  position: fixed; inset: 0; z-index: 9998;
+  background: rgba(20, 17, 15, 0.93);
+  backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+  display: none; align-items: center; justify-content: center;
+  padding: var(--space-40); cursor: zoom-out;
+}
+.lightbox.open { display: flex; }
+.lightbox img {
+  max-width: min(100%, 720px); max-height: 100%;
+  object-fit: contain; cursor: zoom-out;
+  box-shadow: 0 8px 60px rgba(0, 0, 0, 0.45);
+}
+.lightbox-close {
+  position: absolute; top: var(--space-24); right: var(--space-32);
+  font-family: var(--ff-sans); font-size: var(--t--1); font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--on-dark-1); background: none;
+  border: 1px solid rgba(247, 243, 236, 0.35);
+  padding: var(--space-8) var(--space-16); cursor: pointer;
+  transition: border-color var(--dur-base) var(--ease-out),
+              color var(--dur-base) var(--ease-out);
+}
+.lightbox-close:hover { border-color: var(--accent-lift); color: var(--accent-lift); }
+.lightbox-caption {
+  position: absolute; bottom: var(--space-24); left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--t--1); color: var(--on-dark-2);
+  max-width: 60ch; text-align: center;
+}
+
+/* Author photo is expandable */
+.author-card img { cursor: zoom-in; }
+.author-card img:focus-visible { outline: 2px solid var(--accent-lift); outline-offset: 3px; }
+
 /* Wide data tables scroll inside their own container instead of breaking
    the page. The commentary demo table needs ~394px and was pushing the
    document 55px past a 360px viewport. */
