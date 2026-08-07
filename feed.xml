@@ -10,6 +10,15 @@
     <atom:link href="https://alloutoftokens.com/feed.xml" rel="self" type="application/rss+xml" />
 
     <item>
+      <title>What It Can't Do: The Limits of the Variance Commentary Generator</title>
+      <link>https://alloutoftokens.com/blog-variance-5.html</link>
+      <guid isPermaLink="true">https://alloutoftokens.com/blog-variance-5.html</guid>
+      <pubDate>Fri, 07 Aug 2026 09:00:00 +0000</pubDate>
+      <category>Finance × AI: In Practice</category>
+      <description>The last post in the build log. Where the tool falls over, why most of it comes down to context the ledger never had, and why none of it worries me much.</description>
+    </item>
+
+    <item>
       <title>The Rebuild: From Three Tabs to Nine, And the One Thing That Surprised Me</title>
       <link>https://alloutoftokens.com/blog-variance-4.html</link>
       <guid isPermaLink="true">https://alloutoftokens.com/blog-variance-4.html</guid>
