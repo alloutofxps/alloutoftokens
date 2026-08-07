@@ -22,382 +22,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --black:   #1c1815;
-      --cream:   #f7f3ec;
-      --red:     #8f2f45;
-      --mid:     #635a52;
-      --border:  rgba(13,13,13,0.12);
-      --ff-serif: 'Newsreader', Georgia, serif;
-      --ff-mono:  'JetBrains Mono', ui-monospace, monospace;
-      --ff-sans:  'Inter', system-ui, sans-serif;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--cream);
-      color: var(--black);
-      font-family: 'Inter', system-ui, sans-serif;
-      font-size: var(--t-0);
-      line-height: 1.7;
-      cursor: none;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── Custom cursor ── */
-    .cursor {
-      position: fixed;
-      width: 10px; height: 10px;
-      background: var(--red);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: transform var(--dur-fast) var(--ease-out), width var(--dur-base) var(--ease-out), height var(--dur-base) var(--ease-out), background var(--dur-base) var(--ease-out);
-      mix-blend-mode: multiply;
-    }
-    .cursor.hover { width: 28px; height: 28px; background: var(--black); }
-
-    /* ── Nav ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--cream);
-      border-bottom: 1px solid var(--border);
-      padding: 0 clamp(24px, 5vw, 80px);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 60px;
-    }
-
-    .nav-logo {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: var(--t--1);
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-decoration: none;
-      color: var(--black);
-      text-transform: uppercase;
-    }
-    .nav-logo span { color: var(--red); }
-
-    .nav-links {
-      display: flex;
-      gap:var(--space-32);
-      list-style: none;
-    }
-    .nav-links a {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--mid);
-      text-decoration: none;
-      transition: color var(--dur-base);
-    }
-    .nav-links a:hover { color: var(--red); }
-
-    /* ── Article layout ── */
-    .article-wrap {
-      max-width: 768px;
-      margin: 0 auto;
-      padding: 0 clamp(24px, 5vw, 48px);
-    }
-
-    /* ── Hero ── */
-    .hero {
-      padding:var(--space-72) 0 0;
-      border-bottom: 2px solid var(--black);
-      margin-bottom:var(--space-64);
-    }
-
-    .hero-meta {
-      display: flex;
-      align-items: center;
-      gap:var(--space-16);
-      margin-bottom:var(--space-28);
-    }
-
-    .tag {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--cream);
-      background: var(--red);
-      padding:var(--space-4) var(--space-12);
-    }
-
-    .hero-date {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 12px;
-      color: var(--mid);
-      letter-spacing: 0.06em;
-    }
-
-    .hero h1 {
-      font-family: 'Newsreader', Georgia, serif;
-      font-size: clamp(32px, 5vw, 52px);
-      font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom:var(--space-24);
-    }
-
-    .hero h1 em { font-style: italic; color: var(--red); }
-
-    .hero-deck {
-      font-size: 19px;
-      font-weight: 300;
-      color: #3a3530;
-      line-height: 1.6;
-      margin-bottom:var(--space-40);
-      max-width: 600px;
-    }
-
-    /* ── Hero image ── */
-    .post-hero-image {
-      margin:0 0 var(--space-64);
-      border-top: 2px solid var(--black);
-      border-bottom: 2px solid var(--black);
-    }
-    .post-hero-image img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-      max-height: 380px;
-    }
-    .post-hero-image figcaption {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 12px;
-      letter-spacing: 0.06em;
-      color: var(--mid);
-      padding:var(--space-12) 0;
-      border-top: 1px solid var(--border);
-    }
-
-    /* ── Body content ── */
-    .post-body { padding-bottom:var(--space-80); }
-
-    .post-body p {
-      margin-bottom:var(--space-28);
-      font-size: var(--t-0);
-      line-height: 1.75;
-      color: #1a1714;
-    }
-
-    .post-body hr {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin:var(--space-48) 0;
-    }
-
-    .post-body h2 {
-      font-family: 'Newsreader', Georgia, serif;
-      font-size: clamp(22px, 3vw, 28px);
-      font-weight: 700;
-      line-height: 1.2;
-      letter-spacing: -0.01em;
-      margin:var(--space-64) 0 var(--space-24);
-      padding-top:var(--space-64);
-      border-top: 1px solid var(--border);
-    }
-
-    sup { color: var(--red); font-size: 12px; }
-
-    /* ── Pull quote ── */
-    .pull-quote {
-      border-left: 4px solid var(--red);
-      margin:var(--space-48) 0;
-      padding:var(--space-4) 0 var(--space-4) var(--space-28);
-    }
-    .pull-quote p {
-      font-family: 'Newsreader', Georgia, serif;
-      font-size: clamp(20px, 2.8vw, 26px);
-      font-weight: 400;
-      font-style: italic;
-      line-height: 1.4;
-      color: var(--black);
-      margin: 0;
-    }
-
-    /* ── 40/40 moment ── */
-    .forty-moment {
-      text-align: center;
-      padding:var(--space-48) 0;
-      margin:var(--space-48) 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .forty-moment .forty-label {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 12px; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--red);
-      margin-bottom:var(--space-24);
-    }
-    .forty-moment .forty-grid {
-      display: grid; grid-template-columns: 1fr auto 1fr;
-      gap:var(--space-24); align-items: center;
-      max-width: 440px; margin: 0 auto;
-    }
-    .forty-num {
-      font-family: 'Newsreader', serif;
-      font-size: 64px; font-weight: 900; line-height: 1;
-    }
-    .forty-num.old { color: rgba(13,13,13,0.2); }
-    .forty-num.new { color: var(--red); }
-    .forty-sub {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 12px; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--mid);
-      margin-top:var(--space-8);
-    }
-    .forty-arrow { font-size: 32px; color: var(--mid); }
-
-    /* ── Stats block ── */
-    .post-stats {
-      background: var(--black);
-      color: var(--cream);
-      padding:var(--space-40) var(--space-48);
-      margin:var(--space-48) 0;
-      border-left: 4px solid var(--red);
-    }
-    .post-stats p {
-      font-size: 15px !important;
-      line-height: 1.7 !important;
-      color: rgba(245,240,232,0.75) !important;
-      margin-bottom:var(--space-16) !important;
-    }
-    .post-stats p:last-child { margin-bottom: 0 !important; }
-    .post-stats sup { color: var(--red); font-size: 12px; }
-
-    /* ── Sources ── */
-    .sources {
-      background: #ede8e0;
-      padding:var(--space-40) var(--space-48);
-      margin-top:var(--space-72);
-      margin-left:-var(--space-48);
-      margin-right:-var(--space-48);
-    }
-    .sources-title {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 12px; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--red);
-      margin-bottom:var(--space-24);
-      display: flex; align-items: center; gap:var(--space-12);
-    }
-    .sources-title::before { content: ''; width: 24px; height: 1px; background: var(--red); }
-    .source-item {
-      display: flex; gap:var(--space-16); align-items: baseline;
-      padding:var(--space-16) 0;
-      border-bottom: 1px solid rgba(13,13,13,0.1);
-    }
-    .source-item:last-child { border-bottom: none; }
-    .source-num {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 12px; color: var(--red); min-width: 20px;
-    }
-    .source-text { font-size: var(--t--1); color: var(--mid); line-height: 1.6; }
-    .source-text a { color: var(--black); text-decoration: none; border-bottom: 1px solid rgba(13,13,13,0.2); transition: border-color var(--dur-base), color var(--dur-base); }
-    .source-text a:hover { color: var(--red); border-color: var(--red); }
-
-    /* ── Sign off ── */
-    .post-signoff {
-      margin-top:var(--space-72);
-      padding-top:var(--space-40);
-      border-top: 1px solid var(--border);
-    }
-    .post-signoff p { font-size: 15px !important; color: var(--mid) !important; }
-    .post-signoff a { color: var(--black); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--border); transition: color var(--dur-base), border-color var(--dur-base); }
-    .post-signoff a:hover { color: var(--red); border-color: var(--red); }
-
-    /* ── Author card ── */
-    .author-card {
-      background: var(--black);
-      color: var(--cream);
-      padding:var(--space-40);
-      margin-top:var(--space-64);
-      display: flex;
-      align-items: center;
-      gap:var(--space-32);
-    }
-    .author-card img {
-      width: 72px; height: 72px;
-      border-radius: 50%; object-fit: cover;
-      flex-shrink: 0; border: 2px solid var(--red);
-    }
-    .author-card .author-info .name {
-      font-family: 'Newsreader', Georgia, serif;
-      font-size: var(--t-0); font-weight: 700; margin-bottom:var(--space-8);
-    }
-    .author-card .author-info .bio {
-      font-size: var(--t--1); line-height: 1.6;
-      color: rgba(245,240,232,0.7); margin: 0;
-    }
-    .author-card .author-info .bio a { color: var(--red); text-decoration: none; }
-
-    /* ── Back link ── */
-    .back-link-wrap { padding:var(--space-40) 0 0; }
-    .back-link {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 12px; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--mid);
-      text-decoration: none;
-      display: inline-flex; align-items: center; gap:var(--space-8);
-      transition: color var(--dur-base);
-    }
-    .back-link:hover { color: var(--red); }
-    .back-link::before { content: '←'; }
-
-    /* ── Scroll reveal ── */
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    /* ── Footer ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 32px clamp(24px, 5vw, 80px);
-      display: flex; justify-content: space-between; align-items: center; gap:var(--space-16);
-    }
-    footer p { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--mid); margin: 0; }
-    footer a { color: var(--mid); text-decoration: none; transition: color var(--dur-base); }
-    footer a:hover { color: var(--red); }
-
-    /* ── Hamburger ── */
-    .hamburger {
-      display: none; background: none; border: none; cursor: none;
-      flex-direction: column; gap:var(--space-4); padding:var(--space-4);
-    }
-    .hamburger span { display: block; width: 22px; height: 2px; background: var(--black); transition: all var(--dur-base) var(--ease-out); }
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    .mobile-menu {
-      display: none; position: fixed; inset:var(--space-56) 0 0;
-      background: var(--cream); z-index: 99;
-      padding: 40px clamp(24px, 5vw, 48px);
-      flex-direction: column; gap:var(--space-24);
-      border-top: 2px solid var(--black);
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: var(--t--1); letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); text-decoration: none; }
-
-    @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: flex; } }
-    @media (max-width: 768px) {
-      .post-stats { padding:var(--space-32) var(--space-24); }
-      .sources { padding:var(--space-32) var(--space-24); margin-left:-var(--space-24); margin-right:-var(--space-24); }
-      .author-card { padding:var(--space-24); gap:var(--space-16); flex-direction: column; }
-      .forty-num { font-size: 48px; }
-    }
-  </style>
+  <link rel="stylesheet" href="article.css" />
 
   <link rel="canonical" href="https://alloutoftokens.com/blog-ai-agents.html" />
   <meta name="theme-color" content="#f7f3ec" />
@@ -485,7 +110,7 @@
 
       <p>That's the thing about being proactive in a large firm. They tell you to raise your hand. What happens after is less certain.</p>
 
-      <hr>
+      <h2>The problem she was trying to solve</h2>
 
       <p>A month later, at an office party, I bumped into a colleague who I knew was sending out those innovation emails. I asked her the same thing — is there a way in?</p>
 
@@ -495,7 +120,7 @@
 
       <p>She asked me to take a crack at it. The test case: Van Lanschot Kempen's 2024 annual report. A publicly published document — 350 pages. I work in financial services, so it was a natural fit.</p>
 
-      <hr>
+      <h2>Agent mode, on exactly the right day</h2>
 
       <p>I went home that evening and started thinking about approach. The work laptop had Copilot, but it felt limited — basic text and email, not much else. I later found out that's a privacy constraint. EU data regulations mean certain tools get restricted in ways that blunt their usefulness for this kind of analytical work.</p>
 
@@ -511,7 +136,7 @@
 
       <p>Of all the frigging days.</p>
 
-      <hr>
+      <h2>What I put in the prompt</h2>
 
       <p>I spent time building the prompt carefully — giving it the brief a senior auditor would give a very capable junior. It defined materiality from scratch, with the agent documenting its own reasoning for the benchmark it selected. It set up flagging logic: context-aware thresholds, a volatility test for variances above 10%, a sign-change override that flagged items regardless of size if the direction of a number reversed between years. It was asked to independently identify significant risk areas and run the analysis for those regardless of the other criteria.</p>
 
@@ -525,7 +150,7 @@
 
       <p>The Excel was ready.</p>
 
-      <hr>
+      <h2>Forty hours, or forty minutes</h2>
 
       <p>I've done a lot of financial statement analysis over the years. FS analytical review, variance explanations, movement notes across complex group structures. A thorough job on a report this size — 40 hours for a moderately experienced auditor, conservatively.</p>
 
@@ -548,7 +173,7 @@
 
       <p>I went to sleep that night thinking about it. Not anxiously. In that rarer way where something has genuinely shifted and your brain won't let it go.</p>
 
-      <hr>
+      <h2>Showing it around</h2>
 
       <p>The next time I was in the office, I showed my colleague. She didn't say much. She didn't need to — it was written across her face.</p>
 
@@ -564,7 +189,7 @@
 
       <p>He wanted to set up a follow-up with the partner heading the team. That meeting never happened. Scheduling, competing priorities, the general friction of large organisations moving slower than the ideas inside them. I didn't push too hard. These things happen.</p>
 
-      <hr>
+      <h2>The senior manager at the lunch table</h2>
 
       <p>A couple of months later, at a firm training, a senior manager from the broader assurance innovation team gave a session on where things were heading with AI. How clients were already using it. How the audit approach itself was beginning to shift. It was the kind of talk that makes you feel the industry is actually paying attention.</p>
 
@@ -582,7 +207,7 @@
 
       <p>Whether he sat down at our table by chance or by design, I genuinely don't know. I've thought about it.</p>
 
-      <hr>
+      <h2>The offer that never quite landed</h2>
 
       <p>The audit financial services innovation manager did eventually ask me to join the team in a more formal capacity.</p>
 

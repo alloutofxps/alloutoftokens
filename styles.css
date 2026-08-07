@@ -133,10 +133,6 @@ body {
   font-family: var(--ff-sans);
   font-size: var(--t-0);
   line-height: 1.6;
-  /* The blog pages still declare `cursor: none` from their original
-     custom-cursor design. The cursor elements are long gone, so without
-     this there is no pointer at all on those pages. */
-  cursor: auto;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -172,8 +168,6 @@ h1, h2, h3, h4 {
   h1, h2, h3 { margin-block-start: -0.06em; }
 }
 
-/* Any leftover custom-cursor elements stay retired */
-.cursor, .cursor-ring { display: none !important; }
 a, button, [role="button"], summary, label[for],
 .screenshot-slot.expandable img { cursor: pointer; }
 
@@ -471,18 +465,8 @@ h2.section-title { font-size: var(--t-3); }
 
 /* --------------------------------------------------------------------------
    9. Post navigation
-   NOTE: scoped hard, and the blog pages' bare `nav{}` rule is neutralised
-   here because it was clamping this to 60px and forcing sticky.
    -------------------------------------------------------------------------- */
-nav.post-nav {
-  position: static !important;
-  height: auto !important;
-  padding: 0 !important;
-  border-bottom: none !important;
-  /* the bare `nav` rule also sets align-items:center, which centred the grid
-     items instead of stretching them and left the two cards unequal heights */
-  align-items: stretch !important;
-  justify-content: stretch !important;
+.post-nav {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1px;
@@ -492,7 +476,7 @@ nav.post-nav {
   background: var(--rule-soft);
   border-top: 1px solid var(--rule-soft);
 }
-nav.post-nav a {
+.post-nav a {
   background: var(--surface-2);
   padding: var(--space-28) var(--space-24);
   text-decoration: none; color: var(--ink-1);
@@ -500,16 +484,16 @@ nav.post-nav a {
   justify-content: flex-start;
   transition: background var(--dur-base) var(--ease-out);
 }
-nav.post-nav a:hover { background: var(--surface-3); }
-nav.post-nav a.next { text-align: right; align-items: flex-end; }
-nav.post-nav .pn-dir { font-size: var(--t--1); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
-nav.post-nav .pn-title { font-family: var(--ff-display); font-size: 1.125rem; font-weight: 500; line-height: 1.3; }
+.post-nav a:hover { background: var(--surface-3); }
+.post-nav a.next { text-align: right; align-items: flex-end; }
+.post-nav .pn-dir { font-size: var(--t--1); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.post-nav .pn-title { font-family: var(--ff-display); font-size: 1.125rem; font-weight: 500; line-height: 1.3; }
 /* Ends of the chain link to the index instead of collapsing to an empty
    cell, so every post shows two equal-height destinations. */
-nav.post-nav a.pn-index .pn-title { color: var(--ink-2); font-style: italic; }
+.post-nav a.pn-index .pn-title { color: var(--ink-2); font-style: italic; }
 @media (max-width: 768px) {
-  nav.post-nav { grid-template-columns: 1fr; }
-  nav.post-nav a.next { text-align: left; align-items: flex-start; }
+  .post-nav { grid-template-columns: 1fr; }
+  .post-nav a.next { text-align: left; align-items: flex-start; }
 }
 
 /* --------------------------------------------------------------------------
@@ -582,8 +566,10 @@ nav.post-nav a.pn-index .pn-title { color: var(--ink-2); font-style: italic; }
   padding: var(--space-40); cursor: zoom-out;
 }
 .lightbox.open { display: flex; }
+/* No width cap: the screenshots are 1400px wide and the whole point of opening
+   one is to read it. max-height keeps tall images inside the viewport. */
 .lightbox img {
-  max-width: min(100%, 720px); max-height: 100%;
+  max-width: 100%; max-height: 100%;
   object-fit: contain; cursor: zoom-out;
   box-shadow: 0 8px 60px rgba(0, 0, 0, 0.45);
 }
@@ -603,6 +589,10 @@ nav.post-nav a.pn-index .pn-title { color: var(--ink-2); font-style: italic; }
   transform: translateX(-50%);
   font-size: var(--t--1); color: var(--on-dark-2);
   max-width: 60ch; text-align: center;
+}
+@media (max-width: 540px) {
+  .lightbox { padding: var(--space-16); }
+  .lightbox-close { top: var(--space-12); right: var(--space-16); }
 }
 
 /* Author photo is expandable */
@@ -705,19 +695,6 @@ input, textarea, select { border-radius: var(--radius-sm); }
 
 /* Margin table of contents. Only where the gutter is genuinely wide enough:
    article half-width is 380, so 50% - 620 leaves ~40px clearance at 1400. */
-/* The blog pages carry a bare `nav { height:60px; background:cream;
-   padding:0 80px; position:sticky; display:flex }`. It captures any <nav>,
-   including this one, which clipped the TOC to 60px and squeezed the label
-   to 25px so it wrapped to three lines. Same capture that broke .post-nav. */
-nav.toc {
-  height: auto !important;
-  padding: 0 !important;
-  background: transparent !important;
-  border-bottom: none !important;
-  align-items: stretch !important;
-  justify-content: flex-start !important;
-}
-
 .toc { display: none; }
 /* :not([hidden]) matters — the !important below would otherwise beat the
    hidden attribute and render a bare label on posts with under 4 headings */
@@ -794,7 +771,7 @@ nav.toc {
    12. Print
    -------------------------------------------------------------------------- */
 @media print {
-  .site-nav, .mobile-menu, nav.post-nav, .skip-link, .lightbox, body::before,
+  .site-nav, .mobile-menu, .post-nav, .skip-link, .lightbox, body::before,
   .read-progress, .toc, .to-top, .heading-link { display: none !important; }
   * { box-shadow: none !important; }
   body { background: #fff; color: #000; font-size: 11pt; }
