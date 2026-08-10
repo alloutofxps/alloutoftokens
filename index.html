@@ -194,9 +194,14 @@
       transition: filter var(--dur-slow) var(--ease-out);
     }
     .personal-photo img:hover { filter: none; }
-    .personal-cap { font-size: 0.8125rem; color: var(--ink-3); margin-top: var(--s-2); }
+    /* 12px and a hair of negative tracking so the caption holds one line at
+       both column widths it gets: 380px here, 360px once the layout stacks. */
+    .personal-cap { font-size: 0.75rem; letter-spacing: -0.01em; color: var(--ink-3); margin-top: var(--s-2); }
     .personal-body { grid-column: 6 / 12; }
-    .personal-body p { font-size: var(--t-0); line-height: 1.75; color: var(--ink-2); max-width: var(--measure); }
+    /* Same 15px/1.6 as the Experience bullets, the technical values and the
+       automation cards. This was on --t-0, which is the blog post reading size,
+       and it made the section read a size larger than everything above it. */
+    .personal-body p { font-size: 0.9375rem; line-height: 1.6; color: var(--ink-2); max-width: var(--measure); }
     .personal-body p + p { margin-top: var(--s-5); }
     .motto {
       margin-top: var(--s-7); padding-left: var(--s-5);
